@@ -14,6 +14,14 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+            
+            if HKManager.isHKAvailable() {
+                Text("HealthKit is available!")
+            }
+            else {
+                Text("HealthKit is not available, check the configuration!")
+            }
+            
         }
         .padding()
     }
