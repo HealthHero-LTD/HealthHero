@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		34468A752B39790E0081D38E /* HealthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468A742B39790E0081D38E /* HealthKit.swift */; };
+		34468A752B39790E0081D38E /* HKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468A742B39790E0081D38E /* HKManager.swift */; };
 		347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347526D52B313A820022DB52 /* HealthHeroApp.swift */; };
 		347526D82B313A820022DB52 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347526D72B313A820022DB52 /* ContentView.swift */; };
 		347526DA2B313A830022DB52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 347526D92B313A830022DB52 /* Assets.xcassets */; };
@@ -16,7 +16,7 @@
 
 /* Begin PBXFileReference section */
 		34468A732B3971000081D38E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		34468A742B39790E0081D38E /* HealthKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKit.swift; sourceTree = "<group>"; };
+		34468A742B39790E0081D38E /* HKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKManager.swift; sourceTree = "<group>"; };
 		347526D22B313A820022DB52 /* HealthHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		347526D52B313A820022DB52 /* HealthHeroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthHeroApp.swift; sourceTree = "<group>"; };
 		347526D72B313A820022DB52 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 				34468A732B3971000081D38E /* Info.plist */,
 				347526D52B313A820022DB52 /* HealthHeroApp.swift */,
 				347526D72B313A820022DB52 /* ContentView.swift */,
-				34468A742B39790E0081D38E /* HealthKit.swift */,
+				34468A742B39790E0081D38E /* HKManager.swift */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
 				347526DC2B313A830022DB52 /* Preview Content */,
@@ -144,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34468A752B39790E0081D38E /* HealthKit.swift in Sources */,
+				34468A752B39790E0081D38E /* HKManager.swift in Sources */,
 				347526D82B313A820022DB52 /* ContentView.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,
 			);
