@@ -10,13 +10,27 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            
+            if HKManager.isHKAvailable() {
+                Text("HealthKit is available!")
+            }
+            else {
+                Text("HealthKit is not available, check the configuration!")
+            }
+            
+            Button {
+                HKManager.HKAuthorization()
+            } label: {
+                Text("Authorize HealthKit")
+                    .padding(10)
+                    .foregroundColor(.white)
+            }
+            .background(.color1)
+            .cornerRadius(10)
+            
         }
-        .padding()
     }
+
 }
 
 #Preview {
