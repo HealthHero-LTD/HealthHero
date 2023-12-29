@@ -7,7 +7,7 @@
 
 import HealthKit
 
-class HKManager {
+class HKManager: ObservableObject {
     
     static let healthStore = HKHealthStore()
     
@@ -30,5 +30,40 @@ class HKManager {
                 print("Authorization successful!")
             }
         }
+    }
+    
+    static func isAuthorized() -> Bool {
+        // Unwrapping optionals:
+        // 1. Safely unwrap -> If object is nil, we get to decide what to do
+        // 2. Force unwrap -> If object is nil, the app will crash
+        
+        // Safely unwrap
+//        guard let quantityType = HKObjectType.quantityType(forIdentifier: .stepCount) else { return false }
+        if let quantityType = HKObjectType.quantityType(forIdentifier: .stepCount) {
+            return healthStore.authorizationStatus(for: quantityType) == .sharingAuthorized
+        } else {
+            return false
+        }
+    }
+    
+    static func readStepCount(completion: @escaping (Double) -> Void) {
+        guard let stepQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount) else { return }
+        let now = Date()
+        let startOfDay = Calendar.current.startOfDay(for: now)
+        
+        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
+        
+        let query = HKStatisticsQuery(quantityType: stepQuantityType, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, result, error in
+            
+            guard let result = result, let sum = result.sumQuantity() else {
+                completion(0.0)
+                return
+            }
+            
+            completion(sum.doubleValue(for: HKUnit.count()))
+        
+        }
+        
+        healthStore.execute(query)
     }
 }
