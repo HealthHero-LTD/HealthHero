@@ -15,6 +15,7 @@
 		3486B58C2B3F95B000AFC633 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */; };
 		3486B58E2B3F97E400AFC633 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B58D2B3F97E400AFC633 /* ProfileView.swift */; };
 		3486B5902B3F990500AFC633 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B58F2B3F990500AFC633 /* StatsView.swift */; };
+		3486B5922B3F9B5D00AFC633 /* HealthHeroBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B5912B3F9B5D00AFC633 /* HealthHeroBaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		3486B58D2B3F97E400AFC633 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3486B58F2B3F990500AFC633 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		3486B5912B3F9B5D00AFC633 /* HealthHeroBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthHeroBaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				34468A732B3971000081D38E /* Info.plist */,
 				347526D52B313A820022DB52 /* HealthHeroApp.swift */,
 				347526D72B313A820022DB52 /* ContentView.swift */,
+				3486B5912B3F9B5D00AFC633 /* HealthHeroBaseView.swift */,
 				3486B58F2B3F990500AFC633 /* StatsView.swift */,
 				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
 				3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */,
@@ -158,6 +161,7 @@
 				3486B5902B3F990500AFC633 /* StatsView.swift in Sources */,
 				3486B58E2B3F97E400AFC633 /* ProfileView.swift in Sources */,
 				347526D82B313A820022DB52 /* ContentView.swift in Sources */,
+				3486B5922B3F9B5D00AFC633 /* HealthHeroBaseView.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
