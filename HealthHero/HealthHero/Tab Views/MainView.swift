@@ -1,5 +1,5 @@
 //
-//  HealthHeroBaseView.swift
+//  MainView.swift
 //  HealthHero
 //
 //  Created by soroush kami on 2023-12-29.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HealthHeroBaseView: View {
+struct MainView: View {
     var body: some View {
         TabView {
             LeaderboardView()
@@ -27,5 +27,5 @@ struct HealthHeroBaseView: View {
 }
 
 #Preview {
-    HealthHeroBaseView()
+    MainView()
 }
