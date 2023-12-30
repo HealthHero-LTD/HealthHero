@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var stepCount: Double = .zero
     var body: some View {
         VStack {
+            Text("You took \(stepCount) steps today.")
             
             if HKManager.isHKAvailable() {
                 Text("HealthKit is available!")
@@ -28,6 +30,11 @@ struct ContentView: View {
             .background(.color1)
             .cornerRadius(10)
             
+        }
+        .onAppear {
+            HKManager.readStepCount { stepCount in
+                self.stepCount = stepCount
+            }
         }
     }
 
