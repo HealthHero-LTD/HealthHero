@@ -9,27 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var stepCount: Double = .zero
+    // Label -> icon text
     var body: some View {
-        VStack {
-            Text("You took \(stepCount) steps today.")
-            
-            if HKManager.isHKAvailable() {
-                Text("HealthKit is available!")
-            }
-            else {
-                Text("HealthKit is not available, check the configuration!")
-            }
-            
-            Button {
-                HKManager.HKAuthorization()
-            } label: {
-                Text("Authorize HealthKit")
-                    .padding(10)
-                    .foregroundColor(.white)
-            }
-            .background(.color1)
-            .cornerRadius(10)
-            
+        TabView {
+            LeaderboardView()
+                .tabItem { 
+                    Label("Leaderboard", systemImage: "trophy.circle")
+                }
+            StatsView()
+                .tabItem {
+                    Label("Stats", systemImage: "list.number")
+                }
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.crop.circle.fill")
+                }
         }
         .onAppear {
             HKManager.readStepCount { stepCount in
