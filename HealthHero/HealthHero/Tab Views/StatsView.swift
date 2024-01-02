@@ -10,6 +10,16 @@ import Charts
 
 struct StatsView: View {
     @State private var stepCount: Double = .zero
+    
+    var data: [StepsEntry] = [
+        .init(day: "Sudnay", stepCount: 500),
+        .init(day: "Monday", stepCount: 1500),
+        .init(day: "Tuesday", stepCount: 3000),
+        .init(day: "Wednesday", stepCount: 400),
+        .init(day: "Thursday", stepCount: 250),
+        .init(day: "Friday", stepCount: 500),
+        .init(day: "Saturday", stepCount: 1000)
+    ]
     var body: some View {
         
         VStack {
@@ -17,7 +27,6 @@ struct StatsView: View {
                 .font(.title2)
                 .fontWeight(.heavy)
                 .padding()
-            
             
             ZStack {
                 Circle()
@@ -36,7 +45,6 @@ struct StatsView: View {
                 }
                 .padding()
             }
-            
             
             VStack(alignment: .leading) {
                 
@@ -69,20 +77,27 @@ struct StatsView: View {
                 }
             }
             .font(.body)
+            .padding()
             
-            Spacer()
+            Chart {
+                ForEach(data) { entry in
+                    BarMark(
+                        x: .value("Week Day", entry.day),
+                        y: .value("Total Steps", entry.stepCount)
+                    )
+                }
+            }
+            .padding()
         }
-        //        .alignmentInfinity(.top)
     }
 }
-
 
 #Preview {
     StatsView()
 }
 
-//struct ToyShape: Identifiable {
-//    var type: String
-//    var count: Double
-//    var id = UUID()
-//}
+struct StepsEntry: Identifiable {
+    var day: String
+    var stepCount: Double
+    var id = UUID()
+}
