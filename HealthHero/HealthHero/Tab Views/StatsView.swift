@@ -20,75 +20,68 @@ struct StatsView: View {
         .init(day: "Friday", stepCount: 500),
         .init(day: "Saturday", stepCount: 1000)
     ]
+    
     var body: some View {
-        
         VStack {
             Text("Soroush_04")
                 .font(.title2)
                 .fontWeight(.heavy)
                 .padding()
+            circleView
+            statsDetailView
             
-            ZStack {
-                Circle()
-                    .trim(from: 0.0, to: 0.65)
-                    .stroke(Color.blue, lineWidth: 8)
-                    .rotationEffect(Angle(degrees: 90))
-                    .padding()
-                    .frame(width: 240, height: 240)
-                
-                VStack {
-                    Text("Level 1")
-                        .font(.title)
-                        .foregroundColor(.blue)
-                    Text("Title: unlockable")
-                        .fontWeight(.semibold)
-                }
-                .padding()
-            }
-            
-            VStack(alignment: .leading) {
-                
-                HStack {
-                    Text("Completed Tasks:")
-                    Text("30")
-                }
-                
-                HStack {
-                    Text("Current Streak:")
-                    Text("5")
-                }
-                
-                HStack {
-                    Text("Highest Streak:")
-                    Text("7")
-                }
-                
-                HStack {
-                    Text("Top Placements:")
-                    Text("2")
-                }
-                
-                Text("total step counts: \(stepCount)")
-                
-                .onAppear {
-                    HKManager.readStepCount { stepCount in
-                        self.stepCount = stepCount
-                    }
-                }
-            }
-            .font(.body)
-            .padding()
-            
-            Chart {
-                ForEach(data) { entry in
-                    BarMark(
-                        x: .value("Week Day", entry.day),
-                        y: .value("Total Steps", entry.stepCount)
-                    )
-                }
+            Chart(data) { entry in
+                BarMark(
+                    x: .value("Week Day", entry.day),
+                    y: .value("Total Steps", entry.stepCount)
+                )
             }
             .padding()
         }
+        .onAppear {
+            HKManager.readStepCount { stepCount in
+                self.stepCount = stepCount
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var circleView: some View {
+        ZStack {
+            Circle()
+                .trim(from: 0.0, to: 0.65)
+                .stroke(Color.blue, lineWidth: 8)
+                .rotationEffect(Angle(degrees: 90))
+                .frame(width: 200, height: 200) // frame always comes before anything else
+                .padding()
+            
+            VStack {
+                Text("Level 1")
+                    .font(.title)
+                    .foregroundColor(.blue)
+                Text("Title: unlockable")
+                    .fontWeight(.semibold)
+            }
+            .padding()
+        }
+    }
+    
+    @ViewBuilder
+    private var statsDetailView: some View {
+        VStack(alignment: .leading) {
+            ForEach(StatsDetail.items) { item in
+                // TODO: - Use grid here
+                HStack {
+                    Text(item.title)
+                    Spacer()
+                    Text(item.value.description)
+                }
+            }
+            Text("total step counts: \(stepCount)")
+        }
+        .frame(maxWidth: 180)
+        .font(.body)
+        .padding()
     }
 }
 
@@ -100,4 +93,17 @@ struct StepsEntry: Identifiable {
     var day: String
     var stepCount: Double
     var id = UUID()
+}
+
+struct StatsDetail: Identifiable {
+    var id: String { title }
+    
+    let title: String
+    let value: Double
+    
+    static let items: [Self] = [
+        .init(title: "Current Streak:", value: 5),
+        .init(title: "Highest Streak:", value: 10.5),
+        .init(title: "Top Placements:", value: 2),
+    ]
 }
