@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct StatsView: View {
-    @State private var stepCount: Double = .zero
+    @StateObject private var HealthKitManager = HKManager()
     
     var data: [StepsEntry] = [
         .init(day: "Sudnay", stepCount: 500),
@@ -39,6 +39,7 @@ struct StatsView: View {
             .padding()
         }
         .onAppear {
+            HealthKitManager.readStepCount()
         }
     }
     
@@ -74,7 +75,7 @@ struct StatsView: View {
                     Text(item.value.description)
                 }
             }
-            Text("total step counts: \(stepCount)")
+            Text("total step counts: \(HealthKitManager.stepsCount)")
         }
         .frame(maxWidth: 180)
         .font(.body)
