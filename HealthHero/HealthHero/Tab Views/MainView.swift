@@ -16,7 +16,7 @@ struct MainView: View {
                 }
             StatsView()
                 .tabItem {
-                    Label("Stats", systemImage: "list.number")
+                    Label("Stats", systemImage: "list.bullet.clipboard.fill")
                 }
             ProfileView()
                 .tabItem {
