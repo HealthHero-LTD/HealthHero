@@ -10,7 +10,7 @@ import Charts
 
 struct StatsView: View {
     @StateObject private var HealthKitManager = HKManager()
-    
+    @State private var stepsCount: Double = .zero
     var data: [StepsEntry] = [
         .init(day: "Sudnay", stepCount: 500),
         .init(day: "Monday", stepCount: 1500),
@@ -39,8 +39,15 @@ struct StatsView: View {
             .padding()
         }
         .onAppear {
-            HealthKitManager.readStepCount()
+            if HealthKitManager.isAuthorized() {
+                HealthKitManager.readStepCount { stepsCount in
+                    self.stepsCount = stepsCount
+                }
+            } else {
+                HealthKitManager.requestHealthKitAuthorization()
+            }
         }
+        .animation(.default, value: stepsCount)
     }
     
     @ViewBuilder
@@ -75,7 +82,7 @@ struct StatsView: View {
                     Text(item.value.description)
                 }
             }
-            Text("total step counts: \(HealthKitManager.stepsCount)")
+            Text("total step counts: \(stepsCount)")
         }
         .frame(maxWidth: 180)
         .font(.body)

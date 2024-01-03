@@ -9,17 +9,16 @@ import HealthKit
 
 @MainActor
 class HKManager: ObservableObject {
-    @Published var stepsCount: Double = .zero
     @Published var error: Error?
     
     let healthStore = HKHealthStore()
     let stepCountQuantityType = HKObjectType.quantityType(forIdentifier: .stepCount)
     
-    func isHKAvailable() -> Bool {
+    private func isHKAvailable() -> Bool {
         return HKHealthStore.isHealthDataAvailable()
     }
     
-    func HKAuthorization() {
+    func requestHealthKitAuthorization() {
         guard isHKAvailable() else {
             print("Setup HealthKit")
             return
@@ -45,7 +44,7 @@ class HKManager: ObservableObject {
         }
     }
     
-    func readStepCount() {
+    func readStepCount(completion: @escaping (Double) -> Void) {
         guard let stepQuantityType = stepCountQuantityType else { return }
         let now = Date()
         let startOfDay = Calendar.current.startOfDay(for: now)
@@ -63,11 +62,11 @@ class HKManager: ObservableObject {
         ) { _, result, error in
             
             guard let result = result, let sum = result.sumQuantity() else {
-                self.stepsCount = .zero
+                completion(.zero)
                 return
             }
             
-            self.stepsCount = sum.doubleValue(for: HKUnit.count())
+            completion(sum.doubleValue(for: HKUnit.count()))
         }
         
         healthStore.execute(query)
