@@ -39,9 +39,6 @@ struct StatsView: View {
             .padding()
         }
         .onAppear {
-            HKManager.readStepCount { stepCount in
-                self.stepCount = stepCount
-            }
         }
     }
     
@@ -83,10 +80,6 @@ struct StatsView: View {
         .font(.body)
         .padding()
     }
-}
-
-#Preview {
-    StatsView()
 }
 
 struct StepsEntry: Identifiable {

@@ -9,13 +9,13 @@ import HealthKit
 
 class HKManager: ObservableObject {
     
-    static let healthStore = HKHealthStore()
+    let healthStore = HKHealthStore()
     
-    static func isHKAvailable() -> Bool {
+    func isHKAvailable() -> Bool {
         return HKHealthStore.isHealthDataAvailable()
     }
     
-    static func HKAuthorization() {
+    func HKAuthorization() {
         guard isHKAvailable() else {
             print("Setup HealthKit")
             return
@@ -32,13 +32,7 @@ class HKManager: ObservableObject {
         }
     }
     
-    static func isAuthorized() -> Bool {
-        // Unwrapping optionals:
-        // 1. Safely unwrap -> If object is nil, we get to decide what to do
-        // 2. Force unwrap -> If object is nil, the app will crash
-        
-        // Safely unwrap
-//        guard let quantityType = HKObjectType.quantityType(forIdentifier: .stepCount) else { return false }
+    func isAuthorized() -> Bool {
         if let quantityType = HKObjectType.quantityType(forIdentifier: .stepCount) {
             return healthStore.authorizationStatus(for: quantityType) == .sharingAuthorized
         } else {
@@ -46,7 +40,7 @@ class HKManager: ObservableObject {
         }
     }
     
-    static func readStepCount(completion: @escaping (Double) -> Void) {
+    func readStepCount(completion: @escaping (Double) -> Void) {
         guard let stepQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount) else { return }
         let now = Date()
         let startOfDay = Calendar.current.startOfDay(for: now)
