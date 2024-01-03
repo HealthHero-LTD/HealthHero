@@ -9,8 +9,8 @@ import SwiftUI
 import Charts
 
 struct StatsView: View {
-    @State private var stepCount: Double = .zero
-    
+    @StateObject private var HealthKitManager = HKManager()
+    @State private var stepsCount: Double = .zero
     var data: [StepsEntry] = [
         .init(day: "Sudnay", stepCount: 500),
         .init(day: "Monday", stepCount: 1500),
@@ -39,10 +39,15 @@ struct StatsView: View {
             .padding()
         }
         .onAppear {
-            HKManager.readStepCount { stepCount in
-                self.stepCount = stepCount
+            if HealthKitManager.isAuthorized() {
+                HealthKitManager.readStepCount { stepsCount in
+                    self.stepsCount = stepsCount
+                }
+            } else {
+                HealthKitManager.requestHealthKitAuthorization()
             }
         }
+        .animation(.default, value: stepsCount)
     }
     
     @ViewBuilder
@@ -77,16 +82,12 @@ struct StatsView: View {
                     Text(item.value.description)
                 }
             }
-            Text("total step counts: \(stepCount)")
+            Text("total step counts: \(stepsCount)")
         }
         .frame(maxWidth: 180)
         .font(.body)
         .padding()
     }
-}
-
-#Preview {
-    StatsView()
 }
 
 struct StepsEntry: Identifiable {
