@@ -71,4 +71,18 @@ class HKManager: ObservableObject {
         
         healthStore.execute(query)
     }
+    
+    func readWeeklyStepCount(completion: @escaping ([StepsEntry]) -> Void) {
+        let dummyData = [
+            StepsEntry(day: "sun", stepCount: 100),
+            StepsEntry(day: "mon", stepCount: 233),
+            StepsEntry(day: "tue", stepCount: 190),
+            StepsEntry(day: "wed", stepCount: 111),
+            StepsEntry(day: "thu", stepCount: 11),
+            StepsEntry(day: "fri", stepCount: 1020),
+            StepsEntry(day: "sat", stepCount: 500)
+        ]
+
+        completion(dummyData)
+    }
 }
