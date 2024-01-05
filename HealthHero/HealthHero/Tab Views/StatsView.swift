@@ -34,6 +34,9 @@ struct StatsView: View {
             if HealthKitManager.isAuthorized() {
                 HealthKitManager.readWeeklyStepCount { weeklyStepData in
                     self.stepsData = weeklyStepData
+                    if let currentDay = weeklyStepData.last {
+                        self.stepsCount = currentDay.stepCount
+                    } 
                 }
             } else {
                 HealthKitManager.requestHealthKitAuthorization()
@@ -41,7 +44,7 @@ struct StatsView: View {
         }
         .animation(.default, value: stepsCount)
     }
-        
+    
     @ViewBuilder
     private var circleView: some View {
         ZStack {

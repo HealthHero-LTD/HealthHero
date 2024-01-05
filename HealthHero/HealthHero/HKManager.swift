@@ -43,35 +43,7 @@ class HKManager: ObservableObject {
             return false
         }
     }
-    
-//    func readStepCount(for date: Date, completion: @escaping (Double) -> Void) {
-//        guard let stepQuantityType = stepCountQuantityType else { return }
-//        let now = Date()
-//        let startOfDay = Calendar.current.startOfDay(for: now)
-//        
-//        let predicate = HKQuery.predicateForSamples(
-//            withStart: startOfDay,
-//            end: now,
-//            options: .strictStartDate
-//        )
-//        
-//        let query = HKStatisticsQuery(
-//            quantityType: stepQuantityType,
-//            quantitySamplePredicate: predicate,
-//            options: .cumulativeSum
-//        ) { _, result, error in
-//            
-//            guard let result = result, let sum = result.sumQuantity() else {
-//                completion(.zero)
-//                return
-//            }
-//            
-//            completion(sum.doubleValue(for: HKUnit.count()))
-//        }
-//        
-//        healthStore.execute(query)
-//    }
-    
+        
     func readStepCount(for date: Date, completion: @escaping (Double) -> Void) {
         guard let stepQuantityType = stepCountQuantityType else { return }
 
@@ -106,27 +78,25 @@ class HKManager: ObservableObject {
         
         let calendar = Calendar.current
         let now = Date()
+        var weeklyStepData: [StepsEntry] = []
         
-        guard let lastWeekStartDate = calendar.date(byAdding: .weekOfYear, value: -1, to: now),
+        guard let lastWeekStartDate = calendar.date(byAdding: .day, value: -6, to: now),
               let lastWeekEndDate = calendar.date(byAdding: .day, value: 0, to: now) else {
             completion([])
             return
         }
-        
-        var weeklyStepData: [StepsEntry] = []
-        
+                
         for i in 0..<7 {
             if let date = calendar.date(byAdding: .day, value: i, to: lastWeekStartDate) {
-                let dayString = calendar.shortWeekdaySymbols[calendar.component(.weekday, from: date) - 1].lowercased()
+                let dayString = calendar.shortWeekdaySymbols[calendar.component(.weekday, from: date) - 1].capitalized
                 
-                // Fetch real step count from HKManager
                 readStepCount(for: date) { stepsCount in
                     let stepsEntry = StepsEntry(day: dayString, stepCount: stepsCount, date: date)
                     weeklyStepData.append(stepsEntry)
                     
-                    // If all entries are fetched, call the completion handler
                     if weeklyStepData.count == 7 {
-                        completion(weeklyStepData)
+                        let sortedData = weeklyStepData.sorted(by: { $0.date < $1.date })
+                        completion(sortedData)
                     }
                 }
             }
