@@ -32,11 +32,8 @@ struct StatsView: View {
         }
         .onAppear {
             if HealthKitManager.isAuthorized() {
-                HealthKitManager.readStepCount { stepsCount in
-                    self.stepsCount = stepsCount
-                    HealthKitManager.readWeeklyStepCount {dailyStepData in
-                        self.stepsData = dailyStepData
-                    }
+                HealthKitManager.readWeeklyStepCount { weeklyStepData in
+                    self.stepsData = weeklyStepData
                 }
             } else {
                 HealthKitManager.requestHealthKitAuthorization()
@@ -86,9 +83,10 @@ struct StatsView: View {
 }
 
 struct StepsEntry: Identifiable {
+    var id = UUID()
     var day: String
     var stepCount: Double
-    var id = UUID()
+    var date: Date
 }
 
 struct StatsDetail: Identifiable {
