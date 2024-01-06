@@ -11,15 +11,7 @@ import Charts
 struct StatsView: View {
     @StateObject private var HealthKitManager = HKManager()
     @State private var stepsCount: Double = .zero
-    var data: [StepsEntry] = [
-        .init(day: "Sudnay", stepCount: 500),
-        .init(day: "Monday", stepCount: 1500),
-        .init(day: "Tuesday", stepCount: 3000),
-        .init(day: "Wednesday", stepCount: 400),
-        .init(day: "Thursday", stepCount: 250),
-        .init(day: "Friday", stepCount: 500),
-        .init(day: "Saturday", stepCount: 1000)
-    ]
+    @State private var stepsData: [StepsEntry] = []
     
     var body: some View {
         VStack {
@@ -30,7 +22,7 @@ struct StatsView: View {
             circleView
             statsDetailView
             
-            Chart(data) { entry in
+            Chart(stepsData) { entry in
                 BarMark(
                     x: .value("Week Day", entry.day),
                     y: .value("Total Steps", entry.stepCount)
@@ -40,8 +32,11 @@ struct StatsView: View {
         }
         .onAppear {
             if HealthKitManager.isAuthorized() {
-                HealthKitManager.readStepCount { stepsCount in
-                    self.stepsCount = stepsCount
+                HealthKitManager.readWeeklyStepCount { weeklyStepData in
+                    self.stepsData = weeklyStepData
+                    if let currentDay = weeklyStepData.last {
+                        self.stepsCount = currentDay.stepCount
+                    } 
                 }
             } else {
                 HealthKitManager.requestHealthKitAuthorization()
@@ -91,9 +86,10 @@ struct StatsView: View {
 }
 
 struct StepsEntry: Identifiable {
+    var id = UUID()
     var day: String
     var stepCount: Double
-    var id = UUID()
+    var date: Date
 }
 
 struct StatsDetail: Identifiable {
@@ -107,4 +103,8 @@ struct StatsDetail: Identifiable {
         .init(title: "Highest Streak:", value: 10.5),
         .init(title: "Top Placements:", value: 2),
     ]
+}
+
+#Preview {
+    StatsView()
 }
