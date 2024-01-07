@@ -9,7 +9,21 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        Text("profile")
+        
+        VStack {
+            Text("Soroush Kami")
+                .font(.title)
+            Text("@Soroush_04")
+        }
+        .frame(width: 400, height: 200)
+        .background(.green)
+        .padding()
+        
+        Spacer()
+        
+        VStack {
+            
+        }
     }
 }
 
