@@ -13,75 +13,77 @@ struct ProfileView: View {
         NavigationView {
             List {
                 Section {
-                    VStack {
-                            ProfilePicture(image: Image("profilePic"))
-                            
-                            Text("Soroush Kami")
-                                .font(.title)
-                            
-                            Text("@Soroush_04")
-                        }
-                        .padding()
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    profileTop
                 }
                 .listRowBackground(Color.clear)
                 
-
-                Section(
-//                    header: Text(
-//                        "Account"
-//                    )
-                ) {
-                    NavigationLink(destination: EmptyView()) {
-                        Text("Hero Info")
-                    }
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        Text("Badges and Titles")
-                    }
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        Text("Friends List")
-                    }
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        Text("Stats and Goals")
-                    }
-                    
-                    
+                Section {
+                    profileNavLink(navLinkNames:[
+                        "Hero Info",
+                        "Badges and Titles",
+                        "Friends List",
+                        "Stats and Goals"
+                    ])
                 }
                 
                 Section {
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        Text("Appearance")
-                    }
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        Text("Privacy and Security")
-                    }
-                    
-                    NavigationLink(destination: EmptyView()) {
-                        Text("Notifications and Sound")
-                    }
-                    
-                  
+                    profileNavLink(navLinkNames:[
+                        "Appearance",
+                        "Privacy and Security",
+                        "Notifications and Sound",
+                    ])
                 }
                 
                 Section {
-                    Button(action: {
-                        // log in to Apple account
-                        print("Log In tapped!")
-                    }) {
-                        Text("Log In")
-                            .foregroundColor(.blue)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
+                    profileLogButton
                 }
-            
             }
             .listStyle(InsetGroupedListStyle())
         }.padding(.top, 1)
+    }
+    
+    @ViewBuilder
+    private var profileTop: some View {
+        
+        VStack {
+            ProfilePicture(image: Image("profilePic"))
+            
+            Text("Soroush Kami")
+                .font(.title)
+            
+            Text("@Soroush_04")
+        }
+        .padding()
+        .frame(
+            maxWidth: .infinity,
+            alignment: .center
+        )
+    }
+    
+    @ViewBuilder
+    private func profileNavLink(navLinkNames: [String]) -> some View {
+        
+        ForEach(navLinkNames, id: \.self) { navLinkName in
+            NavigationLink(destination: EmptyView()) {
+                Text(navLinkName)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var profileLogButton: some View {
+        
+        Button(action: {
+            // log in to Apple account
+            print("Log In tapped!")
+        }) {
+            Text("Log In")
+                .foregroundColor(.blue)
+                .frame(
+                    maxWidth: .infinity,
+                    alignment: .center
+                )
+        }
     }
 }
 
