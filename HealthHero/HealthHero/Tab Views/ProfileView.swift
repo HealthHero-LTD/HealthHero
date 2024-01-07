@@ -10,19 +10,66 @@ import SwiftUI
 struct ProfileView: View {
     var body: some View {
         
-        VStack {
-            Text("Soroush Kami")
-                .font(.title)
-            Text("@Soroush_04")
-        }
-        .frame(width: 400, height: 200)
-        .background(.green)
-        .padding()
-        
-        Spacer()
-        
-        VStack {
+        VStack() {
+            VStack {
+                ProfilePicture(image: Image("profilePic"))
+                
+                Text("Soroush Kami")
+                    .font(.title)
+                
+                Text("@Soroush_04")
+            }
+            .padding()
             
+            NavigationView {
+                List {
+                    NavigationLink(destination: EmptyView()) {
+                        Text("Account Info")
+                    }
+                    
+                    NavigationLink(destination: EmptyView()) {
+                        Text("Badges and Titles")
+                    }
+                    
+                    NavigationLink(destination: EmptyView()) {
+                        Text("Connections")
+                    }
+                }
+            }
+            
+            NavigationView {
+                List {
+                    NavigationLink(destination: EmptyView()) {
+                        Text("Privacy and Security")
+                    }
+                    
+                    NavigationLink(destination: EmptyView()) {
+                        Text("Notifications and Sound")
+                    }
+                    
+                    NavigationLink(destination: EmptyView()) {
+                        Text("Appearance")
+                    }
+                }
+            }
+            
+            VStack {
+                List {
+                    Button(action: {
+                        // log in to apple account
+                        print("Log In tapped!")
+                    } )
+                    {
+                        Text("Log In")
+                            .foregroundColor(.blue)
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .center
+                            )
+                    }
+                }
+                .frame(width: 300)
+            }
         }
     }
 }
