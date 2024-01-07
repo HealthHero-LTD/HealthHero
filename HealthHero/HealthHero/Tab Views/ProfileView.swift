@@ -10,7 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
+            
             List {
                 Section {
                     profileTop
@@ -38,13 +39,11 @@ struct ProfileView: View {
                     profileLogButton
                 }
             }
-            .listStyle(InsetGroupedListStyle())
         }.padding(.top, 1)
     }
     
     @ViewBuilder
     private var profileTop: some View {
-        
         VStack {
             ProfilePicture(image: Image("profilePic"))
             
@@ -62,7 +61,6 @@ struct ProfileView: View {
     
     @ViewBuilder
     private func profileNavLink(navLinkNames: [String]) -> some View {
-        
         ForEach(navLinkNames, id: \.self) { navLinkName in
             NavigationLink(destination: EmptyView()) {
                 Text(navLinkName)
@@ -72,7 +70,6 @@ struct ProfileView: View {
     
     @ViewBuilder
     private var profileLogButton: some View {
-        
         Button(action: {
             // log in to Apple account
             print("Log In tapped!")

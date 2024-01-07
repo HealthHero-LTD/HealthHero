@@ -10,7 +10,6 @@
 		34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */; };
 		34468A752B39790E0081D38E /* HKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468A742B39790E0081D38E /* HKManager.swift */; };
 		347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347526D52B313A820022DB52 /* HealthHeroApp.swift */; };
-		347526D82B313A820022DB52 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347526D72B313A820022DB52 /* ContentView.swift */; };
 		347526DA2B313A830022DB52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 347526D92B313A830022DB52 /* Assets.xcassets */; };
 		347526DE2B313A830022DB52 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 347526DD2B313A830022DB52 /* Preview Assets.xcassets */; };
 		3486B58C2B3F95B000AFC633 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */; };
@@ -25,7 +24,6 @@
 		34468A742B39790E0081D38E /* HKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKManager.swift; sourceTree = "<group>"; };
 		347526D22B313A820022DB52 /* HealthHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		347526D52B313A820022DB52 /* HealthHeroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthHeroApp.swift; sourceTree = "<group>"; };
-		347526D72B313A820022DB52 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		347526D92B313A830022DB52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		347526DB2B313A830022DB52 /* HealthHero.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthHero.entitlements; sourceTree = "<group>"; };
 		347526DD2B313A830022DB52 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -67,10 +65,9 @@
 			children = (
 				34468A732B3971000081D38E /* Info.plist */,
 				347526D52B313A820022DB52 /* HealthHeroApp.swift */,
-				347526D72B313A820022DB52 /* ContentView.swift */,
 				34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */,
-				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				34468A742B39790E0081D38E /* HKManager.swift */,
+				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
 				347526DC2B313A830022DB52 /* Preview Content */,
@@ -172,7 +169,6 @@
 				3486B5902B3F990500AFC633 /* StatsView.swift in Sources */,
 				3486B58E2B3F97E400AFC633 /* ProfileView.swift in Sources */,
 				34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */,
-				347526D82B313A820022DB52 /* ContentView.swift in Sources */,
 				3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,
 			);
@@ -331,7 +327,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HealthHero.HealthHero1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HealthHero.HealthHero;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -380,7 +376,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HealthHero.HealthHero1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HealthHero.HealthHero;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";

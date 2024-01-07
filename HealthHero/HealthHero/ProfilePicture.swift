@@ -14,7 +14,7 @@ struct ProfilePicture: View {
         image
             .resizable()
             .frame(width: 120, height: 120)
-            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+            .clipShape(Circle())
             .overlay {
                 Circle().stroke(.white, lineWidth: 2)
             }
