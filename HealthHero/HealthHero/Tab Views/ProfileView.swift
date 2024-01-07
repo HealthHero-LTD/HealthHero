@@ -10,21 +10,30 @@ import SwiftUI
 struct ProfileView: View {
     var body: some View {
         
-        VStack() {
-            VStack {
-                ProfilePicture(image: Image("profilePic"))
+        NavigationView {
+            List {
+                Section {
+                    VStack {
+                            ProfilePicture(image: Image("profilePic"))
+                            
+                            Text("Soroush Kami")
+                                .font(.title)
+                            
+                            Text("@Soroush_04")
+                        }
+                        .padding()
+                    .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .listRowBackground(Color.clear)
                 
-                Text("Soroush Kami")
-                    .font(.title)
-                
-                Text("@Soroush_04")
-            }
-            .padding()
-            
-            NavigationView {
-                List {
+
+                Section(
+//                    header: Text(
+//                        "Account"
+//                    )
+                ) {
                     NavigationLink(destination: EmptyView()) {
-                        Text("Account Info")
+                        Text("Hero Info")
                     }
                     
                     NavigationLink(destination: EmptyView()) {
@@ -32,13 +41,22 @@ struct ProfileView: View {
                     }
                     
                     NavigationLink(destination: EmptyView()) {
-                        Text("Connections")
+                        Text("Friends List")
                     }
+                    
+                    NavigationLink(destination: EmptyView()) {
+                        Text("Stats and Goals")
+                    }
+                    
+                    
                 }
-            }
-            
-            NavigationView {
-                List {
+                
+                Section {
+                    
+                    NavigationLink(destination: EmptyView()) {
+                        Text("Appearance")
+                    }
+                    
                     NavigationLink(destination: EmptyView()) {
                         Text("Privacy and Security")
                     }
@@ -47,30 +65,23 @@ struct ProfileView: View {
                         Text("Notifications and Sound")
                     }
                     
-                    NavigationLink(destination: EmptyView()) {
-                        Text("Appearance")
-                    }
+                  
                 }
-            }
-            
-            VStack {
-                List {
+                
+                Section {
                     Button(action: {
-                        // log in to apple account
+                        // log in to Apple account
                         print("Log In tapped!")
-                    } )
-                    {
+                    }) {
                         Text("Log In")
                             .foregroundColor(.blue)
-                            .frame(
-                                maxWidth: .infinity,
-                                alignment: .center
-                            )
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
-                .frame(width: 300)
+            
             }
-        }
+            .listStyle(InsetGroupedListStyle())
+        }.padding(.top, 1)
     }
 }
 
