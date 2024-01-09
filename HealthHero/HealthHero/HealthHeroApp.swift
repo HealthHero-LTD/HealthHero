@@ -6,12 +6,25 @@
 //
 
 import SwiftUI
+import GoogleSignInSwift
+import GoogleSignIn
 
 @main
 struct HealthHeroApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url)
+                }
+                .onAppear {
+                    GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+                        if let user = user {
+                            print(user)
+                        }
+                        // Check if `user` exists; otherwise, do something with `error`
+                    }
+                }
         }
     }
 }
