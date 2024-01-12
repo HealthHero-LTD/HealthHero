@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GoogleSignInSwift
+import GoogleSignIn
 
 struct ProfileView: View {
     var body: some View {
@@ -80,6 +82,25 @@ struct ProfileView: View {
                     maxWidth: .infinity,
                     alignment: .center
                 )
+        }
+        GoogleSignInButton(action: handleSignInButton)
+    }
+    
+    func handleSignInButton() {
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first
+                                              as? UIWindowScene)?.windows.first?.rootViewController
+        else {return}
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, error in
+            guard let result = signInResult else {
+                // Inspect error
+                return
+            }
+            let user = result.user
+            
+            let emailAddress = user.profile?.email
+            print(emailAddress)
+            // If sign in succeeded, display the app's main content View.
         }
     }
 }
