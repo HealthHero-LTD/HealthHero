@@ -72,6 +72,16 @@ struct ProfileView: View {
     private var profileLogButton: some View {
         Button(action: {
             // log in to Apple account
+//            let url = URL(string: "http://127.0.0.1:5000/index")!
+            let url = URL(string: "http://192.168.2.11:6969/index")!
+            let task = URLSession.shared.dataTask(with: url)
+            {(data, response, error) in
+                guard let data = data else { return }
+                print(String(data: data, encoding: .utf8)!)
+            }
+            
+            task.resume()
+            
             print("Log In tapped!")
         }) {
             Text("Log In")
