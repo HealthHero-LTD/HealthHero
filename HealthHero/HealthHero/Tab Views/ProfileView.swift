@@ -71,15 +71,36 @@ struct ProfileView: View {
     @ViewBuilder
     private var profileLogButton: some View {
         Button(action: {
-            // log in to Apple account
 //            let url = URL(string: "http://127.0.0.1:5000/index")!
-            let url = URL(string: "http://192.168.2.11:6969/index")!
-            let task = URLSession.shared.dataTask(with: url)
-            {(data, response, error) in
-                guard let data = data else { return }
-                print(String(data: data, encoding: .utf8)!)
+////            let url = URL(string: "http://192.168.2.11:6969/index")!
+//            let task = URLSession.shared.dataTask(with: url)
+//            {(data, response, error) in
+//                guard let data = data else { return }
+//                print(String(data: data, encoding: .utf8)!)
+//            }
+//            
+//            task.resume()
+            let requestData: [String: Any] = ["key": "value"]
+            let jsonData = try? JSONSerialization.data(withJSONObject: requestData)
+            
+            guard let url = URL(string: "http://127.0.0.1:5000/index") else {
+                return
             }
             
+            var request = URLRequest(url: url)
+            
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type" )
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print("Error: \(error)")
+                } else if let data = data {
+                    let responseString = String(data: data, encoding: .utf8)
+                    print("resonse: \(responseString ?? "")")
+                }
+            }
             task.resume()
             
             print("Log In tapped!")
