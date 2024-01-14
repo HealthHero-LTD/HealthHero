@@ -8,6 +8,7 @@
 import SwiftUI
 import GoogleSignInSwift
 import GoogleSignIn
+import AuthenticationServices
 
 struct ProfileView: View {
     var body: some View {
@@ -100,7 +101,7 @@ struct ProfileView: View {
                     print("Error: \(error)")
                 } else if let data = data {
                     let responseString = String(data: data, encoding: .utf8)
-                    print("resonse: \(responseString ?? "")")
+                    print("response: \(responseString ?? "")")
                 }
             }
             task.resume()
@@ -114,7 +115,9 @@ struct ProfileView: View {
                     alignment: .center
                 )
         }
+        
         GoogleSignInButton(action: handleSignInButton)
+        AppleSignInButton
     }
     
     func handleSignInButton() {
@@ -133,6 +136,16 @@ struct ProfileView: View {
             print(emailAddress)
             // If sign in succeeded, display the app's main content View.
         }
+    }
+    
+    @ViewBuilder
+    private var AppleSignInButton: some View {
+        SignInWithAppleButton(.signIn) { request in
+            print("Apple button clicked")
+        } onCompletion: { result in
+            print("completed")
+        }
+        .frame(height: 50)
     }
 }
 
