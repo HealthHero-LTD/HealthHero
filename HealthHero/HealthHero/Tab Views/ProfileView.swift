@@ -9,6 +9,7 @@ import SwiftUI
 import GoogleSignInSwift
 import GoogleSignIn
 import AuthenticationServices
+import JWTDecode
 
 struct ProfileView: View {
     var body: some View {
@@ -86,7 +87,7 @@ struct ProfileView: View {
             let requestData: [String: Any] = ["key": "value"]
             let jsonData = try? JSONSerialization.data(withJSONObject: requestData)
             
-            guard let url = URL(string: "http://127.0.0.1:5000/index") else {
+            guard let url = URL(string: "http://192.168.2.11:6969/index") else {
                 return
             }
             
@@ -123,18 +124,25 @@ struct ProfileView: View {
     func handleSignInButton() {
         guard let presentingViewController = (UIApplication.shared.connectedScenes.first
                                               as? UIWindowScene)?.windows.first?.rootViewController
-        else {return}
+        else { return }
         
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, error in
-            guard let result = signInResult else {
-                // Inspect error
-                return
-            }
-            let user = result.user
+            guard error == nil else { return }
+            guard let result = signInResult else { return }
             
+            let user = result.user
             let emailAddress = user.profile?.email
             print(emailAddress)
             // If sign in succeeded, display the app's main content View.
+            
+            signInResult?.user.refreshTokensIfNeeded { user, error in
+                guard error == nil else { return }
+                guard let user = user else { return }
+                
+                let idToken = user.idToken // send token to backend
+                print(idToken)
+            
+            }
         }
     }
     
