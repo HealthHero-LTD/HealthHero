@@ -141,9 +141,38 @@ struct ProfileView: View {
                 
                 let idToken = user.idToken // send token to backend
                 print(idToken)
-            
+                if let token = idToken?.tokenString {
+                    SendGoogleTokenBackend(idToken: token)
+                    print("token sent to server")
+                }
+//                do {
+//                    if let token = idToken?.tokenString {
+//                        let jwt = try decode(jwt: token)
+//                        print("Decoded Token:")
+//                        print(jwt)
+//                    } else {
+//                        print("ID Token is nil or does not contain a token string.")
+//                    }
+//                } catch {
+//                    print("Error decoding token:", error)
+//                }
             }
         }
+    }
+    
+    func SendGoogleTokenBackend (idToken: String) {
+        guard let authData = try? JSONEncoder().encode(["idToken": idToken]) else {
+            return
+        }
+        let url = URL(string: "http://192.168.2.11:6969/user-profile")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
+            // Handle response from your backend.
+        }
+        task.resume()
     }
     
     @ViewBuilder
