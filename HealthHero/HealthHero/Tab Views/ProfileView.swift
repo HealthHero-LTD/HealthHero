@@ -75,15 +75,6 @@ struct ProfileView: View {
     @ViewBuilder
     private var profileLogButton: some View {
         Button(action: {
-//            let url = URL(string: "http://127.0.0.1:5000/index")!
-////            let url = URL(string: "http://192.168.2.11:6969/index")!
-//            let task = URLSession.shared.dataTask(with: url)
-//            {(data, response, error) in
-//                guard let data = data else { return }
-//                print(String(data: data, encoding: .utf8)!)
-//            }
-//            
-//            task.resume()
             let requestData: [String: Any] = ["key": "value"]
             let jsonData = try? JSONSerialization.data(withJSONObject: requestData)
             
@@ -132,7 +123,7 @@ struct ProfileView: View {
             
             let user = result.user
             let emailAddress = user.profile?.email
-            print(emailAddress)
+            print(emailAddress!)
             // If sign in succeeded, display the app's main content View.
             
             signInResult?.user.refreshTokensIfNeeded { user, error in
@@ -140,22 +131,11 @@ struct ProfileView: View {
                 guard let user = user else { return }
                 
                 let idToken = user.idToken // send token to backend
-                print(idToken)
+                print(idToken!)
                 if let token = idToken?.tokenString {
                     SendGoogleTokenBackend(idToken: token)
                     print("token sent to server")
                 }
-//                do {
-//                    if let token = idToken?.tokenString {
-//                        let jwt = try decode(jwt: token)
-//                        print("Decoded Token:")
-//                        print(jwt)
-//                    } else {
-//                        print("ID Token is nil or does not contain a token string.")
-//                    }
-//                } catch {
-//                    print("Error decoding token:", error)
-//                }
             }
         }
     }
@@ -164,13 +144,14 @@ struct ProfileView: View {
         guard let authData = try? JSONEncoder().encode(["idToken": idToken]) else {
             return
         }
-        let url = URL(string: "http://192.168.2.11:6969/user-profile")!
+        let url = URL(string: "http://192.168.2.11:6969/login")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
-            // Handle response from your backend.
+            // response from backend
+            print(String(data: data!, encoding: .utf8)!)
         }
         task.resume()
     }
