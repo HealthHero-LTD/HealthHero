@@ -9,12 +9,13 @@ import Foundation
 
 class TokenManager {
     static let shared = TokenManager()
+    private let accessTokenKey = "AccessTokenKey"
     
     func saveAccessToken(token accessToken: String) {
-        UserDefaults.standard.set(accessToken, forKey: "AccessTokenKey")
+        UserDefaults.standard.set(accessToken, forKey: accessTokenKey)
     }
     
     func getAccessToken() -> String? {
-        return UserDefaults.standard.string(forKey: "AccessTokenKey")
+        return UserDefaults.standard.string(forKey: accessTokenKey)
     }
 }

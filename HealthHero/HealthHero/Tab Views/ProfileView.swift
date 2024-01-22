@@ -154,11 +154,9 @@ struct ProfileView: View {
         
         let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
             // response from backend
-            //            print(String(data: data!, encoding: .utf8)!)
             do {
                 if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                     if let accessToken = json["access_token"] as? String {
-//                        print("Access Token: \(accessToken)")
                         TokenManager.shared.saveAccessToken(token: accessToken)
                         print(TokenManager.shared.getAccessToken()!)
                     }
