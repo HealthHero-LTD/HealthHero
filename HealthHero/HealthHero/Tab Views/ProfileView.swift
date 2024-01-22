@@ -158,7 +158,9 @@ struct ProfileView: View {
             do {
                 if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                     if let accessToken = json["access_token"] as? String {
-                        print("Access Token: \(accessToken)")
+//                        print("Access Token: \(accessToken)")
+                        TokenManager.shared.saveAccessToken(token: accessToken)
+                        print(TokenManager.shared.getAccessToken()!)
                     }
                 }
             } catch {
