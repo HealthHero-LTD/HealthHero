@@ -140,16 +140,30 @@ struct ProfileView: View {
     func sendGoogleTokenBackend (idToken: String) {
         let idTokenStore = IdTokenStore(idToken: idToken)
         guard let authData = idTokenStore.encode() else {
+
             return
         }
-        let url = URL(string: "http://192.168.2.11:6969/login")!
+        guard let url = URL(string: "http://192.168.2.11:6969/login") else {
+            print("Invalid URL")
+            return
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
             // response from backend
-            print(String(data: data!, encoding: .utf8)!)
+            //            print(String(data: data!, encoding: .utf8)!)
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                    if let accessToken = json["access_token"] as? String {
+                        print("Access Token: \(accessToken)")
+                    }
+                }
+            } catch {
+                print("Error parsing JSON: \(error)")
+            }
         }
         task.resume()
     }
