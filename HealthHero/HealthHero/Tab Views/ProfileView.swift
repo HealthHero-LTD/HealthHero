@@ -8,7 +8,6 @@
 import SwiftUI
 import GoogleSignInSwift
 import GoogleSignIn
-import AuthenticationServices
 import JWTDecode
 
 struct ProfileView: View {
@@ -109,7 +108,6 @@ struct ProfileView: View {
         }
         
         GoogleSignInButton(action: handleSignInButton)
-        AppleSignInButton
     }
     
     func handleSignInButton() {
@@ -123,7 +121,6 @@ struct ProfileView: View {
             
             let user = result.user
             let emailAddress = user.profile?.email
-            print(emailAddress!)
             // If sign in succeeded, display the app's main content View.
             
             signInResult?.user.refreshTokensIfNeeded { user, error in
@@ -133,14 +130,14 @@ struct ProfileView: View {
                 let idToken = user.idToken // send token to backend
                 print(idToken!)
                 if let token = idToken?.tokenString {
-                    SendGoogleTokenBackend(idToken: token)
+                    sendGoogleTokenBackend(idToken: token)
                     print("token sent to server")
                 }
             }
         }
     }
     
-    func SendGoogleTokenBackend (idToken: String) {
+    func sendGoogleTokenBackend (idToken: String) {
         guard let authData = try? JSONEncoder().encode(["idToken": idToken]) else {
             return
         }
@@ -154,16 +151,6 @@ struct ProfileView: View {
             print(String(data: data!, encoding: .utf8)!)
         }
         task.resume()
-    }
-    
-    @ViewBuilder
-    private var AppleSignInButton: some View {
-        SignInWithAppleButton(.signIn) { request in
-            print("Apple button clicked")
-        } onCompletion: { result in
-            print("completed")
-        }
-        .frame(height: 50)
     }
 }
 
