@@ -19,6 +19,8 @@
 		3486B5902B3F990500AFC633 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B58F2B3F990500AFC633 /* StatsView.swift */; };
 		3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B5912B3F9B5D00AFC633 /* MainView.swift */; };
 		3492E09F2B4CEB6F00AE3719 /* GoogleSignIn.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3492E09E2B4CEB6F00AE3719 /* GoogleSignIn.plist */; };
+		34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 34D014ED2B5AFD1200974C5F /* JWTDecode */; };
+		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,7 @@
 		3486B58F2B3F990500AFC633 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		3486B5912B3F9B5D00AFC633 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3492E09E2B4CEB6F00AE3719 /* GoogleSignIn.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GoogleSignIn.plist; sourceTree = "<group>"; };
+		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,7 @@
 			files = (
 				34824B472B4CE19700253C28 /* GoogleSignIn in Frameworks */,
 				34824B492B4CE19700253C28 /* GoogleSignInSwift in Frameworks */,
+				34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +78,7 @@
 				347526D52B313A820022DB52 /* HealthHeroApp.swift */,
 				34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */,
 				34468A742B39790E0081D38E /* HKManager.swift */,
+				34D014F12B606EB700974C5F /* IdTokenStore.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
@@ -120,6 +125,7 @@
 			packageProductDependencies = (
 				34824B462B4CE19700253C28 /* GoogleSignIn */,
 				34824B482B4CE19700253C28 /* GoogleSignInSwift */,
+				34D014ED2B5AFD1200974C5F /* JWTDecode */,
 			);
 			productName = HealthHero;
 			productReference = 347526D22B313A820022DB52 /* HealthHero.app */;
@@ -151,6 +157,7 @@
 			mainGroup = 347526C92B313A820022DB52;
 			packageReferences = (
 				34824B452B4CE19700253C28 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				34D014EC2B5AFD1200974C5F /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
 			);
 			productRefGroup = 347526D32B313A820022DB52 /* Products */;
 			projectDirPath = "";
@@ -179,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */,
 				3486B58C2B3F95B000AFC633 /* LeaderboardView.swift in Sources */,
 				34468A752B39790E0081D38E /* HKManager.swift in Sources */,
 				3486B5902B3F990500AFC633 /* StatsView.swift in Sources */,
@@ -435,6 +443,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		34D014EC2B5AFD1200974C5F /* XCRemoteSwiftPackageReference "JWTDecode.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -447,6 +463,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 34824B452B4CE19700253C28 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		34D014ED2B5AFD1200974C5F /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34D014EC2B5AFD1200974C5F /* XCRemoteSwiftPackageReference "JWTDecode.swift" */;
+			productName = JWTDecode;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
