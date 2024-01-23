@@ -138,7 +138,8 @@ struct ProfileView: View {
     }
     
     func sendGoogleTokenBackend (idToken: String) {
-        guard let authData = try? JSONEncoder().encode(["idToken": idToken]) else {
+        let idTokenStore = IdTokenStore(idToken: idToken)
+        guard let authData = idTokenStore.encode() else {
             return
         }
         let url = URL(string: "http://192.168.2.11:6969/login")!
