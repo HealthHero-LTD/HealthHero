@@ -140,7 +140,7 @@ struct ProfileView: View {
     func sendGoogleTokenBackend (idToken: String) {
         let idTokenStore = IdTokenStore(idToken: idToken)
         guard let authData = idTokenStore.encode() else {
-
+            
             return
         }
         guard let url = URL(string: "http://192.168.2.11:6969/login") else {
@@ -154,15 +154,11 @@ struct ProfileView: View {
         
         let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
             // response from backend
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
-                    if let accessToken = json["access_token"] as? String {
-                        TokenManager.shared.saveAccessToken(token: accessToken)
-                        print(TokenManager.shared.getAccessToken()!)
-                    }
+            if let data {
+                if let accessTokenStore = AccessTokenStore.decode(from: data) {
+                    TokenManager.shared.saveAccessToken(token: accessTokenStore.accessToken)
+                    print(TokenManager.shared.getAccessToken()!)
                 }
-            } catch {
-                print("Error parsing JSON: \(error)")
             }
         }
         task.resume()
