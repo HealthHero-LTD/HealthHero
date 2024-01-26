@@ -74,6 +74,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var profileLogButton: some View {
         Button(action: {
+            KeychainManager.shared.getAccessTokenFromKeychain()
             let requestData: [String: Any] = ["key": "value"]
             let jsonData = try? JSONSerialization.data(withJSONObject: requestData)
             
@@ -140,16 +141,26 @@ struct ProfileView: View {
     func sendGoogleTokenBackend (idToken: String) {
         let idTokenStore = IdTokenStore(idToken: idToken)
         guard let authData = idTokenStore.encode() else {
+            
             return
         }
-        let url = URL(string: "http://192.168.2.11:6969/login")!
+        guard let url = URL(string: "http://192.168.2.11:6969/login") else {
+            print("Invalid URL")
+            return
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
             // response from backend
-            print(String(data: data!, encoding: .utf8)!)
+            if let data {
+                if let accessTokenStore = AccessTokenStore.decode(from: data) {
+                    let accessToken = accessTokenStore.accessToken
+                    KeychainManager.shared.saveAccessTokenToKeychain(token: accessToken)
+                }
+            }
         }
         task.resume()
     }
