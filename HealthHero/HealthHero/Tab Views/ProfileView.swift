@@ -74,6 +74,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var profileLogButton: some View {
         Button(action: {
+            getAccessTokenFromKeychain()
             let requestData: [String: Any] = ["key": "value"]
             let jsonData = try? JSONSerialization.data(withJSONObject: requestData)
             
