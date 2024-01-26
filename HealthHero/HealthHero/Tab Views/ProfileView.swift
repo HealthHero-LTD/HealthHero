@@ -9,6 +9,7 @@ import SwiftUI
 import GoogleSignInSwift
 import GoogleSignIn
 import JWTDecode
+import Security
 
 struct ProfileView: View {
     var body: some View {
@@ -156,8 +157,8 @@ struct ProfileView: View {
             // response from backend
             if let data {
                 if let accessTokenStore = AccessTokenStore.decode(from: data) {
-                    TokenManager.shared.saveAccessToken(token: accessTokenStore.accessToken)
-                    print(TokenManager.shared.getAccessToken()!)
+                    let accessToken = accessTokenStore.accessToken
+                    saveAccessTokenToKeychain(token: accessToken)
                 }
             }
         }
