@@ -31,3 +31,23 @@ func saveAccessTokenToKeychain(token: String) {
         print("TOKEN SAVEEED")
     }
 }
+
+func getAccessTokenFromKeychain() -> String? {
+    let query: [String: Any] = [
+        kSecClass as String: kSecClassGenericPassword,
+        kSecAttrService as String: serviceName,
+        kSecAttrAccount as String: accessTokenKey,
+        kSecReturnData as String: kCFBooleanTrue!,
+        kSecMatchLimit as String: 1
+    ]
+    
+    var item: CFTypeRef?
+    let status = SecItemCopyMatching(query as CFDictionary, &item)
+    guard status == errSecSuccess, let tokenData = item as? Data else {
+        print("Error retrieving access token from Keychain")
+        return nil
+        
+    }
+    
+    return String(data: tokenData, encoding: .utf8)
+}
