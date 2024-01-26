@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3416F4022B60863400E19FAE /* AccessTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416F4012B60863400E19FAE /* AccessTokenStore.swift */; };
-		3416F4072B63462B00E19FAE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3416F4062B63462B00E19FAE /* Security.framework */; };
 		3416F4092B63493300E19FAE /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416F4082B63493300E19FAE /* KeychainManager.swift */; };
 		34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */; };
 		34468A752B39790E0081D38E /* HKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468A742B39790E0081D38E /* HKManager.swift */; };
@@ -51,7 +50,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3416F4072B63462B00E19FAE /* Security.framework in Frameworks */,
 				34824B472B4CE19700253C28 /* GoogleSignIn in Frameworks */,
 				34824B492B4CE19700253C28 /* GoogleSignInSwift in Frameworks */,
 				34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */,

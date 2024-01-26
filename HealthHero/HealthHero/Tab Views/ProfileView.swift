@@ -74,7 +74,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var profileLogButton: some View {
         Button(action: {
-            getAccessTokenFromKeychain()
+            KeychainManager.shared.getAccessTokenFromKeychain()
             let requestData: [String: Any] = ["key": "value"]
             let jsonData = try? JSONSerialization.data(withJSONObject: requestData)
             
@@ -158,7 +158,7 @@ struct ProfileView: View {
             if let data {
                 if let accessTokenStore = AccessTokenStore.decode(from: data) {
                     let accessToken = accessTokenStore.accessToken
-                    saveAccessTokenToKeychain(token: accessToken)
+                    KeychainManager.shared.saveAccessTokenToKeychain(token: accessToken)
                 }
             }
         }
