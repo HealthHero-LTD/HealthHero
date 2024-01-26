@@ -38,7 +38,7 @@ func getAccessTokenFromKeychain() -> String? {
         kSecAttrService as String: serviceName,
         kSecAttrAccount as String: accessTokenKey,
         kSecReturnData as String: kCFBooleanTrue!,
-        kSecMatchLimit as String: 1
+        kSecMatchLimit as String: kSecMatchLimitOne
     ]
     
     var item: CFTypeRef?
@@ -49,5 +49,11 @@ func getAccessTokenFromKeychain() -> String? {
         
     }
     
-    return String(data: tokenData, encoding: .utf8)
+    if let accessToken = String(data: tokenData, encoding: .utf8) {
+        print("ACCESS TOKEN RECEIVED: \(accessToken)")
+        return accessToken
+    } else {
+        print("error getting access token from keychain")
+        return nil
+    }
 }
