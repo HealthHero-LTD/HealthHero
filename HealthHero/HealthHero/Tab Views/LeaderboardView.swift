@@ -22,6 +22,8 @@ struct LeaderboardView: View {
                     LeaderboardRow(entry: entry)
                 }
             }
+        }.task {
+            leaderboardViewModel.fetchLeaderboardData()
         }
     }
 }
@@ -40,7 +42,7 @@ struct LeaderboardHeader: View {
                 .frame(width: 30, alignment: .center)
             Text("Score")
                 .fontWeight(.bold)
-                .frame(width: 50, alignment: .trailing)
+                .frame(width: 50, alignment: .center)
         }
     }
 }
@@ -58,7 +60,7 @@ struct LeaderboardRow: View {
             Text("\(entry.level)")
                 .frame(width: 25, alignment: .center)
             Text("\(entry.score)")
-                .frame(width: 50, alignment: .trailing)
+                .frame(width: 50, alignment: .center)
         }
     }
 }
@@ -67,7 +69,7 @@ struct LeaderboardRow: View {
     LeaderboardView()
 }
 
-struct LeaderboardEntry: Identifiable {
+struct LeaderboardEntry: Identifiable, Codable {
     let id: Int
     let username: String
     let level: Int
@@ -77,18 +79,31 @@ struct LeaderboardEntry: Identifiable {
 class LeaderboardViewModel: ObservableObject {
     @Published var leaderboardEntries: [LeaderboardEntry] = []
     
-    init() {
-        fetchLeaderboardData()
-    }
-    
     func fetchLeaderboardData() {
         // we can fetch backend data here(maybe?)
-        let dummyEntries = [
-            LeaderboardEntry(id: 1, username: "Player 1", level: 5, score: 100),
-            LeaderboardEntry(id: 2, username: "Player 2", level: 4, score: 90),
-            LeaderboardEntry(id: 3, username: "Player 3", level: 3, score: 80),
-            LeaderboardEntry(id: 99, username: "Player 4", level: 2, score: 70),
-        ]
-        self.leaderboardEntries = dummyEntries
+        let url = URL(string: "http://192.168.2.11:6969/test")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print("error: \(error!.localizedDescription)")
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+                print("HTTP Error: \(httpResponse.statusCode)")
+                return
+            }
+            
+            do {
+                let leaderboardData = try JSONDecoder().decode([LeaderboardEntry].self, from: data)
+            } catch {
+                print("JSON Parsing Error: \(error.localizedDescription)")
+            }
+        }
+        task.resume()
     }
 }
