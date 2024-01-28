@@ -102,8 +102,11 @@ class LeaderboardViewModel: ObservableObject {
             }
             
             do {
-                self.leaderboardEntries = try JSONDecoder().decode([LeaderboardEntry].self, from: data)
-                print("leaderboard data decoded successfully")
+                let leaderboardData = try JSONDecoder().decode([LeaderboardEntry].self, from: data)
+                print("leaderboard data updated successfully")
+                DispatchQueue.main.async {
+                    self.leaderboardEntries = leaderboardData
+                }
             } catch {
                 print("JSON Parsing Error: \(error.localizedDescription)")
             }
