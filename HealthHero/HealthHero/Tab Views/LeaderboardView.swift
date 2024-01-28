@@ -24,7 +24,9 @@ struct LeaderboardView: View {
             }
             Button("Refresh") {
                 leaderboardViewModel.refreshLeaderboardData()
+                leaderboardViewModel.saveCachedData()
             }
+            .padding()
         }
     }
 }
@@ -80,8 +82,10 @@ struct LeaderboardEntry: Identifiable, Codable {
 class LeaderboardViewModel: ObservableObject {
     @Published var leaderboardEntries: [LeaderboardEntry] = []
     
-    func refreshLeaderboardData() {
-        fetchLeaderboardData()
+    private let cacheKey = "LeaderboarCache"
+    
+    init () {
+        loadCachedData()
     }
     
     func fetchLeaderboardData() {
@@ -117,5 +121,30 @@ class LeaderboardViewModel: ObservableObject {
             }
         }
         task.resume()
+    }
+    
+    func refreshLeaderboardData() {
+        fetchLeaderboardData()
+    }
+    
+    func loadCachedData() {
+        if let data = UserDefaults.standard.data(forKey: cacheKey) {
+            do {
+                self.leaderboardEntries = try JSONDecoder().decode([LeaderboardEntry].self, from: data)
+                print("cached data loaded")
+            } catch {
+                print("error with loading cache data \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func saveCachedData() {
+        do {
+            let data = try JSONEncoder().encode(leaderboardEntries)
+            UserDefaults.standard.set(data, forKey: cacheKey)
+            print("cached data saved successfulyl")
+        } catch {
+            print("error with saving cached data \(error.localizedDescription)")
+        }
     }
 }
