@@ -24,9 +24,11 @@ struct LeaderboardView: View {
             }
             Button("Refresh") {
                 leaderboardViewModel.refreshLeaderboardData()
-                leaderboardViewModel.saveCachedData()
             }
             .padding()
+        }
+        .onAppear() {
+            leaderboardViewModel.loadCachedData()
         }
     }
 }
@@ -115,6 +117,7 @@ class LeaderboardViewModel: ObservableObject {
                 print("leaderboard data updated successfully")
                 DispatchQueue.main.async {
                     self.leaderboardEntries = leaderboardData
+                    self.saveCachedData()
                 }
             } catch {
                 print("JSON Parsing Error: \(error.localizedDescription)")
@@ -142,7 +145,7 @@ class LeaderboardViewModel: ObservableObject {
         do {
             let data = try JSONEncoder().encode(leaderboardEntries)
             UserDefaults.standard.set(data, forKey: cacheKey)
-            print("cached data saved successfulyl")
+            print("cached data saved successfully")
         } catch {
             print("error with saving cached data \(error.localizedDescription)")
         }
