@@ -81,7 +81,7 @@ class LeaderboardViewModel: ObservableObject {
     
     func fetchLeaderboardData() {
         // we can fetch backend data here(maybe?)
-        let url = URL(string: "http://192.168.2.11:6969/test")!
+        let url = URL(string: "http://192.168.2.11:6969/leaderboard")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -92,12 +92,13 @@ class LeaderboardViewModel: ObservableObject {
                 print("error: \(error!.localizedDescription)")
                 return
             }
+            print("leaderboard data received")
             
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
                 print("HTTP Error: \(httpResponse.statusCode)")
                 return
             } else {
-                print("resonse received")
+                print("response received")
             }
             
             do {
