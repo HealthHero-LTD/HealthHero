@@ -21,6 +21,10 @@
 		3486B5902B3F990500AFC633 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B58F2B3F990500AFC633 /* StatsView.swift */; };
 		3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486B5912B3F9B5D00AFC633 /* MainView.swift */; };
 		3492E09F2B4CEB6F00AE3719 /* GoogleSignIn.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3492E09E2B4CEB6F00AE3719 /* GoogleSignIn.plist */; };
+		34989B852B66A67D00790C86 /* LeaderboardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B842B66A67D00790C86 /* LeaderboardHeader.swift */; };
+		34989B872B66A6CD00790C86 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B862B66A6CD00790C86 /* LeaderboardRow.swift */; };
+		34989B892B66A70A00790C86 /* LeaderboardEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B882B66A70A00790C86 /* LeaderboardEntry.swift */; };
+		34989B8B2B66A74D00790C86 /* LeaderboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */; };
 		34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 34D014ED2B5AFD1200974C5F /* JWTDecode */; };
 		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +46,10 @@
 		3486B58F2B3F990500AFC633 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		3486B5912B3F9B5D00AFC633 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		3492E09E2B4CEB6F00AE3719 /* GoogleSignIn.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GoogleSignIn.plist; sourceTree = "<group>"; };
+		34989B842B66A67D00790C86 /* LeaderboardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardHeader.swift; sourceTree = "<group>"; };
+		34989B862B66A6CD00790C86 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
+		34989B882B66A70A00790C86 /* LeaderboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntry.swift; sourceTree = "<group>"; };
+		34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewModel.swift; sourceTree = "<group>"; };
 		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +103,10 @@
 				34D014F12B606EB700974C5F /* IdTokenStore.swift */,
 				3416F4012B60863400E19FAE /* AccessTokenStore.swift */,
 				3416F4082B63493300E19FAE /* KeychainManager.swift */,
+				34989B842B66A67D00790C86 /* LeaderboardHeader.swift */,
+				34989B862B66A6CD00790C86 /* LeaderboardRow.swift */,
+				34989B882B66A70A00790C86 /* LeaderboardEntry.swift */,
+				34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
@@ -202,13 +214,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34989B892B66A70A00790C86 /* LeaderboardEntry.swift in Sources */,
 				34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */,
 				3486B58C2B3F95B000AFC633 /* LeaderboardView.swift in Sources */,
 				34468A752B39790E0081D38E /* HKManager.swift in Sources */,
+				34989B8B2B66A74D00790C86 /* LeaderboardViewModel.swift in Sources */,
 				3486B5902B3F990500AFC633 /* StatsView.swift in Sources */,
 				3416F4022B60863400E19FAE /* AccessTokenStore.swift in Sources */,
+				34989B852B66A67D00790C86 /* LeaderboardHeader.swift in Sources */,
 				3416F4092B63493300E19FAE /* KeychainManager.swift in Sources */,
 				3486B58E2B3F97E400AFC633 /* ProfileView.swift in Sources */,
+				34989B872B66A6CD00790C86 /* LeaderboardRow.swift in Sources */,
 				34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */,
 				3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,

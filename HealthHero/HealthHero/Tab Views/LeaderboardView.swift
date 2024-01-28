@@ -8,8 +8,28 @@
 import SwiftUI
 
 struct LeaderboardView: View {
+    @ObservedObject var leaderboardViewModel = LeaderboardViewModel()
+    
     var body: some View {
-        Text("leaderboard")
+        VStack {
+            Text("Leaderboard")
+                .font(.title)
+                .padding()
+            
+            List {
+                LeaderboardHeader()
+                ForEach(leaderboardViewModel.leaderboardEntries) { entry in
+                    LeaderboardRow(entry: entry)
+                }
+            }
+            Button("Refresh") {
+                leaderboardViewModel.refreshLeaderboardData()
+            }
+            .padding()
+        }
+        .onAppear() {
+            leaderboardViewModel.loadCachedData()
+        }
     }
 }
 
