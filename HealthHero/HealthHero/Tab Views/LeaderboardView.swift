@@ -96,10 +96,13 @@ class LeaderboardViewModel: ObservableObject {
             if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
                 print("HTTP Error: \(httpResponse.statusCode)")
                 return
+            } else {
+                print("resonse received")
             }
             
             do {
-                let leaderboardData = try JSONDecoder().decode([LeaderboardEntry].self, from: data)
+                self.leaderboardEntries = try JSONDecoder().decode([LeaderboardEntry].self, from: data)
+                print("leaderboard data decoded successfully")
             } catch {
                 print("JSON Parsing Error: \(error.localizedDescription)")
             }
