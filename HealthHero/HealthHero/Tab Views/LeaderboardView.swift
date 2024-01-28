@@ -22,8 +22,9 @@ struct LeaderboardView: View {
                     LeaderboardRow(entry: entry)
                 }
             }
-        }.task {
-            leaderboardViewModel.fetchLeaderboardData()
+            Button("Refresh") {
+                leaderboardViewModel.refreshLeaderboardData()
+            }
         }
     }
 }
@@ -78,6 +79,10 @@ struct LeaderboardEntry: Identifiable, Codable {
 
 class LeaderboardViewModel: ObservableObject {
     @Published var leaderboardEntries: [LeaderboardEntry] = []
+    
+    func refreshLeaderboardData() {
+        fetchLeaderboardData()
+    }
     
     func fetchLeaderboardData() {
         // we can fetch backend data here(maybe?)
