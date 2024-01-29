@@ -7,8 +7,6 @@
 
 import SwiftUI
 import GoogleSignInSwift
-import GoogleSignIn
-import JWTDecode
 
 struct ProfileView: View {
     var body: some View {
