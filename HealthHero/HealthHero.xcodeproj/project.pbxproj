@@ -25,6 +25,7 @@
 		34989B872B66A6CD00790C86 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B862B66A6CD00790C86 /* LeaderboardRow.swift */; };
 		34989B892B66A70A00790C86 /* LeaderboardEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B882B66A70A00790C86 /* LeaderboardEntry.swift */; };
 		34989B8B2B66A74D00790C86 /* LeaderboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */; };
+		34989B912B68514E00790C86 /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B902B68514E00790C86 /* GoogleSignInManager.swift */; };
 		34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 34D014ED2B5AFD1200974C5F /* JWTDecode */; };
 		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		34989B862B66A6CD00790C86 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
 		34989B882B66A70A00790C86 /* LeaderboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntry.swift; sourceTree = "<group>"; };
 		34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewModel.swift; sourceTree = "<group>"; };
+		34989B902B68514E00790C86 /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
 		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 				34989B862B66A6CD00790C86 /* LeaderboardRow.swift */,
 				34989B882B66A70A00790C86 /* LeaderboardEntry.swift */,
 				34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */,
+				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
@@ -225,6 +228,7 @@
 				3416F4092B63493300E19FAE /* KeychainManager.swift in Sources */,
 				3486B58E2B3F97E400AFC633 /* ProfileView.swift in Sources */,
 				34989B872B66A6CD00790C86 /* LeaderboardRow.swift in Sources */,
+				34989B912B68514E00790C86 /* GoogleSignInManager.swift in Sources */,
 				34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */,
 				3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,
