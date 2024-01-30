@@ -14,7 +14,7 @@ struct SignInScreen: View {
     var body: some View {
         Group {
             if isLoggedIn {
-                MainView()
+                SetUsername()
             } else {
                 Spacer()
                     .frame(height: 500)
