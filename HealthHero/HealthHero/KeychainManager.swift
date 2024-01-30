@@ -18,17 +18,17 @@ class KeychainManager {
     func saveAccessTokenToKeychain(token: String, expirationTime: TimeInterval) {
         // remember this convert data to string
         if let data = token.data(using: .utf8) {
-            let query: [String: Any] = [
+            let tokenQuery: [String: Any] = [
                 kSecClass as String: kSecClassGenericPassword,
                 kSecAttrService as String: serviceName,
                 kSecAttrAccount as String: accessTokenKey,
                 kSecValueData as String: data
             ]
             // detele duplicate token
-            SecItemDelete(query as CFDictionary)
+            SecItemDelete(tokenQuery as CFDictionary)
             // set new token
-            let status = SecItemAdd(query as CFDictionary, nil)
-            guard status == errSecSuccess else {
+            let tokenStatus = SecItemAdd(tokenQuery as CFDictionary, nil)
+            guard tokenStatus == errSecSuccess else {
                 print("Error saving access token to Keychain")
                 return
             }
@@ -43,16 +43,18 @@ class KeychainManager {
                 kSecValueData as String: expirationTimeData
             ]
             
+            // delete duplication expiration time
             SecItemDelete(expirationTimeQuery as CFDictionary)
+            
             let expirationTimeStatus = SecItemAdd(expirationTimeQuery as CFDictionary, nil)
             guard expirationTimeStatus == errSecSuccess else {
                 print("error saving expiration time to Keychain")
                 return
             }
-            
             print("ACCESS TOKEN AND EXPIRATION SAVED!")
         }
     }
+    
     func getAccessTokenFromKeychain() -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
