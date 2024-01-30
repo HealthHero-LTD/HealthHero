@@ -115,11 +115,11 @@
 				34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */,
 				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
 				34989B922B68582500790C86 /* SignInScreen.swift */,
+				34989B942B68789000790C86 /* SetUsername.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
 				347526DC2B313A830022DB52 /* Preview Content */,
-				34989B942B68789000790C86 /* SetUsername.swift */,
 			);
 			path = HealthHero;
 			sourceTree = "<group>";

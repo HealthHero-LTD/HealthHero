@@ -9,27 +9,34 @@ import SwiftUI
 
 struct SetUsername: View {
     @State private var username: String = ""
-
+    @State private var isUsernameSaved: Bool = false
+    
     var body: some View {
-        VStack {
-            Spacer()
-                .frame(height: 400)
-            
-            TextField("Enter username", text: $username)
-                .frame(width: 300)
-                .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .autocapitalization(.none)
-            
-            Button(action: {
-                saveUsername()
-            }) { Text("Save")
-                .frame(width: 200)
-                .padding()
-                .foregroundColor(.white)
-                .background(.blue)
-                .cornerRadius(8)
-                .contentShape(Rectangle())
+        Group {
+            if isUsernameSaved {
+                MainView()
+            } else {
+                VStack {
+                    Spacer()
+                        .frame(height: 400)
+                    
+                    TextField("Enter username", text: $username)
+                        .frame(width: 300)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocapitalization(.none)
+                    
+                    Button(action: {
+                        saveUsername()
+                    }) { Text("Save")
+                            .frame(width: 200)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(.blue)
+                            .cornerRadius(8)
+                            .contentShape(Rectangle())
+                    }
+                }
             }
         }
     }
@@ -37,6 +44,7 @@ struct SetUsername: View {
     func saveUsername() {
         // check the username with backend and db
         print("username saved:", username)
+        isUsernameSaved = true
     }
 }
 
