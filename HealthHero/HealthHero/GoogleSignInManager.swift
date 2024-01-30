@@ -50,8 +50,8 @@ class GoogleSignInManager {
                 let idToken = user.idToken // send token to backend
                 print(idToken!)
                 if let token = idToken?.tokenString {
+                    print("token sent to server")
                     self.sendGoogleTokenBackend(idToken: token) { success in
-                        print("token sent to server")
                         completion(true)
                     }
                 }
@@ -80,7 +80,12 @@ class GoogleSignInManager {
             if let data {
                 if let accessTokenStore = AccessTokenStore.decode(from: data) {
                     let accessToken = accessTokenStore.accessToken
+                    let expirationTime = Int(accessTokenStore.expirationTime)
+                    
+                    print(expirationTime)
                     KeychainManager.shared.saveAccessTokenToKeychain(token: accessToken)
+//                    KeychainManager.shared.saveExpirationTimeToKeychain(expirationTime: expirationTime)
+                    
                     completion(true)
                 }
             }

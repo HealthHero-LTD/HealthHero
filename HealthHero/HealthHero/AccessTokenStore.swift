@@ -9,6 +9,7 @@ import Foundation
 
 struct AccessTokenStore: Codable {
     let accessToken: String
+    let expirationTime: TimeInterval
     
     static func decode(from authData: Data) -> AccessTokenStore? {
         let decoder = JSONDecoder()
