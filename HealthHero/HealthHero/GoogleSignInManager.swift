@@ -28,15 +28,24 @@ class GoogleSignInManager {
                 completion(false)
                 return
             }
-            guard let result = signInResult else { return }
+            guard let result = signInResult else {
+                completion(false)
+                return
+            }
             // set isLoggedIn to true
             let user = result.user
             let emailAddress = user.profile?.email
             // If sign in succeeded, display the app's main content View.
             
             signInResult?.user.refreshTokensIfNeeded { user, error in
-                guard error == nil else { return }
-                guard let user = user else { return }
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
+                guard let user = user else {
+                    completion(false)
+                    return
+                }
                 
                 let idToken = user.idToken // send token to backend
                 print(idToken!)
@@ -53,10 +62,12 @@ class GoogleSignInManager {
     func sendGoogleTokenBackend (idToken: String, completion: @escaping (Bool) -> Void) {
         let idTokenStore = IdTokenStore(idToken: idToken)
         guard let authData = idTokenStore.encode() else {
+            completion(false)
             return
         }
         guard let url = URL(string: "http://192.168.2.11:6969/login") else {
             print("Invalid URL")
+            completion(false)
             return
         }
         
