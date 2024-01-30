@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LaunchScreen: View {
     @State private var isValidate = false
-
+    
     var body: some View {
         Group {
             if isValidate {
@@ -22,6 +22,21 @@ struct LaunchScreen: View {
                     Spacer()
                         .frame(height: 400)
                 }
+            }
+        }
+        .onAppear() {
+            tokenValidation()
+        }
+    }
+    
+    func tokenValidation() {
+        if let expirationTimeDouble = KeychainManager.shared.getExpirationTimeFromKeychain() {
+            let currentUnixTimestamp = Date().timeIntervalSince1970
+            if expirationTimeDouble > currentUnixTimestamp {
+                print("Token is valid")
+                isValidate = true
+            } else {
+                print("Token has expired")
             }
         }
     }
