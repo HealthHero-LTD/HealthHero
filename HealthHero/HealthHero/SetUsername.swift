@@ -21,14 +21,16 @@ struct SetUsername: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .autocapitalization(.none)
             
-            Button("Save") {
+            Button(action: {
                 saveUsername()
+            }) { Text("Save")
+                .frame(width: 200)
+                .padding()
+                .foregroundColor(.white)
+                .background(.blue)
+                .cornerRadius(8)
+                .contentShape(Rectangle())
             }
-            .frame(width: 200)
-            .padding()
-            .foregroundColor(.white)
-            .background(.blue)
-            .cornerRadius(8)
         }
     }
     
