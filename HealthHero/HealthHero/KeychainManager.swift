@@ -81,6 +81,32 @@ class KeychainManager {
         }
     }
     
+    func getExpirationTimeFromKeychain() -> TimeInterval? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: serviceName,
+            kSecAttrAccount as String: expirationTimeKey,
+            kSecReturnData as String: kCFBooleanTrue!,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+        guard status == errSecSuccess, let expirationData = item as? Data else {
+            print("error retrieving expiration time from Keychain")
+            return nil
+        }
+        
+        var expirationTime: TimeInterval = 0
+        expirationData.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
+            guard let baseAddress = ptr.baseAddress else { return }
+            expirationTime = baseAddress.load(as: TimeInterval.self)
+        }
+        
+        print("expiration time received: \(expirationTime)")
+        return expirationTime
+    }
+    
     func deleteAccessTokenFromKeychain() {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
