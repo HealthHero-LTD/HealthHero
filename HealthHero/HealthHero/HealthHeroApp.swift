@@ -13,7 +13,7 @@ import GoogleSignIn
 struct HealthHeroApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            SignInScreen()
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }

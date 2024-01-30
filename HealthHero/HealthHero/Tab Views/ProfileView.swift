@@ -38,9 +38,6 @@ struct ProfileView: View {
                 
                 Section {
                     profileLogButton
-                    GoogleSignInButton(
-                        action: GoogleSignInManager.shared.handleSignInButton
-                    )
                 }
             }
         }.padding(.top, 1)
