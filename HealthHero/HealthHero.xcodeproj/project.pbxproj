@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3404ABE72B69765600C55381 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3404ABE62B69765600C55381 /* LaunchScreen.swift */; };
 		3416F4022B60863400E19FAE /* AccessTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416F4012B60863400E19FAE /* AccessTokenStore.swift */; };
 		3416F4092B63493300E19FAE /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416F4082B63493300E19FAE /* KeychainManager.swift */; };
 		34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3404ABE62B69765600C55381 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		3416F4012B60863400E19FAE /* AccessTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenStore.swift; sourceTree = "<group>"; };
 		3416F4062B63462B00E19FAE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		3416F4082B63493300E19FAE /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
 				34989B922B68582500790C86 /* SignInScreen.swift */,
 				34989B942B68789000790C86 /* SetUsername.swift */,
+				3404ABE62B69765600C55381 /* LaunchScreen.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
@@ -225,6 +228,7 @@
 			files = (
 				34989B892B66A70A00790C86 /* LeaderboardEntry.swift in Sources */,
 				34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */,
+				3404ABE72B69765600C55381 /* LaunchScreen.swift in Sources */,
 				3486B58C2B3F95B000AFC633 /* LeaderboardView.swift in Sources */,
 				34468A752B39790E0081D38E /* HKManager.swift in Sources */,
 				34989B8B2B66A74D00790C86 /* LeaderboardViewModel.swift in Sources */,
