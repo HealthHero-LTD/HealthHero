@@ -9,12 +9,13 @@ import Foundation
 
 let serviceName = "com.HealthHero.HealthHeroApp"
 let accessTokenKey = "hhAccessToken"
+let expirationTimeKey = "hhExpirationTime"
 
 class KeychainManager {
     static let shared = KeychainManager()
     private init() {}
     
-    func saveAccessTokenToKeychain(token: String) {
+    func saveAccessTokenToKeychain(token: String, expirationTime: TimeInterval) {
         // remember this convert data to string
         if let data = token.data(using: .utf8) {
             let query: [String: Any] = [
@@ -31,10 +32,27 @@ class KeychainManager {
                 print("Error saving access token to Keychain")
                 return
             }
-            print("TOKEN SAVEEED")
+            
+            var expirationTime = expirationTime
+            let expirationTimeData = Data(bytes: &expirationTime, count: MemoryLayout<TimeInterval>.size)
+            
+            let expirationTimeQuery: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: serviceName,
+                kSecAttrAccount as String: expirationTimeKey,
+                kSecValueData as String: expirationTimeData
+            ]
+            
+            SecItemDelete(expirationTimeQuery as CFDictionary)
+            let expirationTimeStatus = SecItemAdd(expirationTimeQuery as CFDictionary, nil)
+            guard expirationTimeStatus == errSecSuccess else {
+                print("error saving expiration time to Keychain")
+                return
+            }
+            
+            print("ACCESS TOKEN AND EXPIRATION SAVED!")
         }
     }
-
     func getAccessTokenFromKeychain() -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -60,7 +78,7 @@ class KeychainManager {
             return nil
         }
     }
-
+    
     func deleteAccessTokenFromKeychain() {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
