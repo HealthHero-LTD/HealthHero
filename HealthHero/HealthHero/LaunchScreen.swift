@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LaunchScreen: View {
     @State private var isValidate = false
+    @State private var isSignInRequire = false
     
     var body: some View {
         Group {
@@ -22,11 +23,14 @@ struct LaunchScreen: View {
                     Spacer()
                         .frame(height: 400)
                 }
+                .onAppear() {
+                    tokenValidation()
+                }
             }
         }
-        .onAppear() {
-            tokenValidation()
-        }
+        .fullScreenCover(isPresented: $isSignInRequire, content: {
+            SignInScreen()
+        })
     }
     
     func tokenValidation() {
@@ -34,10 +38,19 @@ struct LaunchScreen: View {
             let currentUnixTimestamp = Date().timeIntervalSince1970
             if expirationTimeDouble > currentUnixTimestamp {
                 print("Token is valid")
-                isValidate = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    isValidate = true
+                }
             } else {
                 print("Token has expired")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    isSignInRequire = true
+                    // send request for refresh token here!
+                }
             }
+        } else {
+            print("token not found")
+            isSignInRequire = true
         }
     }
 }
