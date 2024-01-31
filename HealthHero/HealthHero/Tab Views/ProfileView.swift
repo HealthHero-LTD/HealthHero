@@ -72,8 +72,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var profileLogButton: some View {
         Button(action: {
-            KeychainManager.shared.deleteExpirationTimeFromKeychain()
-            KeychainManager.shared.deleteAccessTokenFromKeychain()
+            KeychainManager.shared.deleteUserTokenFromKeychain()
             print("user Logged out!")
         }) {
             Text("Log Out")

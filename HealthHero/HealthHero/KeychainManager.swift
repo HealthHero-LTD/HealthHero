@@ -107,43 +107,30 @@ class KeychainManager {
         return expirationTime
     }
     
-    func deleteAccessTokenFromKeychain() {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: accessTokenKey
-        ]
-        
-        let status = SecItemDelete(query as CFDictionary)
-        guard status == errSecSuccess || status == errSecItemNotFound else {
-            print("Error deleting access token from Keychain")
-            return
+    func deleteUserTokenFromKeychain(
+        accessTokenKey: String = "hhAccessToken",
+        expirationTimeKey: String = "hhExpirationTime"
+    ) {
+        let deleteItem = { (key: String) in
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: serviceName,
+                kSecAttrAccount as String: key
+            ]
+            
+            let status = SecItemDelete(query as CFDictionary)
+            guard status == errSecSuccess || status == errSecItemNotFound else {
+                print("error deleting token from Keychain")
+                return
+            }
+            
+            if status == errSecSuccess {
+                print("\(key) deleted from Keychain")
+            } else {
+                print("no \(key) found in Keychain")
+            }
         }
-        
-        if status == errSecSuccess {
-            print("Access token deleted from Keychain")
-        } else {
-            print("No access token found in Keychain")
-        }
-    }
-    
-    func deleteExpirationTimeFromKeychain() {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: expirationTimeKey
-        ]
-        
-        let status = SecItemDelete(query as CFDictionary)
-        guard status == errSecSuccess || status == errSecItemNotFound else {
-            print("Error deleting expiration time from Keychain")
-            return
-        }
-        
-        if status == errSecSuccess {
-            print("Expiration time deleted from Keychain")
-        } else {
-            print("No expiration time found in Keychain")
-        }
+        deleteItem(accessTokenKey)
+        deleteItem(expirationTimeKey)
     }
 }
