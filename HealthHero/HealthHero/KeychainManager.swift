@@ -126,4 +126,24 @@ class KeychainManager {
             print("No access token found in Keychain")
         }
     }
+    
+    func deleteExpirationTimeFromKeychain() {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: serviceName,
+            kSecAttrAccount as String: expirationTimeKey
+        ]
+        
+        let status = SecItemDelete(query as CFDictionary)
+        guard status == errSecSuccess || status == errSecItemNotFound else {
+            print("Error deleting expiration time from Keychain")
+            return
+        }
+        
+        if status == errSecSuccess {
+            print("Expiration time deleted from Keychain")
+        } else {
+            print("No expiration time found in Keychain")
+        }
+    }
 }
