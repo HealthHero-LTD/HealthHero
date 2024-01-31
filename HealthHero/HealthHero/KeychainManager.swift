@@ -55,7 +55,7 @@ class KeychainManager {
         }
     }
     
-    func getAccessTokenFromKeychain() -> String? {
+    func getAccessToken() -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
@@ -81,7 +81,7 @@ class KeychainManager {
         }
     }
     
-    func getExpirationTimeFromKeychain() -> TimeInterval? {
+    func getExpirationTime() -> TimeInterval? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
@@ -107,7 +107,7 @@ class KeychainManager {
         return expirationTime
     }
     
-    func deleteUserTokenFromKeychain(
+    func deleteUserToken(
         accessTokenKey: String = "hhAccessToken",
         expirationTimeKey: String = "hhExpirationTime"
     ) {

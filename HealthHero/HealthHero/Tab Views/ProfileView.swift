@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GoogleSignInSwift
+import GoogleSignIn
 
 struct ProfileView: View {
     var body: some View {
@@ -72,7 +73,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var profileLogButton: some View {
         Button(action: {
-            KeychainManager.shared.deleteUserTokenFromKeychain()
+            GIDSignIn.sharedInstance.signOut()
             print("user Logged out!")
         }) {
             Text("Log Out")

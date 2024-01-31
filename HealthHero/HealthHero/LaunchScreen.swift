@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import GoogleSignIn
 
 struct LaunchScreen: View {
-    @State private var isValidate = false
+    @State private var isAccessTokenValid = false
     @State private var isSignInRequire = false
     
     var body: some View {
         Group {
-            if isValidate {
+            if isAccessTokenValid {
                 MainView()
             } else {
                 VStack {
@@ -24,7 +25,22 @@ struct LaunchScreen: View {
                         .frame(height: 400)
                 }
                 .onAppear() {
-                    tokenValidation()
+                    // check google sign in status
+                    GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+                        if error != nil || user == nil {
+                            // show signed out state
+                            DispatchQueue.main.async {
+                                isSignInRequire = true
+                                print("google token is not validate")
+                            }
+                        } else {
+                            // show signed in state
+                            DispatchQueue.main.async {
+                                isAccessTokenValid = true
+                                print("google token is validate")
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -33,13 +49,13 @@ struct LaunchScreen: View {
         })
     }
     
-    func tokenValidation() {
-        if let expirationTimeDouble = KeychainManager.shared.getExpirationTimeFromKeychain() {
+    func validateToken() {
+        if let expirationTimeDouble = KeychainManager.shared.getExpirationTime() {
             let currentUnixTimestamp = Date().timeIntervalSince1970
             if expirationTimeDouble > currentUnixTimestamp {
                 print("Token is valid")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    isValidate = true
+                    isAccessTokenValid = true
                 }
             } else {
                 print("Token has expired")

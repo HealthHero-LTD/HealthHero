@@ -28,8 +28,8 @@ struct SetUsername: View {
                     
                     Button(action: {
                         saveUsername()
-                        print(KeychainManager.shared.getExpirationTimeFromKeychain()!)
-                        if let expirationTimeDouble = KeychainManager.shared.getExpirationTimeFromKeychain() {
+                        print(KeychainManager.shared.getExpirationTime()!)
+                        if let expirationTimeDouble = KeychainManager.shared.getExpirationTime() {
                             let currentUnixTimestamp = Date().timeIntervalSince1970
                             if expirationTimeDouble > currentUnixTimestamp {
                                 print("Token is valid")

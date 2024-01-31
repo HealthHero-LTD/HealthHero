@@ -51,7 +51,7 @@ class GoogleSignInManager {
                 print(idToken!)
                 if let token = idToken?.tokenString {
                     print("token sent to server")
-                    self.sendGoogleTokenBackend(idToken: token) { success in
+                    self.sendTokenToBackend(idToken: token) { success in
                         completion(true)
                     }
                 }
@@ -59,7 +59,7 @@ class GoogleSignInManager {
         }
     }
     
-    func sendGoogleTokenBackend (idToken: String, completion: @escaping (Bool) -> Void) {
+    func sendTokenToBackend(idToken: String, completion: @escaping (Bool) -> Void) {
         let idTokenStore = IdTokenStore(idToken: idToken)
         guard let authData = idTokenStore.encode() else {
             completion(false)
