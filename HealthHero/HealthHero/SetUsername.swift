@@ -27,18 +27,7 @@ struct SetUsername: View {
                         .autocapitalization(.none)
                     
                     Button(action: {
-                        saveUsername()
-                        print(KeychainManager.shared.getExpirationTime()!)
-                        if let expirationTimeDouble = KeychainManager.shared.getExpirationTime() {
-                            let currentUnixTimestamp = Date().timeIntervalSince1970
-                            if expirationTimeDouble > currentUnixTimestamp {
-                                print("Token is valid")
-                            } else {
-                                print("Token has expired")
-                            }
-                        } else {
-                            print("Expiration time not found in the keychain.")
-                        }
+                        setUsername()
                     }) { Text("Save")
                             .frame(width: 200)
                             .padding()
@@ -52,10 +41,41 @@ struct SetUsername: View {
         }
     }
     
-    func saveUsername() {
-        // check the username with backend and db
-        print("username saved:", username)
-        isUsernameSaved = true
+    func setUsername() {
+        guard !username.isEmpty else {
+            // Show an alert or message indicating that the username cannot be empty
+            return
+        }
+        
+        // Prepare the request payload
+        let requestData = ["username": username]
+        guard let requestDataJSON = try? JSONSerialization.data(withJSONObject: requestData) else {
+            // Handle JSON serialization error
+            return
+        }
+        
+        // Prepare the URL for your backend endpoint
+        guard let url = URL(string: "http://192.168.2.11:6969/set-username") else {
+            // Handle invalid URL error
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Get JWT token from your storage or wherever it's stored after user login
+        if let jwtToken = KeychainManager.shared.getAccessToken() {
+            // Include JWT token in the request header
+            request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+        }
+        
+        request.httpBody = requestDataJSON
+        
+        // Perform the network request
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            // Handle response...
+        }.resume()
     }
 }
 

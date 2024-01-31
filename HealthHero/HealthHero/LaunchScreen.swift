@@ -49,26 +49,26 @@ struct LaunchScreen: View {
         })
     }
     
-    func validateToken() {
-        if let expirationTimeDouble = KeychainManager.shared.getExpirationTime() {
-            let currentUnixTimestamp = Date().timeIntervalSince1970
-            if expirationTimeDouble > currentUnixTimestamp {
-                print("Token is valid")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    isAccessTokenValid = true
-                }
-            } else {
-                print("Token has expired")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    isSignInRequire = true
-                    // send request for refresh token here!
-                }
-            }
-        } else {
-            print("token not found")
-            isSignInRequire = true
-        }
-    }
+//    func validateToken() {
+//        if let expirationTimeDouble = KeychainManager.shared.getExpirationTime() {
+//            let currentUnixTimestamp = Date().timeIntervalSince1970
+//            if expirationTimeDouble > currentUnixTimestamp {
+//                print("Token is valid")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                    isAccessTokenValid = true
+//                }
+//            } else {
+//                print("Token has expired")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                    isSignInRequire = true
+//                    // send request for refresh token here!
+//                }
+//            }
+//        } else {
+//            print("token not found")
+//            isSignInRequire = true
+//        }
+//    }
 }
 
 #Preview {

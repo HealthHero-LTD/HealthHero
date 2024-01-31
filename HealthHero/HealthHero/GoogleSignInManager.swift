@@ -80,12 +80,9 @@ class GoogleSignInManager {
             if let data {
                 if let accessTokenStore = AccessTokenStore.decode(from: data) {
                     let accessToken = accessTokenStore.accessToken
-                    let expirationTime = accessTokenStore.expirationTime
-                    
-                    print(expirationTime)
-                    KeychainManager.shared.saveAccessTokenToKeychain(token: accessToken, expirationTime: expirationTime)
-//                    KeychainManager.shared.saveExpirationTimeToKeychain(expirationTime: expirationTime)
-                    
+                    let tokenId = accessTokenStore.tokenId
+
+                    KeychainManager.shared.saveAccessTokenToKeychain(token: accessToken, tokenID: tokenId)
                     completion(true)
                 }
             }
