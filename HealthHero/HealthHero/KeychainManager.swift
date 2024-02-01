@@ -9,33 +9,51 @@ import Foundation
 
 let serviceName = "com.HealthHero.HealthHeroApp"
 let accessTokenKey = "hhAccessToken"
+let tokenIDKey = "hhTokenID"
 
 class KeychainManager {
     static let shared = KeychainManager()
     private init() {}
     
-    func saveAccessTokenToKeychain(token: String) {
+    func saveAccessTokenToKeychain(token: String, tokenID: String) {
         // remember this convert data to string
         if let data = token.data(using: .utf8) {
-            let query: [String: Any] = [
+            let tokenQuery: [String: Any] = [
                 kSecClass as String: kSecClassGenericPassword,
                 kSecAttrService as String: serviceName,
                 kSecAttrAccount as String: accessTokenKey,
                 kSecValueData as String: data
             ]
             // detele duplicate token
-            SecItemDelete(query as CFDictionary)
+            SecItemDelete(tokenQuery as CFDictionary)
             // set new token
-            let status = SecItemAdd(query as CFDictionary, nil)
-            guard status == errSecSuccess else {
+            let tokenStatus = SecItemAdd(tokenQuery as CFDictionary, nil)
+            guard tokenStatus == errSecSuccess else {
                 print("Error saving access token to Keychain")
                 return
             }
-            print("TOKEN SAVEEED")
+            
+            if let data = tokenID.data(using: .utf8) {
+                let tokenQuery: [String: Any] = [
+                    kSecClass as String: kSecClassGenericPassword,
+                    kSecAttrService as String: serviceName,
+                    kSecAttrAccount as String: tokenIDKey,
+                    kSecValueData as String: data
+                ]
+                // detele duplicate token
+                SecItemDelete(tokenQuery as CFDictionary)
+                // set new token
+                let tokenStatus = SecItemAdd(tokenQuery as CFDictionary, nil)
+                guard tokenStatus == errSecSuccess else {
+                    print("Error saving access token to Keychain")
+                    return
+                }
+                print("ACCESS TOKEN AND TOKEN ID SAVED!")
+            }
         }
     }
-
-    func getAccessTokenFromKeychain() -> String? {
+    
+    func getAccessToken() -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
@@ -60,24 +78,54 @@ class KeychainManager {
             return nil
         }
     }
-
-    func deleteAccessTokenFromKeychain() {
+    
+    func getTokenID() -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: accessTokenKey
+            kSecAttrAccount as String: tokenIDKey,
+            kSecReturnData as String: kCFBooleanTrue!,
+            kSecMatchLimit as String: kSecMatchLimitOne
         ]
         
-        let status = SecItemDelete(query as CFDictionary)
-        guard status == errSecSuccess || status == errSecItemNotFound else {
-            print("Error deleting access token from Keychain")
-            return
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+        guard status == errSecSuccess, let tokenData = item as? Data else {
+            print("Error retrieving token ID from Keychain")
+            return nil
         }
         
-        if status == errSecSuccess {
-            print("Access token deleted from Keychain")
+        if let tokenID = String(data: tokenData, encoding: .utf8) {
+            print("TOKEN ID RECEIVED: \(tokenID)")
+            return tokenID
         } else {
-            print("No access token found in Keychain")
+            print("error getting token ID from keychain")
+            return nil
         }
+    }
+        
+    func deleteUserToken(
+        accessTokenKey: String = "hhAccessToken")
+     {
+        let deleteItem = { (key: String) in
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: serviceName,
+                kSecAttrAccount as String: key
+            ]
+            
+            let status = SecItemDelete(query as CFDictionary)
+            guard status == errSecSuccess || status == errSecItemNotFound else {
+                print("error deleting token from Keychain")
+                return
+            }
+            
+            if status == errSecSuccess {
+                print("\(key) deleted from Keychain")
+            } else {
+                print("no \(key) found in Keychain")
+            }
+        }
+        deleteItem(accessTokenKey)
     }
 }
