@@ -43,20 +43,18 @@ struct SetUsername: View {
     
     func setUsername() {
         guard !username.isEmpty else {
-            // Show an alert or message indicating that the username cannot be empty
+            print("empty error")
             return
         }
         
-        // Prepare the request payload
         let requestData = ["username": username]
         guard let requestDataJSON = try? JSONSerialization.data(withJSONObject: requestData) else {
-            // Handle JSON serialization error
+            print("username json error")
             return
         }
         
-        // Prepare the URL for your backend endpoint
         guard let url = URL(string: "http://192.168.2.11:6969/set-username") else {
-            // Handle invalid URL error
+            print("invalid set username url")
             return
         }
         
@@ -64,17 +62,33 @@ struct SetUsername: View {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // Get JWT token from your storage or wherever it's stored after user login
         if let jwtToken = KeychainManager.shared.getAccessToken() {
-            // Include JWT token in the request header
+            print("its working ?", jwtToken)
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
         }
         
         request.httpBody = requestDataJSON
         
-        // Perform the network request
         URLSession.shared.dataTask(with: request) { data, response, error in
-            // Handle response...
+            if let error = error {
+                print("set username error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("invalid response for set username")
+                return
+            }
+            
+            if httpResponse.statusCode == 200 {
+                print("username set successfully")
+                isUsernameSaved = true
+//                DispatchQueue.main.async {
+//                    // Update UI or perform any necessary action
+//                }
+            } else {
+                print("failed to set username: \(httpResponse.statusCode)")
+            }
         }.resume()
     }
 }
