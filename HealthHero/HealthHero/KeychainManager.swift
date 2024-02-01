@@ -93,7 +93,6 @@ class KeychainManager {
         guard status == errSecSuccess, let tokenData = item as? Data else {
             print("Error retrieving token ID from Keychain")
             return nil
-            
         }
         
         if let tokenID = String(data: tokenData, encoding: .utf8) {
@@ -105,37 +104,8 @@ class KeychainManager {
         }
     }
         
-        
-    
-//    func getExpirationTime() -> TimeInterval? {
-//        let query: [String: Any] = [
-//            kSecClass as String: kSecClassGenericPassword,
-//            kSecAttrService as String: serviceName,
-//            kSecAttrAccount as String: tokenIDKey,
-//            kSecReturnData as String: kCFBooleanTrue!,
-//            kSecMatchLimit as String: kSecMatchLimitOne
-//        ]
-//        
-//        var item: CFTypeRef?
-//        let status = SecItemCopyMatching(query as CFDictionary, &item)
-//        guard status == errSecSuccess, let expirationData = item as? Data else {
-//            print("error retrieving expiration time from Keychain")
-//            return nil
-//        }
-//        
-//        var expirationTime: TimeInterval = 0
-//        expirationData.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
-//            guard let baseAddress = ptr.baseAddress else { return }
-//            expirationTime = baseAddress.load(as: TimeInterval.self)
-//        }
-//        
-//        print("expiration time received: \(expirationTime)")
-//        return expirationTime
-//    }
-    
     func deleteUserToken(
         accessTokenKey: String = "hhAccessToken")
-//        expirationTimeKey: String = "hhExpirationTime"
      {
         let deleteItem = { (key: String) in
             let query: [String: Any] = [
@@ -157,6 +127,5 @@ class KeychainManager {
             }
         }
         deleteItem(accessTokenKey)
-//        deleteItem(expirationTimeKey)
     }
 }

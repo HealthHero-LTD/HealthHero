@@ -73,7 +73,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var profileLogButton: some View {
         Button(action: {
-            GIDSignIn.sharedInstance.signOut()
+            KeychainManager.shared.deleteUserToken()
             print("user Logged out!")
         }) {
             Text("Log Out")
