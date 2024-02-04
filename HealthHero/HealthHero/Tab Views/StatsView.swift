@@ -34,9 +34,15 @@ struct StatsView: View {
             if HealthKitManager.isAuthorized() {
                 HealthKitManager.readWeeklyStepCount { weeklyStepData in
                     self.stepsData = weeklyStepData
+                    let modifiedData = weeklyStepData.map { entry in
+                        // xp algorithm
+                        let modifiedStepCount = entry.stepCount / 10
+                        print(modifiedStepCount)
+                        return StepsEntry(day: entry.day, stepCount: modifiedStepCount, date: entry.date)
+                    }
                     if let currentDay = weeklyStepData.last {
                         self.stepsCount = currentDay.stepCount
-                    } 
+                    }
                 }
             } else {
                 HealthKitManager.requestHealthKitAuthorization()
@@ -77,7 +83,7 @@ struct StatsView: View {
                     Text(item.value.description)
                 }
             }
-            Text("total step counts: \(stepsCount)")
+            Text("total step counts: \(Int(stepsCount))")
         }
         .frame(maxWidth: 180)
         .font(.body)

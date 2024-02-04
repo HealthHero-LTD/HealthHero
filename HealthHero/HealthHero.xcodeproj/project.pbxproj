@@ -29,6 +29,7 @@
 		34989B912B68514E00790C86 /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B902B68514E00790C86 /* GoogleSignInManager.swift */; };
 		34989B932B68582500790C86 /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B922B68582500790C86 /* SignInScreen.swift */; };
 		34989B952B68789000790C86 /* SetUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B942B68789000790C86 /* SetUsername.swift */; };
+		34C209AC2B6F4840008323E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C209AB2B6F4840008323E0 /* User.swift */; };
 		34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 34D014ED2B5AFD1200974C5F /* JWTDecode */; };
 		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,7 @@
 		34989B902B68514E00790C86 /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
 		34989B922B68582500790C86 /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
 		34989B942B68789000790C86 /* SetUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUsername.swift; sourceTree = "<group>"; };
+		34C209AB2B6F4840008323E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 				34989B922B68582500790C86 /* SignInScreen.swift */,
 				34989B942B68789000790C86 /* SetUsername.swift */,
 				3404ABE62B69765600C55381 /* LaunchScreen.swift */,
+				34C209AB2B6F4840008323E0 /* User.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
@@ -244,6 +247,7 @@
 				34989B952B68789000790C86 /* SetUsername.swift in Sources */,
 				3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,
+				34C209AC2B6F4840008323E0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
