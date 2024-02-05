@@ -36,9 +36,24 @@ struct StatsView: View {
                     self.stepsData = weeklyStepData
                     let modifiedData = weeklyStepData.map { entry in
                         // xp algorithm
-                        let modifiedStepCount = entry.stepCount / 10
-                        print(modifiedStepCount)
-                        return StepsEntry(day: entry.day, stepCount: modifiedStepCount, date: entry.date)
+                        var score: Int = 0
+                        if entry.stepCount <= 500 {
+                                score = Int(entry.stepCount / 35)
+                            } else if entry.stepCount <= 2000 {
+                                score += 500 / 40
+                                score += Int((entry.stepCount - 500) / 30)
+                            } else if entry.stepCount <= 6000 {
+                                score += (500/40) + (1500/30)
+                                score += Int((entry.stepCount - 2000) / 25)
+                            } else if entry.stepCount <= 10000 {
+                                score += (500/40) + (1500/30) + (4000/25)
+                                score += Int((entry.stepCount - 6000) / 30)
+                            } else {
+                                score += (500/40) + (1500/30) + (4000/25) + (4000/30)
+                                score += Int((entry.stepCount - 10000) / 100)
+                            }
+                        print(entry.stepCount, score)
+                        return StepsEntry(day: entry.day, stepCount: entry.stepCount, date: entry.date)
                     }
                     if let currentDay = weeklyStepData.last {
                         self.stepsCount = currentDay.stepCount
