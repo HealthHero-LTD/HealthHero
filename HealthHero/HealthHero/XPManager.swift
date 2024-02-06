@@ -9,23 +9,33 @@ import Foundation
 
 struct XPManager {
     static func convertStepCountToXP(_ stepCount: Double) -> Int {
+        let rangeMin: Double = 500
+        let rangeLow: Double = 2000
+        let rangeHigh: Double = 6000
+        let rangeMax: Double = 10000
+        
+        let valueMin: Double = 30
+        let valueLow: Double = 35
+        let valueHigh: Double = 40
+        let valueMax: Double = 50
+        
         var xp: Int = 0
         
         switch stepCount {
-        case 0...500:
-            xp = Int(stepCount / 40)
-        case 501...2000:
-            xp += 500 / 40
-            xp += Int((stepCount - 500) / 30)
-        case 2001...6000:
-            xp += (500/40) + (1500/30)
-            xp += Int((stepCount - 2000) / 25)
-        case 6001...10000:
-            xp += (500/40) + (1500/30) + (4000/25)
-            xp += Int((stepCount - 6000) / 30)
+        case 0...rangeMin:
+            xp = Int(stepCount / valueMin)
+        case rangeMin+1...rangeLow:
+            xp += Int(rangeMin / valueMin)
+            xp += Int((stepCount - rangeMin) / valueLow)
+        case rangeLow+1...rangeHigh:
+            xp += Int(rangeMin / valueMin) + Int((rangeLow - rangeMin) / valueLow)
+            xp += Int((stepCount - rangeLow) / valueHigh)
+        case rangeHigh+1...rangeMax:
+            xp += Int(rangeMin / valueMin) + Int((rangeLow - rangeMin) / valueLow) + Int((rangeHigh - rangeLow) / valueHigh)
+            xp += Int((stepCount - rangeHigh) / valueMax)
         default:
-            xp += (500/40) + (1500/30) + (4000/25) + (4000/30)
-            xp += Int((stepCount - 10000) / 100)
+            xp += Int(rangeMin / valueMin) + Int((rangeLow - rangeMin) / valueLow) + Int((rangeHigh - rangeLow) / valueHigh) + Int((rangeMax - rangeHigh) / valueMax)
+            xp += Int((stepCount - rangeMax) / 100)
         }
         
         return xp
