@@ -36,15 +36,42 @@ struct StatsView: View {
                     self.stepsData = weeklyStepData
                     
                     // calculate xp
-                    let weeklyXP = weeklyStepData.map { entry in
+                    let xpDataArray = weeklyStepData.map { entry in
                         let xp = XPManager.convertStepCountToXP(entry.stepCount)
                         print(Int(entry.stepCount), xp)
-                        return StepsEntry(
-                            day: entry.day,
-                            stepCount: entry.stepCount,
-                            date: entry.date
-                        )
+                        return XPData(date: entry.date, xp: xp)
                     }
+                    
+                    // send xpDataArray to backend
+                    guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
+                        print("invalid URL for XP transmission")
+                        return
+                    }
+                    
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    
+                    do {
+                        let jsonData = try JSONEncoder().encode(xpDataArray)
+                        request.httpBody = jsonData
+                    } catch {
+                        print("error encoding XP data: \(error)")
+                        return
+                    }
+                    
+                    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                        if let error = error {
+                            print("Error sending XP data: \(error)")
+                            return
+                        }
+                        
+                        if let httpResponse = response as? HTTPURLResponse {
+                            print("Response status code: \(httpResponse.statusCode)")
+                            // handle response status
+                        }
+                    }
+                    task.resume()
                     
                     if let currentDay = weeklyStepData.last {
                         self.stepsCount = currentDay.stepCount
@@ -95,13 +122,6 @@ struct StatsView: View {
         .font(.body)
         .padding()
     }
-}
-
-struct StepsEntry: Identifiable {
-    var id = UUID()
-    var day: String
-    var stepCount: Double
-    var date: Date
 }
 
 struct StatsDetail: Identifiable {

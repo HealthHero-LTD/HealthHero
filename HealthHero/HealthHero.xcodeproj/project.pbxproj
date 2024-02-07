@@ -31,6 +31,8 @@
 		34989B952B68789000790C86 /* SetUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34989B942B68789000790C86 /* SetUsername.swift */; };
 		34C209AC2B6F4840008323E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C209AB2B6F4840008323E0 /* User.swift */; };
 		34C209AE2B7198A0008323E0 /* XPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C209AD2B7198A0008323E0 /* XPManager.swift */; };
+		34C209B02B726B2B008323E0 /* StepsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C209AF2B726B2B008323E0 /* StepsEntry.swift */; };
+		34C209B22B73E016008323E0 /* XPData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C209B12B73E016008323E0 /* XPData.swift */; };
 		34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 34D014ED2B5AFD1200974C5F /* JWTDecode */; };
 		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
 /* End PBXBuildFile section */
@@ -62,6 +64,8 @@
 		34989B942B68789000790C86 /* SetUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUsername.swift; sourceTree = "<group>"; };
 		34C209AB2B6F4840008323E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		34C209AD2B7198A0008323E0 /* XPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPManager.swift; sourceTree = "<group>"; };
+		34C209AF2B726B2B008323E0 /* StepsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsEntry.swift; sourceTree = "<group>"; };
+		34C209B12B73E016008323E0 /* XPData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPData.swift; sourceTree = "<group>"; };
 		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +129,8 @@
 				3404ABE62B69765600C55381 /* LaunchScreen.swift */,
 				34C209AB2B6F4840008323E0 /* User.swift */,
 				34C209AD2B7198A0008323E0 /* XPManager.swift */,
+				34C209AF2B726B2B008323E0 /* StepsEntry.swift */,
+				34C209B12B73E016008323E0 /* XPData.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
@@ -235,6 +241,7 @@
 				34989B892B66A70A00790C86 /* LeaderboardEntry.swift in Sources */,
 				34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */,
 				3404ABE72B69765600C55381 /* LaunchScreen.swift in Sources */,
+				34C209B22B73E016008323E0 /* XPData.swift in Sources */,
 				3486B58C2B3F95B000AFC633 /* LeaderboardView.swift in Sources */,
 				34468A752B39790E0081D38E /* HKManager.swift in Sources */,
 				34C209AE2B7198A0008323E0 /* XPManager.swift in Sources */,
@@ -250,6 +257,7 @@
 				34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */,
 				34989B952B68789000790C86 /* SetUsername.swift in Sources */,
 				3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */,
+				34C209B02B726B2B008323E0 /* StepsEntry.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,
 				34C209AC2B6F4840008323E0 /* User.swift in Sources */,
 			);
