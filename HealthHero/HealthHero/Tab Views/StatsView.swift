@@ -52,6 +52,10 @@ struct StatsView: View {
                     request.httpMethod = "POST"
                     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                     
+                    if let jwtToken = KeychainManager.shared.getAccessToken() {
+                        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+                    }
+                    
                     do {
                         let jsonData = try JSONEncoder().encode(xpDataArray)
                         request.httpBody = jsonData
@@ -66,9 +70,13 @@ struct StatsView: View {
                             return
                         }
                         
-                        if let httpResponse = response as? HTTPURLResponse {
-                            print("Response status code: \(httpResponse.statusCode)")
-                            // handle response status
+                        guard let httpResponse = response as? HTTPURLResponse else {
+                            print("invalid response for set username")
+                            return
+                        }
+                        
+                        if httpResponse.statusCode == 200 {
+                            print("XP updated")
                         }
                     }
                     task.resume()
