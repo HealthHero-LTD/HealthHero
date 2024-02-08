@@ -63,7 +63,6 @@ struct SetUsername: View {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         if let jwtToken = KeychainManager.shared.getAccessToken() {
-            print("its working ?", jwtToken)
             request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
         }
         

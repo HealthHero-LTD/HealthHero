@@ -12,6 +12,7 @@ struct StatsView: View {
     @StateObject private var HealthKitManager = HKManager()
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
+    @State var weeklyXP: Int = .zero
     
     var body: some View {
         VStack {
@@ -31,12 +32,60 @@ struct StatsView: View {
             .padding()
         }
         .onAppear {
+            weeklyXP = .zero
             if HealthKitManager.isAuthorized() {
                 HealthKitManager.readWeeklyStepCount { weeklyStepData in
                     self.stepsData = weeklyStepData
+                    
+                    // calculate xp
+                    let xpDataArray = weeklyStepData.map { entry in
+                        let xp = XPManager.convertStepCountToXP(entry.stepCount)
+                        weeklyXP += xp
+                        return XPData(date: entry.date, xp: xp)
+                    }
+                    
+                    // send xpDataArray to backend
+                    guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
+                        print("invalid URL for XP transmission")
+                        return
+                    }
+                    
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    
+                    if let jwtToken = KeychainManager.shared.getAccessToken() {
+                        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
+                    }
+                    
+                    do {
+                        let jsonData = try JSONEncoder().encode(xpDataArray)
+                        request.httpBody = jsonData
+                    } catch {
+                        print("error encoding XP data: \(error)")
+                        return
+                    }
+                    
+                    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                        if let error = error {
+                            print("Error sending XP data: \(error)")
+                            return
+                        }
+                        
+                        guard let httpResponse = response as? HTTPURLResponse else {
+                            print("invalid response for set username")
+                            return
+                        }
+                        
+                        if httpResponse.statusCode == 200 {
+                            print("XP updated")
+                        }
+                    }
+                    task.resume()
+                    
                     if let currentDay = weeklyStepData.last {
                         self.stepsCount = currentDay.stepCount
-                    } 
+                    }
                 }
             } else {
                 HealthKitManager.requestHealthKitAuthorization()
@@ -77,19 +126,17 @@ struct StatsView: View {
                     Text(item.value.description)
                 }
             }
-            Text("total step counts: \(stepsCount)")
+            
+            HStack {
+                Text("Weekly XP:")
+                Spacer()
+                Text(String(weeklyXP))
+            }
         }
         .frame(maxWidth: 180)
         .font(.body)
         .padding()
     }
-}
-
-struct StepsEntry: Identifiable {
-    var id = UUID()
-    var day: String
-    var stepCount: Double
-    var date: Date
 }
 
 struct StatsDetail: Identifiable {

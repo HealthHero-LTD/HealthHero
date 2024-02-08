@@ -48,7 +48,6 @@ class GoogleSignInManager {
                 }
                 
                 let idToken = user.idToken // send token to backend
-                print(idToken!)
                 if let token = idToken?.tokenString {
                     print("token sent to server")
                     self.sendTokenToBackend(idToken: token) { success in
