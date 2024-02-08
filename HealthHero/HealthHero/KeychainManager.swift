@@ -71,7 +71,7 @@ class KeychainManager {
         }
         
         if let accessToken = String(data: tokenData, encoding: .utf8) {
-            print("ACCESS TOKEN RECEIVED: \(accessToken)")
+            print("Access token received from Keychain!")
             return accessToken
         } else {
             print("error getting access token from keychain")
@@ -96,7 +96,7 @@ class KeychainManager {
         }
         
         if let tokenID = String(data: tokenData, encoding: .utf8) {
-            print("TOKEN ID RECEIVED: \(tokenID)")
+            print("TOKEN ID RECEIVED!")
             return tokenID
         } else {
             print("error getting token ID from keychain")
@@ -104,8 +104,7 @@ class KeychainManager {
         }
     }
         
-    func deleteUserToken(
-        accessTokenKey: String = "hhAccessToken")
+    func deleteUserToken(accessTokenKey: String = "hhAccessToken")
      {
         let deleteItem = { (key: String) in
             let query: [String: Any] = [

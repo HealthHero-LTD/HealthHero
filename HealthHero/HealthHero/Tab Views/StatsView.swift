@@ -32,6 +32,7 @@ struct StatsView: View {
             .padding()
         }
         .onAppear {
+            weeklyXP = .zero
             if HealthKitManager.isAuthorized() {
                 HealthKitManager.readWeeklyStepCount { weeklyStepData in
                     self.stepsData = weeklyStepData
