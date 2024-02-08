@@ -12,6 +12,7 @@ struct StatsView: View {
     @StateObject private var HealthKitManager = HKManager()
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
+    @State var weeklyXP: Int = .zero
     
     var body: some View {
         VStack {
@@ -38,7 +39,7 @@ struct StatsView: View {
                     // calculate xp
                     let xpDataArray = weeklyStepData.map { entry in
                         let xp = XPManager.convertStepCountToXP(entry.stepCount)
-                        print(Int(entry.stepCount), xp)
+                        weeklyXP += xp
                         return XPData(date: entry.date, xp: xp)
                     }
                     
@@ -124,7 +125,12 @@ struct StatsView: View {
                     Text(item.value.description)
                 }
             }
-            Text("total step counts: \(Int(stepsCount))")
+            
+            HStack {
+                Text("Weekly XP:")
+                Spacer()
+                Text(String(weeklyXP))
+            }
         }
         .frame(maxWidth: 180)
         .font(.body)
