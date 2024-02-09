@@ -41,6 +41,7 @@ struct StatsView: View {
                     let xpDataArray = weeklyStepData.map { entry in
                         let xp = XPManager.convertStepCountToXP(entry.stepCount)
                         weeklyXP += xp
+                        print(entry.date)
                         return XPData(date: entry.date, xp: xp)
                     }
                     
@@ -59,7 +60,9 @@ struct StatsView: View {
                     }
                     
                     do {
-                        let jsonData = try JSONEncoder().encode(xpDataArray)
+                        let encoder = JSONEncoder()
+                        encoder.dateEncodingStrategy = .secondsSince1970
+                        let jsonData = try encoder.encode(xpDataArray)
                         request.httpBody = jsonData
                     } catch {
                         print("error encoding XP data: \(error)")
