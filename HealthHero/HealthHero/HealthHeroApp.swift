@@ -11,6 +11,8 @@ import GoogleSignIn
 
 @main
 struct HealthHeroApp: App {
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some Scene {
         WindowGroup {
             LaunchScreen()
@@ -23,6 +25,15 @@ struct HealthHeroApp: App {
                             print(user)
                         }
                         // Check if `user` exists; otherwise, do something with `error`
+                    }
+                }
+                .onChange(of: scenePhase) { newPhase in
+                    if newPhase == .active {
+                        print("Active")
+                    } else if newPhase == .inactive {
+                        print("Inactive")
+                    } else if newPhase == .background {
+                        print("Background")
                     }
                 }
         }
