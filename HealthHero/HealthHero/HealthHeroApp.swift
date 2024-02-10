@@ -27,12 +27,12 @@ struct HealthHeroApp: App {
                         // Check if `user` exists; otherwise, do something with `error`
                     }
                 }
-                .onChange(of: scenePhase) { newPhase in
-                    if newPhase == .active {
+                .onChange(of: scenePhase) {
+                    if scenePhase == .active {
                         let lastActiveDate = try? UserDefaultsManager.shared.getLastActiveDate()
                             
-                    } else if newPhase == .inactive {
-                    } else if newPhase == .background {
+                    } else if scenePhase == .inactive {
+                    } else if scenePhase == .background {
                         let lastActiveDate = Date()
                         UserDefaultsManager.shared.setLastActiveDate(lastActiveDate)
                     }
