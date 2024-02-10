@@ -37,13 +37,12 @@ struct StatsView: View {
                     self.stepsData = weeklyStepData
                     
                     // calculate xp
-                    let xpDataArray = weeklyStepData.map { entry in
-                        let xp = XPManager.convertStepCountToXP(entry.stepCount)
+                    let xpDataArray = weeklyStepData.map {
+                        let xp = XPManager.convertStepCountToXP($0.stepCount)
                         weeklyXP += xp
-                        return XPData(date: entry.date, xp: xp)
-                    }.filter { data in
-                        let lastActiveDate = UserDefaultsManager.shared.getLastActiveDate()
-                        return data.date > lastActiveDate
+                        return XPData(date: $0.date, xp: xp)
+                    }.filter {
+                        $0.date > UserDefaultsManager.shared.getLastActiveDate()
                     }
                     
                     // send xpDataArray to backend
