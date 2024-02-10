@@ -35,6 +35,7 @@
 		34C209B22B73E016008323E0 /* XPData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C209B12B73E016008323E0 /* XPData.swift */; };
 		34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 34D014ED2B5AFD1200974C5F /* JWTDecode */; };
 		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
+		34D24FA02B76FA35004682E7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		34C209AF2B726B2B008323E0 /* StepsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsEntry.swift; sourceTree = "<group>"; };
 		34C209B12B73E016008323E0 /* XPData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPData.swift; sourceTree = "<group>"; };
 		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
+		34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				34C209AD2B7198A0008323E0 /* XPManager.swift */,
 				34C209AF2B726B2B008323E0 /* StepsEntry.swift */,
 				34C209B12B73E016008323E0 /* XPData.swift */,
+				34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
@@ -245,6 +248,7 @@
 				3486B58C2B3F95B000AFC633 /* LeaderboardView.swift in Sources */,
 				34468A752B39790E0081D38E /* HKManager.swift in Sources */,
 				34C209AE2B7198A0008323E0 /* XPManager.swift in Sources */,
+				34D24FA02B76FA35004682E7 /* UserDefaultsManager.swift in Sources */,
 				34989B8B2B66A74D00790C86 /* LeaderboardViewModel.swift in Sources */,
 				34989B932B68582500790C86 /* SignInScreen.swift in Sources */,
 				3486B5902B3F990500AFC633 /* StatsView.swift in Sources */,

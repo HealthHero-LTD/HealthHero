@@ -32,7 +32,6 @@ struct StatsView: View {
             .padding()
         }
         .onAppear {
-            weeklyXP = .zero
             if HealthKitManager.isAuthorized() {
                 HealthKitManager.readWeeklyStepCount { weeklyStepData in
                     self.stepsData = weeklyStepData
@@ -42,6 +41,9 @@ struct StatsView: View {
                         let xp = XPManager.convertStepCountToXP(entry.stepCount)
                         weeklyXP += xp
                         return XPData(date: entry.date, xp: xp)
+                    }.filter { data in
+                        let lastActiveDate = UserDefaultsManager.shared.getLastActiveDate()
+                        return data.date > lastActiveDate
                     }
                     
                     // send xpDataArray to backend
@@ -59,7 +61,9 @@ struct StatsView: View {
                     }
                     
                     do {
-                        let jsonData = try JSONEncoder().encode(xpDataArray)
+                        let encoder = JSONEncoder()
+                        encoder.dateEncodingStrategy = .secondsSince1970
+                        let jsonData = try encoder.encode(xpDataArray)
                         request.httpBody = jsonData
                     } catch {
                         print("error encoding XP data: \(error)")

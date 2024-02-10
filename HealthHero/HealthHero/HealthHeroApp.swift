@@ -11,6 +11,8 @@ import GoogleSignIn
 
 @main
 struct HealthHeroApp: App {
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some Scene {
         WindowGroup {
             LaunchScreen()
@@ -23,6 +25,11 @@ struct HealthHeroApp: App {
                             print(user)
                         }
                         // Check if `user` exists; otherwise, do something with `error`
+                    }
+                }
+                .onChange(of: scenePhase) {
+                    if scenePhase == .background {
+                        UserDefaultsManager.shared.setLastActiveDate(.now)
                     }
                 }
         }
