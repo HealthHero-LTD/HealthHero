@@ -29,11 +29,21 @@ struct HealthHeroApp: App {
                 }
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
+                        if let lastActiveDate = UserDefaults.standard.object(forKey: "LastActiveDate") as? Date {
+                            print(lastActiveDate)
+                        } else {
+                            print("LastActiveDate not found in UserDefaults")
+                        }
+
                         print("Active")
                     } else if newPhase == .inactive {
                         print("Inactive")
                     } else if newPhase == .background {
                         print("Background")
+                        let lastActiveDate = Date()
+
+                        print(lastActiveDate)
+                        UserDefaults.standard.set(lastActiveDate, forKey: "LastActiveDate")
                     }
                 }
         }
