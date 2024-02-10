@@ -29,11 +29,7 @@ struct HealthHeroApp: App {
                 }
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
-                        if let lastActiveDate = UserDefaultsManager.shared.getLastActiveDate() {
-                            print(lastActiveDate)
-                        } else {
-                            print("user defaults manager error")
-                        }
+                        let lastActiveDate = try? UserDefaultsManager.shared.getLastActiveDate()
                             
                     } else if newPhase == .inactive {
                     } else if newPhase == .background {
