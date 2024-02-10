@@ -32,7 +32,6 @@ struct StatsView: View {
             .padding()
         }
         .onAppear {
-            weeklyXP = .zero
             if HealthKitManager.isAuthorized() {
                 HealthKitManager.readWeeklyStepCount { weeklyStepData in
                     self.stepsData = weeklyStepData
@@ -41,8 +40,10 @@ struct StatsView: View {
                     let xpDataArray = weeklyStepData.map { entry in
                         let xp = XPManager.convertStepCountToXP(entry.stepCount)
                         weeklyXP += xp
-                        print(entry.date)
                         return XPData(date: entry.date, xp: xp)
+                    }.filter { data in
+                        let lastActiveDate = UserDefaultsManager.shared.getLastActiveDate()
+                        return data.date > lastActiveDate
                     }
                     
                     // send xpDataArray to backend
