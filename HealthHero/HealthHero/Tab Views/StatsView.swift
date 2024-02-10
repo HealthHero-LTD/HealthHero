@@ -41,6 +41,7 @@ struct StatsView: View {
                     let xpDataArray = weeklyStepData.map { entry in
                         let xp = XPManager.convertStepCountToXP(entry.stepCount)
                         weeklyXP += xp
+                        print(entry.date)
                         return XPData(date: entry.date, xp: xp)
                     }
                     
