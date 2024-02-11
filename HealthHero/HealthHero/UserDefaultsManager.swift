@@ -12,6 +12,7 @@ struct UserDefaultsManager {
     
     private let userDefaults = UserDefaults.standard
     private let lastActiveDateKey = "LastActiveDate"
+    private let userLevelKey = "UserLevel"
     
     func setLastActiveDate(_ date: Date) {
         userDefaults.set(date, forKey: lastActiveDateKey)
@@ -19,5 +20,10 @@ struct UserDefaultsManager {
     
     func getLastActiveDate() -> Date {
         userDefaults.object(forKey: lastActiveDateKey) as! Date
+    }
+    
+    func setUserLevel(level userLevel:Int) {
+        userDefaults.set(userLevel, forKey: userLevelKey)
+        print("user level saved in user defaults and is \(userLevel)")
     }
 }

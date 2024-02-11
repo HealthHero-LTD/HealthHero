@@ -28,6 +28,7 @@ class LevelManager {
     private func levelUp() {
         currentLevel += 1
         requiredXPForNextLevel *= 2 // double the required XP for the next level
+        UserDefaultsManager.shared.setUserLevel(level: currentLevel)
         print("You've reached level \(currentLevel)")
         print(userXP)
         print(requiredXPForNextLevel)
