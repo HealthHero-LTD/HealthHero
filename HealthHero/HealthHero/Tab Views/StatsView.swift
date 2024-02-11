@@ -13,6 +13,7 @@ struct StatsView: View {
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
+    @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
     
     var body: some View {
         VStack {
@@ -37,6 +38,7 @@ struct StatsView: View {
                     self.stepsData = weeklyStepData
                     
                     // calculate xp
+                    weeklyXP = .zero
                     let xpDataArray = weeklyStepData.map {
                         let xp = XPManager.convertStepCountToXP($0.stepCount)
                         weeklyXP += xp
@@ -110,7 +112,7 @@ struct StatsView: View {
                 .padding()
             
             VStack {
-                Text("Level 1")
+                Text("Level \(userLevel)")
                     .font(.title)
                     .foregroundColor(.blue)
                 Text("Title: unlockable")
