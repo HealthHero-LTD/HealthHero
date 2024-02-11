@@ -46,7 +46,11 @@ struct StatsView: View {
                         $0.date > UserDefaultsManager.shared.getLastActiveDate()
                     }
                     
-                    print(UserDefaultsManager.shared.getUserLevel())
+                    if let userLevel = UserDefaultsManager.shared.getUserLevel() {
+                        print(userLevel)
+                    } else {
+                        print("error for getting user level")
+                    }
                     // send xpDataArray to backend
                     guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
                         print("invalid URL for XP transmission")
