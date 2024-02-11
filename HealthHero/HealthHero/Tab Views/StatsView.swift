@@ -40,6 +40,7 @@ struct StatsView: View {
                     let xpDataArray = weeklyStepData.map {
                         let xp = XPManager.convertStepCountToXP($0.stepCount)
                         weeklyXP += xp
+                        LevelManager.shared.updateUserXP(weeklyXP)
                         return XPData(date: $0.date, xp: xp)
                     }.filter {
                         $0.date > UserDefaultsManager.shared.getLastActiveDate()
