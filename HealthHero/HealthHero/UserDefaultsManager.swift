@@ -26,4 +26,11 @@ struct UserDefaultsManager {
         userDefaults.set(userLevel, forKey: userLevelKey)
         print("user level saved in user defaults and is \(userLevel)")
     }
+    
+    func getUserLevel() -> Int? {
+        if let userLevel = userDefaults.object(forKey: userLevelKey) as? Int {
+            print("User level retrieved from UserDefaults: \(userLevel)")
+            return userLevel
+        } else { return nil }
+    }
 }
