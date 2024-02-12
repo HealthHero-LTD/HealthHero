@@ -13,6 +13,8 @@ struct StatsView: View {
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
+    @State var userXP: Int = .zero
+    @State var lastActiveDayXp: Int = .zero
     @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
     
     var body: some View {
@@ -48,16 +50,25 @@ struct StatsView: View {
                         $0.date > UserDefaultsManager.shared.getLastActiveDate()
                     }
                     
-                    let firstXPData = xpDataArray.first!
-                    let xp = firstXPData.xp
-                    print("XP: \(xp)")
+                    userXP = UserDefaults.standard.integer(forKey: "UserXP")
+                    print("XP: \(lastActiveDayXp)")
+                    let lastActiveDay = xpDataArray.first!
+                    lastActiveDayXp = lastActiveDay.xp
                     
-                    UserDefaults.standard.setValue(weeklyXP, forKey: "WeeklyXP")
+                    UserDefaults.standard.setValue(lastActiveDayXp, forKey: "LastActiveDayXP")
+                    lastActiveDayXp = UserDefaults.standard.integer(forKey: "LastActiveDayXP")
                     
-                    let retrievedWeeklyXP = UserDefaults.standard.integer(forKey: "WeeklyXP")
-                    UserDefaults.standard.removeObject(forKey: "WeeklyXP")
-                    print("get weeklyxp from user defaults: \(retrievedWeeklyXP)")
+                    print(userXP)
+                    userXP = userXP + weeklyXP - lastActiveDayXp
                     
+                    UserDefaults.standard.setValue(userXP, forKey: "UserXP")
+                    print(userXP)
+                    
+//                    UserDefaults.standard.setValue(weeklyXP, forKey: "UserXP")
+                    
+                    
+//                    UserDefaults.standard.removeObject(forKey: "UserXP")
+//                    UserDefaults.standard.removeObject(forKey: "LastActiveDayXP")
 
                     
                     print("user level is \(UserDefaultsManager.shared.getUserLevel())")
