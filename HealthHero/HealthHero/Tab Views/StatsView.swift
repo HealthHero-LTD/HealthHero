@@ -48,6 +48,18 @@ struct StatsView: View {
                         $0.date > UserDefaultsManager.shared.getLastActiveDate()
                     }
                     
+                    let firstXPData = xpDataArray.first!
+                    let xp = firstXPData.xp
+                    print("XP: \(xp)")
+                    
+                    UserDefaults.standard.setValue(weeklyXP, forKey: "WeeklyXP")
+                    
+                    let retrievedWeeklyXP = UserDefaults.standard.integer(forKey: "WeeklyXP")
+                    UserDefaults.standard.removeObject(forKey: "WeeklyXP")
+                    print("get weeklyxp from user defaults: \(retrievedWeeklyXP)")
+                    
+
+                    
                     print("user level is \(UserDefaultsManager.shared.getUserLevel())")
                     // send xpDataArray to backend
                     guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
