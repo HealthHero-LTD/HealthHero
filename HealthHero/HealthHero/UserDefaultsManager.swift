@@ -15,6 +15,7 @@ struct UserDefaultsManager {
     private let userLevelKey = "UserLevel"
     private let userXPKey = "UserXP"
     private let lastActiveDayXPKey = "LastActiveDayXP"
+    private let usernameKey = "UsernameKey"
     
     func setLastActiveDate(_ date: Date) {
         userDefaults.set(date, forKey: lastActiveDateKey)
@@ -47,5 +48,13 @@ struct UserDefaultsManager {
     
     func getLastActiveDayXP() -> Int {
         userDefaults.integer(forKey: lastActiveDayXPKey)
+    }
+    
+    func setUsername(_ username: String) {
+        userDefaults.set(username, forKey: usernameKey)
+    }
+
+    func getUsername() -> String? {
+        return userDefaults.string(forKey: usernameKey)
     }
 }
