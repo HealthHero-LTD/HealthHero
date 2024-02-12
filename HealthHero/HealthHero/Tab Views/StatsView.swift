@@ -13,8 +13,8 @@ struct StatsView: View {
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
-    @State var userXP: Int = .zero
-    @State var lastActiveDayXp: Int = .zero
+    @State var userXP: Int = UserDefaultsManager.shared.getUserXP()
+    @State var storedLastActiveDayXP: Int = UserDefaults.standard.integer(forKey: "LastActiveDayXP")
     @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
     
     var body: some View {
@@ -50,28 +50,25 @@ struct StatsView: View {
                         $0.date > UserDefaultsManager.shared.getLastActiveDate()
                     }
                     
-                    userXP = UserDefaults.standard.integer(forKey: "UserXP")
-                    print("XP: \(lastActiveDayXp)")
-                    let lastActiveDay = xpDataArray.first!
-                    lastActiveDayXp = lastActiveDay.xp
+                    print("userXP: \(userXP)")
+                    let duplicateActiveDayXP = xpDataArray.first!.xp
+                    let lastActiveDayXP = xpDataArray.last!.xp
+                    let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
+                    print("cumulated xp \(cumulatedXpUntilNow)")
+                    print("lastActiveDayXP: \(lastActiveDayXP)")
                     
-                    UserDefaults.standard.setValue(lastActiveDayXp, forKey: "LastActiveDayXP")
-                    lastActiveDayXp = UserDefaults.standard.integer(forKey: "LastActiveDayXP")
-                    
+                    print("storedLastActiveDayXP: \(storedLastActiveDayXP)")
                     print(userXP)
-                    userXP = userXP + weeklyXP - lastActiveDayXp
+                    userXP = userXP - storedLastActiveDayXP + cumulatedXpUntilNow
+                    print(userXP)
                     
+                    UserDefaults.standard.set(lastActiveDayXP, forKey: "LastActiveDayXP")
                     UserDefaults.standard.setValue(userXP, forKey: "UserXP")
-                    print(userXP)
-                    
-//                    UserDefaults.standard.setValue(weeklyXP, forKey: "UserXP")
-                    
                     
 //                    UserDefaults.standard.removeObject(forKey: "UserXP")
 //                    UserDefaults.standard.removeObject(forKey: "LastActiveDayXP")
 
                     
-                    print("user level is \(UserDefaultsManager.shared.getUserLevel())")
                     // send xpDataArray to backend
                     guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
                         print("invalid URL for XP transmission")
