@@ -81,6 +81,8 @@ struct SetUsername: View {
             
             if httpResponse.statusCode == 200 {
                 print("username set successfully")
+                UserDefaults.standard.set(username, forKey: "Username")
+                print(UserDefaults.standard.object(forKey: "Username"))
                 isUsernameSaved = true
 //                DispatchQueue.main.async {
 //                    // Update UI or perform any necessary action

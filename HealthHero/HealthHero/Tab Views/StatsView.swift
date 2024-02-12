@@ -53,6 +53,7 @@ struct StatsView: View {
                     let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
 
                     userXP = userXP - storedLastActiveDayXP + cumulatedXpUntilNow
+                    print("userXP\(userXP)")
                     LevelManager.shared.updateUserXP(userXP)
                     storedLastActiveDayXP = lastActiveDayXP
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
