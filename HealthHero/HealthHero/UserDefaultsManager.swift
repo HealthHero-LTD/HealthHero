@@ -54,7 +54,7 @@ struct UserDefaultsManager {
         userDefaults.set(username, forKey: usernameKey)
     }
 
-    func getUsername() -> String? {
-        return userDefaults.string(forKey: usernameKey)
+    func getUsername() -> String {
+        return userDefaults.object(forKey: usernameKey) as! String
     }
 }

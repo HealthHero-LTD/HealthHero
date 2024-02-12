@@ -10,6 +10,8 @@ import GoogleSignInSwift
 import GoogleSignIn
 
 struct ProfileView: View {
+    @State var username = UserDefaultsManager.shared.getUsername()
+    
     var body: some View {
         
         NavigationStack {
@@ -52,7 +54,7 @@ struct ProfileView: View {
             Text("Soroush Kami")
                 .font(.title)
             
-            Text("@Soroush_04")
+            Text(username)
         }
         .padding()
         .frame(

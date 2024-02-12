@@ -16,10 +16,11 @@ struct StatsView: View {
     @State var userXP: Int = UserDefaultsManager.shared.getUserXP()
     @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
     @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
+    @State var username: String = UserDefaultsManager.shared.getUsername()
     
     var body: some View {
         VStack {
-            Text("Soroush_04")
+            Text("@\(username)")
                 .font(.title2)
                 .fontWeight(.heavy)
                 .padding()
