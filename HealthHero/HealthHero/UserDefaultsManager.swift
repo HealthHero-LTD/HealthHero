@@ -14,6 +14,7 @@ struct UserDefaultsManager {
     private let lastActiveDateKey = "LastActiveDate"
     private let userLevelKey = "UserLevel"
     private let userXPKey = "UserXP"
+    private let lastActiveDayXPKey = "LastActiveDayXP"
     
     func setLastActiveDate(_ date: Date) {
         userDefaults.set(date, forKey: lastActiveDateKey)
@@ -38,5 +39,13 @@ struct UserDefaultsManager {
     
     func getUserXP() -> Int {
         userDefaults.integer(forKey: userXPKey)
+    }
+    
+    func setLastActiveDayXP(_ lastActiveDayXP: Int) {
+        userDefaults.set(lastActiveDayXP, forKey: lastActiveDayXPKey)
+    }
+    
+    func getLastActiveDayXP() -> Int {
+        userDefaults.integer(forKey: lastActiveDayXPKey)
     }
 }

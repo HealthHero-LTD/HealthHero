@@ -14,7 +14,7 @@ struct StatsView: View {
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
     @State var userXP: Int = UserDefaultsManager.shared.getUserXP()
-    @State var storedLastActiveDayXP: Int = UserDefaults.standard.integer(forKey: "LastActiveDayXP")
+    @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
     @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
     
     var body: some View {
@@ -61,12 +61,12 @@ struct StatsView: View {
                     print(userXP)
                     userXP = userXP - storedLastActiveDayXP + cumulatedXpUntilNow
                     print(userXP)
+                    storedLastActiveDayXP = lastActiveDayXP
+                    UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
+                    UserDefaultsManager.shared.setUserXP(userXP)
                     
-                    UserDefaults.standard.set(lastActiveDayXP, forKey: "LastActiveDayXP")
-                    UserDefaults.standard.setValue(userXP, forKey: "UserXP")
-                    
-//                    UserDefaults.standard.removeObject(forKey: "UserXP")
-//                    UserDefaults.standard.removeObject(forKey: "LastActiveDayXP")
+                    UserDefaults.standard.removeObject(forKey: "UserXP")
+                    UserDefaults.standard.removeObject(forKey: "LastActiveDayXP")
 
                     
                     // send xpDataArray to backend
