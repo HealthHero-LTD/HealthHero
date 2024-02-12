@@ -44,30 +44,19 @@ struct StatsView: View {
                     let xpDataArray = weeklyStepData.map {
                         let xp = XPManager.convertStepCountToXP($0.stepCount)
                         weeklyXP += xp
-                        LevelManager.shared.updateUserXP(weeklyXP)
                         return XPData(date: $0.date, xp: xp)
                     }.filter {
                         $0.date > UserDefaultsManager.shared.getLastActiveDate()
                     }
                     
-                    print("userXP: \(userXP)")
-                    let duplicateActiveDayXP = xpDataArray.first!.xp
                     let lastActiveDayXP = xpDataArray.last!.xp
                     let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
-                    print("cumulated xp \(cumulatedXpUntilNow)")
-                    print("lastActiveDayXP: \(lastActiveDayXP)")
-                    
-                    print("storedLastActiveDayXP: \(storedLastActiveDayXP)")
-                    print(userXP)
+
                     userXP = userXP - storedLastActiveDayXP + cumulatedXpUntilNow
-                    print(userXP)
+                    LevelManager.shared.updateUserXP(userXP)
                     storedLastActiveDayXP = lastActiveDayXP
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
                     UserDefaultsManager.shared.setUserXP(userXP)
-                    
-                    UserDefaults.standard.removeObject(forKey: "UserXP")
-                    UserDefaults.standard.removeObject(forKey: "LastActiveDayXP")
-
                     
                     // send xpDataArray to backend
                     guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
@@ -105,7 +94,7 @@ struct StatsView: View {
                         }
                         
                         if httpResponse.statusCode == 200 {
-                            print("XP updated")
+                            print("XP updated in backend")
                         }
                     }
                     task.resume()
