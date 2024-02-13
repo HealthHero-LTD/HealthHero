@@ -19,12 +19,7 @@ class HttpRequestProcessor {
             }
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            if !data.isEmpty {
-                return try decoder.decode(T.self, from: data)
-            } else {
-                let emptyBody = "{}".data(using: .utf8)
-                return try decoder.decode(T.self, from: emptyBody!)
-            }
+            return try decoder.decode(T.self, from: data)
         } catch let error as DecodingError {
             throw HttpError.decodingError(description: error.localizedDescription)
         } catch let error as EncodingError {
