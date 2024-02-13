@@ -9,6 +9,7 @@ import Foundation
 
 class LeaderboardViewModel: ObservableObject {
     @Published var leaderboardEntries: [LeaderboardEntry] = []
+    let httpRequestProcessor = HttpRequestProcessor()
     
     private let cacheKey = "LeaderboarCache"
     
@@ -16,44 +17,18 @@ class LeaderboardViewModel: ObservableObject {
         loadCachedData()
     }
     
-    func fetchLeaderboardData() {
-        // we can fetch backend data here(maybe?)
-        let url = URL(string: "http://192.168.2.11:6969/leaderboard")!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print("error: \(error!.localizedDescription)")
-                return
-            }
-            print("leaderboard data received")
-            
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-                print("HTTP Error: \(httpResponse.statusCode)")
-                return
-            } else {
-                print("response received")
-            }
-            
-            do {
-                let leaderboardData = try JSONDecoder().decode([LeaderboardEntry].self, from: data)
-                print("leaderboard data updated successfully")
-                DispatchQueue.main.async {
-                    self.leaderboardEntries = leaderboardData
-                    self.saveCachedData()
-                }
-            } catch {
-                print("JSON Parsing Error: \(error.localizedDescription)")
-            }
-        }
-        task.resume()
+    func fetchLeaderboardData() async throws {
+        let request = HttpRequest(
+            endpoint: .leaderboard,
+            headers: [.contentTypeApplicationJson],
+            httpMethod: .GET
+        )
+        self.leaderboardEntries = try await httpRequestProcessor.process(request)
+        self.saveCachedData()
     }
     
-    func refreshLeaderboardData() {
-        fetchLeaderboardData()
+    func refreshLeaderboardData() async throws {
+        try await fetchLeaderboardData()
     }
     
     func loadCachedData() {
