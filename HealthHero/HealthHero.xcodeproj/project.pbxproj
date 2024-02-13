@@ -38,6 +38,7 @@
 		34D24FA02B76FA35004682E7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */; };
 		34D24FA22B795607004682E7 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24FA12B795607004682E7 /* LevelManager.swift */; };
 		82E2FBE32B7BC131007AE967 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE22B7BC131007AE967 /* HttpHeader.swift */; };
+		82E2FBE52B7BC1B5007AE967 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE42B7BC1B5007AE967 /* HttpError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		34D24FA12B795607004682E7 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
 		82E2FBE22B7BC131007AE967 /* HttpHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
+		82E2FBE42B7BC1B5007AE967 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
 				347526DC2B313A830022DB52 /* Preview Content */,
 				82E2FBE22B7BC131007AE967 /* HttpHeader.swift */,
+				82E2FBE42B7BC1B5007AE967 /* HttpError.swift */,
 			);
 			path = HealthHero;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				34989B932B68582500790C86 /* SignInScreen.swift in Sources */,
 				3486B5902B3F990500AFC633 /* StatsView.swift in Sources */,
 				3416F4022B60863400E19FAE /* AccessTokenStore.swift in Sources */,
+				82E2FBE52B7BC1B5007AE967 /* HttpError.swift in Sources */,
 				34989B852B66A67D00790C86 /* LeaderboardHeader.swift in Sources */,
 				3416F4092B63493300E19FAE /* KeychainManager.swift in Sources */,
 				3486B58E2B3F97E400AFC633 /* ProfileView.swift in Sources */,
