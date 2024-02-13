@@ -37,6 +37,7 @@
 		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
 		34D24FA02B76FA35004682E7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */; };
 		34D24FA22B795607004682E7 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24FA12B795607004682E7 /* LevelManager.swift */; };
+		82E2FBE32B7BC131007AE967 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE22B7BC131007AE967 /* HttpHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
 		34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		34D24FA12B795607004682E7 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
+		82E2FBE22B7BC131007AE967 /* HttpHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
 				347526DC2B313A830022DB52 /* Preview Content */,
+				82E2FBE22B7BC131007AE967 /* HttpHeader.swift */,
 			);
 			path = HealthHero;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */,
 				34989B952B68789000790C86 /* SetUsername.swift in Sources */,
 				3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */,
+				82E2FBE32B7BC131007AE967 /* HttpHeader.swift in Sources */,
 				34C209B02B726B2B008323E0 /* StepsEntry.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,
 				34C209AC2B6F4840008323E0 /* User.swift in Sources */,
