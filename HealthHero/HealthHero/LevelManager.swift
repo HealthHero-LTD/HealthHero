@@ -19,8 +19,6 @@ class LevelManager {
         userXP = xp
         checkLevelUp()
         levelProgression = Float(userXP) / Float(requiredXPForNextLevel)
-        print("level progression \(levelProgression)")
-
     }
     
     private func checkLevelUp() {
@@ -35,8 +33,5 @@ class LevelManager {
         userXP -= requiredXPForNextLevel
         requiredXPForNextLevel *= 2
         checkLevelUp()
-        print("You've reached level \(currentLevel)")
-        print("new user xp:\(userXP)")
-        print(requiredXPForNextLevel)
     }
 }

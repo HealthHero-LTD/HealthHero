@@ -54,25 +54,20 @@ struct StatsView: View {
                     let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
 
                     userXP = userXP - storedLastActiveDayXP + cumulatedXpUntilNow
-                    print("userXP\(userXP)")
                     LevelManager.shared.updateUserXP(userXP)
                     storedLastActiveDayXP = lastActiveDayXP
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
                     UserDefaultsManager.shared.setUserXP(userXP)
                     
-                    let user = User(
+                    let userData = User(
                         level: UserDefaultsManager.shared.getUserLevel(),
                         username: UserDefaultsManager.shared.getUsername(),
                         xpDataArray: xpDataArray
                     )
                     
-                    print("user level \(user.level)")
-                    
-                    print("this is the requestData\(user)")
-                    
                     // send xpDataArray to backend
                     guard let url = URL(string: "http://192.168.2.11:6969/update-user") else {
-                        print("invalid URL for XP transmission")
+                        print("invalid URL for user data transmission")
                         return
                     }
                     
@@ -87,16 +82,16 @@ struct StatsView: View {
                     do {
                         let encoder = JSONEncoder()
                         encoder.dateEncodingStrategy = .secondsSince1970
-                        let jsonData = try encoder.encode(user)
+                        let jsonData = try encoder.encode(userData)
                         request.httpBody = jsonData
                     } catch {
-                        print("error encoding XP data: \(error)")
+                        print("error encoding user data: \(error)")
                         return
                     }
                     
                     let task = URLSession.shared.dataTask(with: request) { data, response, error in
                         if let error = error {
-                            print("Error sending XP data: \(error)")
+                            print("Error sending user data: \(error)")
                             return
                         }
                         
@@ -106,7 +101,7 @@ struct StatsView: View {
                         }
                         
                         if httpResponse.statusCode == 200 {
-                            print("XP updated in backend")
+                            print("user data updated in backend")
                         }
                     }
                     task.resume()

@@ -27,7 +27,6 @@ struct UserDefaultsManager {
     
     func setUserLevel(_ userLevel: Int) {
         userDefaults.set(userLevel, forKey: userLevelKey)
-        print("user level saved in user defaults and is \(userLevel)")
     }
     
     func getUserLevel() -> Int {
