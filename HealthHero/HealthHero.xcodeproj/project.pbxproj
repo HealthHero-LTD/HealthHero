@@ -151,11 +151,7 @@
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
 				347526DC2B313A830022DB52 /* Preview Content */,
-				82E2FBE22B7BC131007AE967 /* HttpHeader.swift */,
-				82E2FBE42B7BC1B5007AE967 /* HttpError.swift */,
-				82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */,
-				82E2FBE82B7BC231007AE967 /* HttpRequest.swift */,
-				82E2FBEA2B7BC2DA007AE967 /* HttpRequestProcessor.swift */,
+				82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */,
 			);
 			path = HealthHero;
 			sourceTree = "<group>";
@@ -177,6 +173,18 @@
 				3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */,
 			);
 			path = "Tab Views";
+			sourceTree = "<group>";
+		};
+		82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				82E2FBE22B7BC131007AE967 /* HttpHeader.swift */,
+				82E2FBE42B7BC1B5007AE967 /* HttpError.swift */,
+				82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */,
+				82E2FBE82B7BC231007AE967 /* HttpRequest.swift */,
+				82E2FBEA2B7BC2DA007AE967 /* HttpRequestProcessor.swift */,
+			);
+			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
