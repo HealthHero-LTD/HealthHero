@@ -36,6 +36,7 @@
 		34D014EE2B5AFD1200974C5F /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 34D014ED2B5AFD1200974C5F /* JWTDecode */; };
 		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
 		34D24FA02B76FA35004682E7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */; };
+		34D24FA22B795607004682E7 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24FA12B795607004682E7 /* LevelManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		34C209B12B73E016008323E0 /* XPData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPData.swift; sourceTree = "<group>"; };
 		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
 		34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		34D24FA12B795607004682E7 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				34C209AF2B726B2B008323E0 /* StepsEntry.swift */,
 				34C209B12B73E016008323E0 /* XPData.swift */,
 				34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */,
+				34D24FA12B795607004682E7 /* LevelManager.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
 				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
@@ -257,6 +260,7 @@
 				3416F4092B63493300E19FAE /* KeychainManager.swift in Sources */,
 				3486B58E2B3F97E400AFC633 /* ProfileView.swift in Sources */,
 				34989B872B66A6CD00790C86 /* LeaderboardRow.swift in Sources */,
+				34D24FA22B795607004682E7 /* LevelManager.swift in Sources */,
 				34989B912B68514E00790C86 /* GoogleSignInManager.swift in Sources */,
 				34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */,
 				34989B952B68789000790C86 /* SetUsername.swift in Sources */,

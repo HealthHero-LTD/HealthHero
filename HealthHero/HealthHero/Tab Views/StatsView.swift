@@ -13,6 +13,9 @@ struct StatsView: View {
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
+    @State var userXP: Int = UserDefaultsManager.shared.getUserXP()
+    @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
+    @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
     
     var body: some View {
         VStack {
@@ -37,6 +40,7 @@ struct StatsView: View {
                     self.stepsData = weeklyStepData
                     
                     // calculate xp
+                    weeklyXP = .zero
                     let xpDataArray = weeklyStepData.map {
                         let xp = XPManager.convertStepCountToXP($0.stepCount)
                         weeklyXP += xp
@@ -44,6 +48,15 @@ struct StatsView: View {
                     }.filter {
                         $0.date > UserDefaultsManager.shared.getLastActiveDate()
                     }
+                    
+                    let lastActiveDayXP = xpDataArray.last!.xp
+                    let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
+
+                    userXP = userXP - storedLastActiveDayXP + cumulatedXpUntilNow
+                    LevelManager.shared.updateUserXP(userXP)
+                    storedLastActiveDayXP = lastActiveDayXP
+                    UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
+                    UserDefaultsManager.shared.setUserXP(userXP)
                     
                     // send xpDataArray to backend
                     guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
@@ -81,7 +94,7 @@ struct StatsView: View {
                         }
                         
                         if httpResponse.statusCode == 200 {
-                            print("XP updated")
+                            print("XP updated in backend")
                         }
                     }
                     task.resume()
@@ -108,7 +121,7 @@ struct StatsView: View {
                 .padding()
             
             VStack {
-                Text("Level 1")
+                Text("Level \(userLevel)")
                     .font(.title)
                     .foregroundColor(.blue)
                 Text("Title: unlockable")
