@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct User {
-    var xp: Int
-    var username: String
+struct User: Codable {
     var level: Int
+    var username: String
+    var xpDataArray: [XPData]
 }

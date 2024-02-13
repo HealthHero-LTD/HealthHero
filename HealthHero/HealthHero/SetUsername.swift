@@ -81,10 +81,11 @@ struct SetUsername: View {
             
             if httpResponse.statusCode == 200 {
                 print("username set successfully")
+                UserDefaultsManager.shared.setUsername(username)
                 isUsernameSaved = true
-//                DispatchQueue.main.async {
-//                    // Update UI or perform any necessary action
-//                }
+                //                DispatchQueue.main.async {
+                //                    // Update UI or perform any necessary action
+                //                }
             } else {
                 print("failed to set username: \(httpResponse.statusCode)")
             }

@@ -12,25 +12,26 @@ class LevelManager {
     
     var userXP: Int = 0
     var currentLevel: Int = 1
-    var requiredXPForNextLevel: Int = 1
+    var requiredXPForNextLevel: Int = 3
+    var levelProgression: Float = 0
     
     func updateUserXP(_ xp: Int) {
         userXP = xp
         checkLevelUp()
+        levelProgression = Float(userXP) / Float(requiredXPForNextLevel)
     }
     
     private func checkLevelUp() {
-        if userXP >= requiredXPForNextLevel {
+        while userXP >= requiredXPForNextLevel {
             levelUp()
         }
     }
     
     private func levelUp() {
         currentLevel += 1
-        requiredXPForNextLevel *= 2 // double the required XP for the next level
         UserDefaultsManager.shared.setUserLevel(currentLevel)
-        print("You've reached level \(currentLevel)")
-        print(userXP)
-        print(requiredXPForNextLevel)
+        userXP -= requiredXPForNextLevel
+        requiredXPForNextLevel *= 2
+        checkLevelUp()
     }
 }

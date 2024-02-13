@@ -16,10 +16,11 @@ struct StatsView: View {
     @State var userXP: Int = UserDefaultsManager.shared.getUserXP()
     @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
     @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
+    @State var username: String = UserDefaultsManager.shared.getUsername()
     
     var body: some View {
         VStack {
-            Text("Soroush_04")
+            Text("@\(username)")
                 .font(.title2)
                 .fontWeight(.heavy)
                 .padding()
@@ -58,9 +59,15 @@ struct StatsView: View {
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
                     UserDefaultsManager.shared.setUserXP(userXP)
                     
+                    let userData = User(
+                        level: UserDefaultsManager.shared.getUserLevel(),
+                        username: UserDefaultsManager.shared.getUsername(),
+                        xpDataArray: xpDataArray
+                    )
+                    
                     // send xpDataArray to backend
-                    guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
-                        print("invalid URL for XP transmission")
+                    guard let url = URL(string: "http://192.168.2.11:6969/update-user") else {
+                        print("invalid URL for user data transmission")
                         return
                     }
                     
@@ -75,16 +82,16 @@ struct StatsView: View {
                     do {
                         let encoder = JSONEncoder()
                         encoder.dateEncodingStrategy = .secondsSince1970
-                        let jsonData = try encoder.encode(xpDataArray)
+                        let jsonData = try encoder.encode(userData)
                         request.httpBody = jsonData
                     } catch {
-                        print("error encoding XP data: \(error)")
+                        print("error encoding user data: \(error)")
                         return
                     }
                     
                     let task = URLSession.shared.dataTask(with: request) { data, response, error in
                         if let error = error {
-                            print("Error sending XP data: \(error)")
+                            print("Error sending user data: \(error)")
                             return
                         }
                         
@@ -94,7 +101,7 @@ struct StatsView: View {
                         }
                         
                         if httpResponse.statusCode == 200 {
-                            print("XP updated in backend")
+                            print("user data updated in backend")
                         }
                     }
                     task.resume()
@@ -114,7 +121,7 @@ struct StatsView: View {
     private var circleView: some View {
         ZStack {
             Circle()
-                .trim(from: 0.0, to: 0.65)
+                .trim(from: 0.0, to: CGFloat(LevelManager.shared.levelProgression))
                 .stroke(Color.blue, lineWidth: 8)
                 .rotationEffect(Angle(degrees: 90))
                 .frame(width: 200, height: 200) // frame always comes before anything else
