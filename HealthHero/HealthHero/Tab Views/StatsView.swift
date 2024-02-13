@@ -60,6 +60,14 @@ struct StatsView: View {
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
                     UserDefaultsManager.shared.setUserXP(userXP)
                     
+                    let user = User(
+                        level: UserDefaultsManager.shared.getUserLevel(),
+                        username: UserDefaultsManager.shared.getUsername(),
+                        xpDataArray: xpDataArray
+                    )
+                    
+                    print("this is the requestData\(user)")
+                    
                     // send xpDataArray to backend
                     guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
                         print("invalid URL for XP transmission")
@@ -77,7 +85,7 @@ struct StatsView: View {
                     do {
                         let encoder = JSONEncoder()
                         encoder.dateEncodingStrategy = .secondsSince1970
-                        let jsonData = try encoder.encode(xpDataArray)
+                        let jsonData = try encoder.encode(user)
                         request.httpBody = jsonData
                     } catch {
                         print("error encoding XP data: \(error)")
