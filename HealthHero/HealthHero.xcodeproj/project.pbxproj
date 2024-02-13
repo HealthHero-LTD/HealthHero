@@ -39,6 +39,8 @@
 		34D24FA22B795607004682E7 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24FA12B795607004682E7 /* LevelManager.swift */; };
 		82E2FBE32B7BC131007AE967 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE22B7BC131007AE967 /* HttpHeader.swift */; };
 		82E2FBE52B7BC1B5007AE967 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE42B7BC1B5007AE967 /* HttpError.swift */; };
+		82E2FBE72B7BC1F1007AE967 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */; };
+		82E2FBE92B7BC231007AE967 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE82B7BC231007AE967 /* HttpRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +77,8 @@
 		34D24FA12B795607004682E7 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
 		82E2FBE22B7BC131007AE967 /* HttpHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
 		82E2FBE42B7BC1B5007AE967 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
+		82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		82E2FBE82B7BC231007AE967 /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 				347526DC2B313A830022DB52 /* Preview Content */,
 				82E2FBE22B7BC131007AE967 /* HttpHeader.swift */,
 				82E2FBE42B7BC1B5007AE967 /* HttpError.swift */,
+				82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */,
+				82E2FBE82B7BC231007AE967 /* HttpRequest.swift */,
 			);
 			path = HealthHero;
 			sourceTree = "<group>";
@@ -252,8 +258,10 @@
 			files = (
 				34989B892B66A70A00790C86 /* LeaderboardEntry.swift in Sources */,
 				34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */,
+				82E2FBE72B7BC1F1007AE967 /* HttpMethod.swift in Sources */,
 				3404ABE72B69765600C55381 /* LaunchScreen.swift in Sources */,
 				34C209B22B73E016008323E0 /* XPData.swift in Sources */,
+				82E2FBE92B7BC231007AE967 /* HttpRequest.swift in Sources */,
 				3486B58C2B3F95B000AFC633 /* LeaderboardView.swift in Sources */,
 				34468A752B39790E0081D38E /* HKManager.swift in Sources */,
 				34C209AE2B7198A0008323E0 /* XPManager.swift in Sources */,
