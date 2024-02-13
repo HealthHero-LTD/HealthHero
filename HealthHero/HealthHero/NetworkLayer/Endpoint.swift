@@ -41,3 +41,14 @@ extension Endpoint {
         return url
     }
 }
+
+// MARK: - List of all available endpoints
+extension Endpoint {
+    static var leaderboard: Self {
+        Endpoint(path: "leaderboard")
+    }
+    
+    static var login: Self {
+        Endpoint(path: "login")
+    }
+}
