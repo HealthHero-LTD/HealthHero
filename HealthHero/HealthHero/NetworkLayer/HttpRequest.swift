@@ -10,24 +10,21 @@ import Foundation
 struct EmptyBody: Codable {}
 
 struct HttpRequest {
-    let url: String
+    let endpoint: Endpoint
     let headers: [HttpHeader]
-    let queryItems: [String: String]?
     let requestTimeout: TimeInterval
     let httpMethod: HttpMethod
     let body: Encodable?
     
     init(
-        url: String,
+        endpoint: Endpoint,
         headers: [HttpHeader],
-        queryItems: [String: String]? = [:],
         requestTimeout: TimeInterval = 60,
         httpMethod: HttpMethod,
         body: Encodable? = EmptyBody()
     ) {
-        self.url = url
+        self.endpoint = endpoint
         self.headers = headers
-        self.queryItems = queryItems
         self.requestTimeout = requestTimeout
         self.httpMethod = httpMethod
         self.body = body
@@ -35,24 +32,13 @@ struct HttpRequest {
     
     var urlRequest: URLRequest {
         get throws {
-            guard let url = URL(string: self.url) else {
-                throw HttpError.invalidURL(url: self.url)
-            }
-            
-            let queryItems = getQueryItems(self.queryItems ?? [:])
+            let url = endpoint.url
+            let queryItems = endpoint.queryItems
             let components = try getURLComponents(url: url, with: queryItems)
             return try getRequest(with: components)
         }
     }
-    
-    private func getQueryItems(_ items: [String: String]) -> [URLQueryItem] {
-        guard !items.isEmpty else { return [] }
         
-        return items.compactMap { (key: String, value: String) in
-            URLQueryItem(name: key, value: value)
-        }
-    }
-    
     private func getURLComponents(
         url: URL,
         with queryItems: [URLQueryItem]
@@ -72,7 +58,7 @@ struct HttpRequest {
     
     private func getRequest(with components: URLComponents) throws -> URLRequest {
         guard let url = components.url else {
-            throw HttpError.invalidURL(url: self.url)
+            throw HttpError.invalidURL(url: self.endpoint.url.absoluteString)
         }
         
         var request = URLRequest(url: url, timeoutInterval: requestTimeout)
