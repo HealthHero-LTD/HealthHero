@@ -8,7 +8,7 @@
 import Foundation
 
 enum HttpHeader {
-    case authorization(String, String? = nil)
+    case authorization(String)
     case contentTypeApplicationJson
     
     var headerKey: String {
@@ -22,12 +22,8 @@ enum HttpHeader {
     
     var headerValue: String {
         switch self {
-        case .authorization(let token, let nonce):
-            if let nonce {
-                return "Bearer \(token) \(nonce)"
-            } else {
-                return "Bearer \(token)"
-            }
+        case .authorization(let token):
+            return "Bearer \(token)"
         case .contentTypeApplicationJson:
             return "application/json"
         }
