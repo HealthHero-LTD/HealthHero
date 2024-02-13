@@ -66,10 +66,12 @@ struct StatsView: View {
                         xpDataArray: xpDataArray
                     )
                     
+                    print("user level \(user.level)")
+                    
                     print("this is the requestData\(user)")
                     
                     // send xpDataArray to backend
-                    guard let url = URL(string: "http://192.168.2.11:6969/update-xp") else {
+                    guard let url = URL(string: "http://192.168.2.11:6969/update-user") else {
                         print("invalid URL for XP transmission")
                         return
                     }
@@ -124,7 +126,7 @@ struct StatsView: View {
     private var circleView: some View {
         ZStack {
             Circle()
-                .trim(from: 0.0, to: 0.65)
+                .trim(from: 0.0, to: CGFloat(LevelManager.shared.levelProgression))
                 .stroke(Color.blue, lineWidth: 8)
                 .rotationEffect(Angle(degrees: 90))
                 .frame(width: 200, height: 200) // frame always comes before anything else

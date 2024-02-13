@@ -12,11 +12,15 @@ class LevelManager {
     
     var userXP: Int = 0
     var currentLevel: Int = 1
-    var requiredXPForNextLevel: Int = 1
+    var requiredXPForNextLevel: Int = 3
+    var levelProgression: Float = 0
     
     func updateUserXP(_ xp: Int) {
         userXP = xp
         checkLevelUp()
+        levelProgression = Float(userXP) / Float(requiredXPForNextLevel)
+        print("level progression \(levelProgression)")
+
     }
     
     private func checkLevelUp() {
