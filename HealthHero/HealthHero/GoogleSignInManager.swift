@@ -42,6 +42,7 @@ class GoogleSignInManager {
                     Task {
                         let accessTokenStore = try await self.fetchAccessToken(idToken)
                         self.saveAccessTokenToKeychain(accessTokenStore)
+                        completion(true)
                     }
                 }
             }
