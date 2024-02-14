@@ -23,7 +23,8 @@ struct LeaderboardView: View {
                 }
             }
             Button("Refresh") {
-                leaderboardViewModel.refreshLeaderboardData()
+                Task { try await leaderboardViewModel.refreshLeaderboardData()
+                }
             }
             .padding()
         }

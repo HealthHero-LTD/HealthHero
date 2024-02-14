@@ -12,45 +12,36 @@ import JWTDecode
 
 class GoogleSignInManager {
     static let shared = GoogleSignInManager()
+    let httpRequestProcessor = HttpRequestProcessor()
     
     private init() {}
     
     func handleSignInButton(completion: @escaping (Bool) -> Void) {
-        guard let presentingViewController = (UIApplication.shared.connectedScenes.first
-                                              as? UIWindowScene)?.windows.first?.rootViewController
-        else { 
+        guard let rootViewController = (
+            UIApplication.shared.connectedScenes.first
+            as? UIWindowScene
+        )?.windows.first?.rootViewController else {
             completion(false)
             return
         }
         
-        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, error in
-            guard error == nil else { 
+        GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { signInResult, error in
+            guard error == nil, let result = signInResult else {
                 completion(false)
                 return
             }
-            guard let result = signInResult else {
-                completion(false)
-                return
-            }
-            // set isLoggedIn to true
-            let user = result.user
-            let emailAddress = user.profile?.email
-            // If sign in succeeded, display the app's main content View.
             
             signInResult?.user.refreshTokensIfNeeded { user, error in
-                guard error == nil else {
-                    completion(false)
-                    return
-                }
-                guard let user = user else {
+                guard error == nil, let user else {
                     completion(false)
                     return
                 }
                 
-                let idToken = user.idToken // send token to backend
-                if let token = idToken?.tokenString {
+                if let idToken = user.idToken?.tokenString {
                     print("token sent to server")
-                    self.sendTokenToBackend(idToken: token) { success in
+                    Task {
+                        let accessTokenStore = try await self.fetchAccessToken(idToken)
+                        self.saveAccessTokenToKeychain(accessTokenStore)
                         completion(true)
                     }
                 }
@@ -58,34 +49,19 @@ class GoogleSignInManager {
         }
     }
     
-    func sendTokenToBackend(idToken: String, completion: @escaping (Bool) -> Void) {
-        let idTokenStore = IdTokenStore(idToken: idToken)
-        guard let authData = idTokenStore.encode() else {
-            completion(false)
-            return
-        }
-        guard let url = URL(string: "http://192.168.2.11:6969/login") else {
-            print("Invalid URL")
-            completion(false)
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
-            // response from backend
-            if let data {
-                if let accessTokenStore = AccessTokenStore.decode(from: data) {
-                    let accessToken = accessTokenStore.accessToken
-                    let tokenId = accessTokenStore.tokenId
-
-                    KeychainManager.shared.saveAccessTokenToKeychain(token: accessToken, tokenID: tokenId)
-                    completion(true)
-                }
-            }
-        }
-        task.resume()
+    private func fetchAccessToken(_ idToken: String) async throws -> AccessTokenStore {
+        let request = HttpRequest(
+            endpoint: .login,
+            headers: [.contentTypeApplicationJson],
+            httpMethod: .POST,
+            body: IdTokenStore(idToken: idToken)
+        )
+        return try await httpRequestProcessor.process(request)
+    }
+    
+    private func saveAccessTokenToKeychain(_ accessTokenStore: AccessTokenStore) {
+        let accessToken = accessTokenStore.accessToken
+        let tokenId = accessTokenStore.tokenId
+        KeychainManager.shared.saveAccessTokenToKeychain(token: accessToken, tokenID: tokenId)
     }
 }
