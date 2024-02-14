@@ -9,7 +9,7 @@ import Foundation
 
 struct Endpoint {
     #if DEBUG
-    static let host = "192.168.2.11:6969"
+    static let host = "192.168.2.11"
     #else
     static let host = "api.healthhero.app"
     #endif
@@ -29,6 +29,7 @@ extension Endpoint {
         var components = URLComponents()
         components.scheme = Endpoint.scheme
         components.host = Endpoint.host
+        components.port = 6969
         components.path = "/" + path
         components.queryItems = queryItems
         

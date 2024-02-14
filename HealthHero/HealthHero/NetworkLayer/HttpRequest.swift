@@ -21,7 +21,7 @@ struct HttpRequest {
         headers: [HttpHeader],
         requestTimeout: TimeInterval = 60,
         httpMethod: HttpMethod,
-        body: Encodable? = EmptyBody()
+        body: Encodable? = nil
     ) {
         self.endpoint = endpoint
         self.headers = headers

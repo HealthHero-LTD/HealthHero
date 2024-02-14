@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class LeaderboardViewModel: ObservableObject {
     @Published var leaderboardEntries: [LeaderboardEntry] = []
     let httpRequestProcessor = HttpRequestProcessor()
