@@ -65,47 +65,8 @@ struct StatsView: View {
                         xpDataArray: xpDataArray
                     )
                     
-                    // send xpDataArray to backend
-                    guard let url = URL(string: "http://192.168.2.11:6969/update-user") else {
-                        print("invalid URL for user data transmission")
-                        return
-                    }
-                    
-                    var request = URLRequest(url: url)
-                    request.httpMethod = "POST"
-                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                    
-                    if let jwtToken = KeychainManager.shared.getAccessToken() {
-                        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-                    }
-                    
-                    do {
-                        let encoder = JSONEncoder()
-                        encoder.dateEncodingStrategy = .secondsSince1970
-                        let jsonData = try encoder.encode(userData)
-                        request.httpBody = jsonData
-                    } catch {
-                        print("error encoding user data: \(error)")
-                        return
-                    }
-                    
-                    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                        if let error = error {
-                            print("Error sending user data: \(error)")
-                            return
-                        }
-                        
-                        guard let httpResponse = response as? HTTPURLResponse else {
-                            print("invalid response for set username")
-                            return
-                        }
-                        
-                        if httpResponse.statusCode == 200 {
-                            print("user data updated in backend")
-                        }
-                    }
-                    task.resume()
-                    
+                    updateStatTask(data: userData)
+                                        
                     if let currentDay = weeklyStepData.last {
                         self.stepsCount = currentDay.stepCount
                     }
@@ -115,6 +76,22 @@ struct StatsView: View {
             }
         }
         .animation(.default, value: stepsCount)
+    }
+    
+    private func updateStatTask(data: User) {
+        Task {
+            guard let accessToken = KeychainManager.shared.getAccessToken() else {
+                return
+            }
+            
+            let request = HttpRequest(
+                endpoint: .updateStats,
+                headers: [.authorization(accessToken), .contentTypeApplicationJson],
+                httpMethod: .POST,
+                body: data
+            )
+            let updateResult: UpdateResult = try await HttpRequestProcessor().process(request)
+        }
     }
     
     @ViewBuilder

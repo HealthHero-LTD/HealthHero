@@ -56,4 +56,8 @@ extension Endpoint {
     static var setUsername: Self {
         Endpoint(path: "set-username")
     }
+    
+    static var updateStats: Self {
+        Endpoint(path: "update-user")
+    }
 }

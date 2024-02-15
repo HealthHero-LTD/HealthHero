@@ -38,6 +38,7 @@
 		34D014F22B606EB700974C5F /* IdTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D014F12B606EB700974C5F /* IdTokenStore.swift */; };
 		34D24FA02B76FA35004682E7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */; };
 		34D24FA22B795607004682E7 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24FA12B795607004682E7 /* LevelManager.swift */; };
+		34D9E9102B7EA4B900D70049 /* UpdateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9E90F2B7EA4B900D70049 /* UpdateResult.swift */; };
 		82E2FBE32B7BC131007AE967 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE22B7BC131007AE967 /* HttpHeader.swift */; };
 		82E2FBE52B7BC1B5007AE967 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE42B7BC1B5007AE967 /* HttpError.swift */; };
 		82E2FBE72B7BC1F1007AE967 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */; };
@@ -79,6 +80,7 @@
 		34D014F12B606EB700974C5F /* IdTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTokenStore.swift; sourceTree = "<group>"; };
 		34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		34D24FA12B795607004682E7 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
+		34D9E90F2B7EA4B900D70049 /* UpdateResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateResult.swift; sourceTree = "<group>"; };
 		82E2FBE22B7BC131007AE967 /* HttpHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
 		82E2FBE42B7BC1B5007AE967 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				82E2FBE82B7BC231007AE967 /* HttpRequest.swift */,
 				82E2FBEA2B7BC2DA007AE967 /* HttpRequestProcessor.swift */,
 				82E2FBED2B7BC544007AE967 /* Endpoint.swift */,
+				34D9E90F2B7EA4B900D70049 /* UpdateResult.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				34989B8B2B66A74D00790C86 /* LeaderboardViewModel.swift in Sources */,
 				34989B932B68582500790C86 /* SignInScreen.swift in Sources */,
 				3486B5902B3F990500AFC633 /* StatsView.swift in Sources */,
+				34D9E9102B7EA4B900D70049 /* UpdateResult.swift in Sources */,
 				3416F4022B60863400E19FAE /* AccessTokenStore.swift in Sources */,
 				82E2FBEB2B7BC2DA007AE967 /* HttpRequestProcessor.swift in Sources */,
 				82E2FBE52B7BC1B5007AE967 /* HttpError.swift in Sources */,
