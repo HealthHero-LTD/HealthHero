@@ -7,12 +7,12 @@
 
 import Foundation
 
-class LevelManager {
+class LevelManager: ObservableObject {
     static let shared = LevelManager()
     
     var userXP: Int = 0
-    var currentLevel: Int = 1
-    var requiredXPForNextLevel: Int = 3
+    @Published var currentLevel: Int = 1
+    var requiredXPForNextLevel: Int = 1
     var levelProgression: Float = 0
     
     func updateUserXP(_ xp: Int) {

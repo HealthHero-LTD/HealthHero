@@ -15,7 +15,7 @@ struct StatsView: View {
     @State var weeklyXP: Int = .zero
     @State var userXP: Int = UserDefaultsManager.shared.getUserXP()
     @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
-    @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
+    var userLevel: Int { LevelManager.shared.currentLevel }
     @State var username: String = UserDefaultsManager.shared.getUsername()
     
     var body: some View {
