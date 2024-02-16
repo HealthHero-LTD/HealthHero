@@ -39,6 +39,9 @@
 		34D24FA02B76FA35004682E7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */; };
 		34D24FA22B795607004682E7 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D24FA12B795607004682E7 /* LevelManager.swift */; };
 		34D9E9102B7EA4B900D70049 /* UpdateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9E90F2B7EA4B900D70049 /* UpdateResult.swift */; };
+		34D9E9142B7F068500D70049 /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9E9132B7F068500D70049 /* StatsViewModel.swift */; };
+		34D9E9162B7F137E00D70049 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9E9152B7F137E00D70049 /* UserStore.swift */; };
+		34D9E9182B7F1B8A00D70049 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D9E9172B7F1B8A00D70049 /* UserInfo.swift */; };
 		82E2FBE32B7BC131007AE967 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE22B7BC131007AE967 /* HttpHeader.swift */; };
 		82E2FBE52B7BC1B5007AE967 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE42B7BC1B5007AE967 /* HttpError.swift */; };
 		82E2FBE72B7BC1F1007AE967 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */; };
@@ -81,6 +84,9 @@
 		34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		34D24FA12B795607004682E7 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
 		34D9E90F2B7EA4B900D70049 /* UpdateResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateResult.swift; sourceTree = "<group>"; };
+		34D9E9132B7F068500D70049 /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		34D9E9152B7F137E00D70049 /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
+		34D9E9172B7F1B8A00D70049 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		82E2FBE22B7BC131007AE967 /* HttpHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
 		82E2FBE42B7BC1B5007AE967 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		82E2FBE62B7BC1F1007AE967 /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
@@ -159,6 +165,9 @@
 				347526DC2B313A830022DB52 /* Preview Content */,
 				82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */,
 				34923AE82B7D3C74009D11EF /* Username.swift */,
+				34D9E9132B7F068500D70049 /* StatsViewModel.swift */,
+				34D9E9152B7F137E00D70049 /* UserStore.swift */,
+				34D9E9172B7F1B8A00D70049 /* UserInfo.swift */,
 			);
 			path = HealthHero;
 			sourceTree = "<group>";
@@ -292,6 +301,7 @@
 				34989B932B68582500790C86 /* SignInScreen.swift in Sources */,
 				3486B5902B3F990500AFC633 /* StatsView.swift in Sources */,
 				34D9E9102B7EA4B900D70049 /* UpdateResult.swift in Sources */,
+				34D9E9142B7F068500D70049 /* StatsViewModel.swift in Sources */,
 				3416F4022B60863400E19FAE /* AccessTokenStore.swift in Sources */,
 				82E2FBEB2B7BC2DA007AE967 /* HttpRequestProcessor.swift in Sources */,
 				82E2FBE52B7BC1B5007AE967 /* HttpError.swift in Sources */,
@@ -305,8 +315,10 @@
 				34989B952B68789000790C86 /* SetUsername.swift in Sources */,
 				3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */,
 				82E2FBE32B7BC131007AE967 /* HttpHeader.swift in Sources */,
+				34D9E9162B7F137E00D70049 /* UserStore.swift in Sources */,
 				34C209B02B726B2B008323E0 /* StepsEntry.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,
+				34D9E9182B7F1B8A00D70049 /* UserInfo.swift in Sources */,
 				34C209AC2B6F4840008323E0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

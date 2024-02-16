@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var selection = 1
+    @StateObject private var userStore = UserStore()
     
     var body: some View {
         TabView(selection: $selection) {
@@ -27,6 +28,14 @@ struct MainView: View {
                     Label("Profile", systemImage: "person.crop.circle.fill")
                 }
                 .tag(2)
+        }
+        .task {
+            await userStore.fetchCurrentUser()
+            if let response = userStore.currentUser {
+                print(response)
+            } else {
+                print("no user info")
+            }
         }
     }
 }

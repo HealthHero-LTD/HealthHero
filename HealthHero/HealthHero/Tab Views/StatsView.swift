@@ -128,9 +128,9 @@ struct StatsView: View {
             }
             
             HStack {
-                Text("Weekly XP:")
+                Text("Current user XP:")
                 Spacer()
-                Text(String(weeklyXP))
+                Text(String(userXP))
             }
         }
         .frame(maxWidth: 180)
