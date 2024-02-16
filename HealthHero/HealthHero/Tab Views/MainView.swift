@@ -31,11 +31,6 @@ struct MainView: View {
         }
         .task {
             await userStore.fetchCurrentUser()
-            if let response = userStore.currentUser {
-                print(response)
-            } else {
-                print("no user info")
-            }
         }
     }
 }
