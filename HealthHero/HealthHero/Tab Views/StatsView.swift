@@ -10,17 +10,15 @@ import Charts
 
 struct StatsView: View {
     @StateObject private var HealthKitManager = HKManager()
+    @EnvironmentObject private var userStore: UserStore
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
-    @State var userXP: Int = UserDefaultsManager.shared.getUserXP()
     @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
-    var userLevel: Int { LevelManager.shared.currentLevel }
-    @State var username: String = UserDefaultsManager.shared.getUsername()
     
     var body: some View {
         VStack {
-            Text("@\(username)")
+            Text("@\(userStore.currentUser.username)")
                 .font(.title2)
                 .fontWeight(.heavy)
                 .padding()
@@ -52,12 +50,11 @@ struct StatsView: View {
                     
                     let lastActiveDayXP = xpDataArray.last!.xp
                     let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
-
-                    userXP = userXP - storedLastActiveDayXP + cumulatedXpUntilNow
-                    LevelManager.shared.updateUserXP(userXP)
+                    
+                    let updatedXP = userStore.currentUser.xp - storedLastActiveDayXP + cumulatedXpUntilNow
+                    LevelManager.shared.updateUserXP(updatedXP)
                     storedLastActiveDayXP = lastActiveDayXP
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
-                    UserDefaultsManager.shared.setUserXP(userXP)
                     
                     let userData = User(
                         level: UserDefaultsManager.shared.getUserLevel(),
@@ -66,7 +63,7 @@ struct StatsView: View {
                     )
                     
                     updateStatTask(data: userData)
-                                        
+                    
                     if let currentDay = weeklyStepData.last {
                         self.stepsCount = currentDay.stepCount
                     }
@@ -105,7 +102,7 @@ struct StatsView: View {
                 .padding()
             
             VStack {
-                Text("Level \(userLevel)")
+                Text("Level \(userStore.currentUser.level)")
                     .font(.title)
                     .foregroundColor(.blue)
                 Text("Title: unlockable")
@@ -130,7 +127,7 @@ struct StatsView: View {
             HStack {
                 Text("Current user XP:")
                 Spacer()
-                Text(String(userXP))
+                Text(String(userStore.currentUser.xp))
             }
         }
         .frame(maxWidth: 180)

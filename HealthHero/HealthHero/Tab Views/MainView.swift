@@ -19,6 +19,7 @@ struct MainView: View {
                 }
                 .tag(0)
             StatsView()
+                .environmentObject(userStore)
                 .tabItem {
                     Label("Stats", systemImage: "list.bullet.clipboard.fill")
                 }

@@ -159,15 +159,15 @@
 				34C209B12B73E016008323E0 /* XPData.swift */,
 				34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */,
 				34D24FA12B795607004682E7 /* LevelManager.swift */,
-				3486B5932B3F9CD200AFC633 /* Tab Views */,
-				347526D92B313A830022DB52 /* Assets.xcassets */,
-				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
-				347526DC2B313A830022DB52 /* Preview Content */,
-				82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */,
 				34923AE82B7D3C74009D11EF /* Username.swift */,
 				34D9E9132B7F068500D70049 /* StatsViewModel.swift */,
 				34D9E9152B7F137E00D70049 /* UserStore.swift */,
 				34D9E9172B7F1B8A00D70049 /* UserInfo.swift */,
+				3486B5932B3F9CD200AFC633 /* Tab Views */,
+				82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */,
+				347526D92B313A830022DB52 /* Assets.xcassets */,
+				347526DB2B313A830022DB52 /* HealthHero.entitlements */,
+				347526DC2B313A830022DB52 /* Preview Content */,
 			);
 			path = HealthHero;
 			sourceTree = "<group>";

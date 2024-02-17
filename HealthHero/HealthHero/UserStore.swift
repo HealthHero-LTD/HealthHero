@@ -8,7 +8,7 @@
 import Foundation
 
 class UserStore: ObservableObject {
-    @Published var currentUser: UserInfo?
+    @Published var currentUser: UserInfo = UserInfo()
     let httpRequestProcessor = HttpRequestProcessor()
     
     @MainActor
@@ -23,6 +23,11 @@ class UserStore: ObservableObject {
             httpMethod: .GET
         )
         
-        currentUser = try? await httpRequestProcessor.process(request)
+        do {
+            currentUser = try await httpRequestProcessor.process(request)
+            print(currentUser.level)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
