@@ -19,8 +19,15 @@ class HttpRequestProcessor {
             }
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
+            // Set up a custom date formatter
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            
             return try decoder.decode(T.self, from: data)
         } catch let error as DecodingError {
+            print("its the error here?")
             throw HttpError.decodingError(description: error.localizedDescription)
         } catch let error as EncodingError {
             throw HttpError.encodingError(description: error.localizedDescription)
