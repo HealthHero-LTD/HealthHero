@@ -15,9 +15,14 @@ struct StatsView: View {
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
-    @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
-    init(currentLevel: Int) {
-        self._levelManager = StateObject(wrappedValue: .init(currentLevel: currentLevel))
+//    @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
+    init(currentLevel: Int, userXP: Int) {
+        self._levelManager = StateObject(
+            wrappedValue: .init(
+                currentLevel: currentLevel,
+                userXP: userXP
+            )
+        )
     }
     
     var body: some View {
@@ -49,22 +54,36 @@ struct StatsView: View {
                         weeklyXP += xp
                         return XPData(date: $0.date, xp: xp)
                     }.filter {
-                        $0.date > UserDefaultsManager.shared.getLastActiveDate()
+                        if let lastActiveDate = userStore.currentUser.lastActiveDate {
+                            return $0.date > lastActiveDate
+                        } 
+                        else {
+                            return false
+                        }
                     }
                     
+                    print("last active date: \(UserDefaultsManager.shared.getLastActiveDate())")
+                    print("now time: \(Date.now)")
                     let lastActiveDayXP = xpDataArray.last!.xp
                     let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
-                    
+                    var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
                     let updatedXP = userStore.currentUser.xp - storedLastActiveDayXP + cumulatedXpUntilNow
+                    print("stored last active xp: \(storedLastActiveDayXP)")
+                    print("cumulated xp: \(cumulatedXpUntilNow)")
+                    print("updated xp: \(updatedXP)")
+                    
                     levelManager.updateUserXP(updatedXP)
                     storedLastActiveDayXP = lastActiveDayXP
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
+                    
                     // TODO: pass updatedXp to backend
                     let userData = User(
-                        level: UserDefaultsManager.shared.getUserLevel(),
-                        username: UserDefaultsManager.shared.getUsername(), // remove this line
+                        level: levelManager.currentLevel,
+                        xp: levelManager.userXP,
+                        lastActiveDate: xpDataArray.last?.date,
                         xpDataArray: xpDataArray
                     )
+                    print("user package \(userData)")
                     
                     updateStatTask(data: userData)
                     

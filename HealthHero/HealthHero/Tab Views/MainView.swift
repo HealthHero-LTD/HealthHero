@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var selection = 1
+    @State private var selection = 0
     @StateObject private var userStore = UserStore()
     
     var body: some View {
@@ -18,7 +18,10 @@ struct MainView: View {
                     Label("Leaderboard", systemImage: "trophy.circle")
                 }
                 .tag(0)
-            StatsView(currentLevel: userStore.currentUser.level)
+            StatsView(
+                currentLevel: userStore.currentUser.level,
+                userXP: userStore.currentUser.xp
+            )
                 .environmentObject(userStore)
                 .tabItem {
                     Label("Stats", systemImage: "list.bullet.clipboard.fill")

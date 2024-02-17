@@ -24,6 +24,7 @@ class HttpRequestProcessor {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            print(try JSONSerialization.jsonObject(with: data))
             
             return try decoder.decode(T.self, from: data)
         } catch let error as DecodingError {

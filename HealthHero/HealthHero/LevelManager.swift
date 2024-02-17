@@ -9,23 +9,25 @@ import Foundation
 
 class LevelManager: ObservableObject {
     init(
-        currentLevel: Int
+        currentLevel: Int,
+        userXP: Int
     ) {
-        self.userXP = 0
+        self.userXP = userXP
         self.currentLevel = currentLevel
         self.requiredXPForNextLevel = 1
-        self.levelProgression = 0
     }
     
     var userXP: Int
     var currentLevel: Int
     var requiredXPForNextLevel: Int
-    var levelProgression: Float
+    var levelProgression: Float {
+        Float(userXP) / Float(requiredXPForNextLevel)
+    }
     
     func updateUserXP(_ xp: Int) {
         userXP = xp
         checkLevelUp()
-        levelProgression = Float(userXP) / Float(requiredXPForNextLevel)
+        print("level progression: \(levelProgression)")
     }
     
     private func checkLevelUp() {
@@ -38,6 +40,7 @@ class LevelManager: ObservableObject {
         currentLevel += 1
         userXP -= requiredXPForNextLevel
         requiredXPForNextLevel *= 2
+        print("required xp for next level: \(requiredXPForNextLevel)")
         checkLevelUp()
     }
 }
