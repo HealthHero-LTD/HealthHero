@@ -10,11 +10,15 @@ import Charts
 
 struct StatsView: View {
     @StateObject private var HealthKitManager = HKManager()
+    @StateObject private var levelManager: LevelManager
     @EnvironmentObject private var userStore: UserStore
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
     @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
+    init(currentLevel: Int) {
+        self._levelManager = StateObject(wrappedValue: .init(currentLevel: currentLevel))
+    }
     
     var body: some View {
         VStack {
@@ -52,13 +56,13 @@ struct StatsView: View {
                     let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
                     
                     let updatedXP = userStore.currentUser.xp - storedLastActiveDayXP + cumulatedXpUntilNow
-                    LevelManager.shared.updateUserXP(updatedXP)
+                    levelManager.updateUserXP(updatedXP)
                     storedLastActiveDayXP = lastActiveDayXP
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
-                    
+                    // TODO: pass updatedXp to backend
                     let userData = User(
                         level: UserDefaultsManager.shared.getUserLevel(),
-                        username: UserDefaultsManager.shared.getUsername(),
+                        username: UserDefaultsManager.shared.getUsername(), // remove this line
                         xpDataArray: xpDataArray
                     )
                     
@@ -95,7 +99,7 @@ struct StatsView: View {
     private var circleView: some View {
         ZStack {
             Circle()
-                .trim(from: 0.0, to: CGFloat(LevelManager.shared.levelProgression))
+                .trim(from: 0.0, to: CGFloat(levelManager.levelProgression))
                 .stroke(Color.blue, lineWidth: 8)
                 .rotationEffect(Angle(degrees: 90))
                 .frame(width: 200, height: 200) // frame always comes before anything else
@@ -147,8 +151,4 @@ struct StatsDetail: Identifiable {
         .init(title: "Highest Streak:", value: 10.5),
         .init(title: "Top Placements:", value: 2),
     ]
-}
-
-#Preview {
-    StatsView()
 }

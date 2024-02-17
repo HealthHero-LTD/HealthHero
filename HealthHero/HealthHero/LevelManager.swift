@@ -8,12 +8,19 @@
 import Foundation
 
 class LevelManager: ObservableObject {
-    static let shared = LevelManager()
+    init(
+        currentLevel: Int
+    ) {
+        self.userXP = 0
+        self.currentLevel = currentLevel
+        self.requiredXPForNextLevel = 1
+        self.levelProgression = 0
+    }
     
-    var userXP: Int = 0
-    @Published var currentLevel: Int = 1
-    var requiredXPForNextLevel: Int = 1
-    var levelProgression: Float = 0
+    var userXP: Int
+    var currentLevel: Int
+    var requiredXPForNextLevel: Int
+    var levelProgression: Float
     
     func updateUserXP(_ xp: Int) {
         userXP = xp
@@ -29,7 +36,6 @@ class LevelManager: ObservableObject {
     
     private func levelUp() {
         currentLevel += 1
-        UserDefaultsManager.shared.setUserLevel(currentLevel)
         userXP -= requiredXPForNextLevel
         requiredXPForNextLevel *= 2
         checkLevelUp()

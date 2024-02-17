@@ -18,7 +18,7 @@ struct MainView: View {
                     Label("Leaderboard", systemImage: "trophy.circle")
                 }
                 .tag(0)
-            StatsView()
+            StatsView(currentLevel: userStore.currentUser.level)
                 .environmentObject(userStore)
                 .tabItem {
                     Label("Stats", systemImage: "list.bullet.clipboard.fill")
