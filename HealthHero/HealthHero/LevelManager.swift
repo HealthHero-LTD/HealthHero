@@ -27,7 +27,6 @@ class LevelManager: ObservableObject {
     func updateUserXP(_ xp: Int) {
         userXP = xp
         checkLevelUp()
-        print("level progression: \(levelProgression)")
     }
     
     private func checkLevelUp() {
@@ -40,7 +39,6 @@ class LevelManager: ObservableObject {
         currentLevel += 1
         userXP -= requiredXPForNextLevel
         requiredXPForNextLevel *= 2
-        print("required xp for next level: \(requiredXPForNextLevel)")
         checkLevelUp()
     }
 }

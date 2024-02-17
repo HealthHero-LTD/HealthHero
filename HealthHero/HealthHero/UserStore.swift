@@ -25,10 +25,6 @@ class UserStore: ObservableObject {
         
         do {
             currentUser = try await httpRequestProcessor.process(request)
-            print("user XP:\(currentUser.xp)")
-            print("received username: \(currentUser.username)")
-            print("received last active date: \(currentUser.lastActiveDate)")
-            
         } catch let httpError as HealthHero.HttpError {
             print("HTTP Error: \(httpError.localizedDescription)")
         } catch {
