@@ -85,6 +85,7 @@ extension Encodable {
     func encode() throws -> Data {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.dateEncodingStrategy = .secondsSince1970
         return try encoder.encode(self)
     }
 }

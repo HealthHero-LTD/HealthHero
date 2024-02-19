@@ -60,4 +60,8 @@ extension Endpoint {
     static var updateStats: Self {
         Endpoint(path: "update-user")
     }
+    
+    static var getUser: Self {
+        Endpoint(path: "get-user")
+    }
 }

@@ -10,17 +10,24 @@ import Charts
 
 struct StatsView: View {
     @StateObject private var HealthKitManager = HKManager()
+    @StateObject private var levelManager: LevelManager
+    @EnvironmentObject private var userStore: UserStore
     @State private var stepsCount: Double = .zero
     @State private var stepsData: [StepsEntry] = []
     @State var weeklyXP: Int = .zero
-    @State var userXP: Int = UserDefaultsManager.shared.getUserXP()
-    @State var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
-    @State var userLevel: Int = UserDefaultsManager.shared.getUserLevel()
-    @State var username: String = UserDefaultsManager.shared.getUsername()
+    
+    init(currentLevel: Int, userXP: Int) {
+        self._levelManager = StateObject(
+            wrappedValue: .init(
+                currentLevel: currentLevel,
+                userXP: userXP
+            )
+        )
+    }
     
     var body: some View {
         VStack {
-            Text("@\(username)")
+            Text("@\(userStore.currentUser.username)")
                 .font(.title2)
                 .fontWeight(.heavy)
                 .padding()
@@ -47,26 +54,33 @@ struct StatsView: View {
                         weeklyXP += xp
                         return XPData(date: $0.date, xp: xp)
                     }.filter {
-                        $0.date > UserDefaultsManager.shared.getLastActiveDate()
+                        if let lastActiveDate = userStore.currentUser.lastActiveDate {
+                            return $0.date > lastActiveDate
+                        } 
+                        else {
+                            return false
+                        }
                     }
                     
                     let lastActiveDayXP = xpDataArray.last!.xp
                     let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
-
-                    userXP = userXP - storedLastActiveDayXP + cumulatedXpUntilNow
-                    LevelManager.shared.updateUserXP(userXP)
+                    var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
+                    let updatedXP = userStore.currentUser.xp - storedLastActiveDayXP + cumulatedXpUntilNow
+                    
+                    levelManager.updateUserXP(updatedXP)
                     storedLastActiveDayXP = lastActiveDayXP
                     UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
-                    UserDefaultsManager.shared.setUserXP(userXP)
                     
+                    // TODO: pass updatedXp to backend (done)
                     let userData = User(
-                        level: UserDefaultsManager.shared.getUserLevel(),
-                        username: UserDefaultsManager.shared.getUsername(),
+                        level: levelManager.currentLevel,
+                        xp: levelManager.userXP,
+                        lastActiveDate: xpDataArray.last?.date,
                         xpDataArray: xpDataArray
                     )
                     
                     updateStatTask(data: userData)
-                                        
+                    
                     if let currentDay = weeklyStepData.last {
                         self.stepsCount = currentDay.stepCount
                     }
@@ -98,14 +112,14 @@ struct StatsView: View {
     private var circleView: some View {
         ZStack {
             Circle()
-                .trim(from: 0.0, to: CGFloat(LevelManager.shared.levelProgression))
+                .trim(from: 0.0, to: CGFloat(levelManager.levelProgression))
                 .stroke(Color.blue, lineWidth: 8)
                 .rotationEffect(Angle(degrees: 90))
                 .frame(width: 200, height: 200) // frame always comes before anything else
                 .padding()
             
             VStack {
-                Text("Level \(userLevel)")
+                Text("Level \(userStore.currentUser.level)")
                     .font(.title)
                     .foregroundColor(.blue)
                 Text("Title: unlockable")
@@ -128,9 +142,9 @@ struct StatsView: View {
             }
             
             HStack {
-                Text("Weekly XP:")
+                Text("Current user XP:")
                 Spacer()
-                Text(String(weeklyXP))
+                Text(String(userStore.currentUser.xp))
             }
         }
         .frame(maxWidth: 180)
@@ -150,8 +164,4 @@ struct StatsDetail: Identifiable {
         .init(title: "Highest Streak:", value: 10.5),
         .init(title: "Top Placements:", value: 2),
     ]
-}
-
-#Preview {
-    StatsView()
 }

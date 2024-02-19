@@ -9,6 +9,7 @@ import Foundation
 
 struct User: Codable {
     var level: Int
-    var username: String
-    var xpDataArray: [XPData]
+    var xp: Int
+    var lastActiveDate: Date?
+    var xpDataArray: [XPData] = []
 }
