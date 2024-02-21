@@ -9,19 +9,14 @@ import SwiftUI
 import Charts
 
 struct StatsView: View {
-    @StateObject private var HealthKitManager = HKManager()
-    @StateObject private var levelManager: LevelManager
-    @EnvironmentObject private var userStore: UserStore
-    @State private var stepsCount: Double = .zero
-    @State private var stepsData: [StepsEntry] = []
-    @State var weeklyXP: Int = .zero
+    @StateObject private var statsViewModel: StatsViewModel
+    var userStore: UserStore
     
-    init(currentLevel: Int, userXP: Int) {
-        self._levelManager = StateObject(
-            wrappedValue: .init(
-                currentLevel: currentLevel,
-                userXP: userXP
-            )
+    init(userStore: UserStore) {
+        self.userStore = userStore
+        self._statsViewModel = StateObject(
+            wrappedValue:
+                    .init(userStore: userStore)
         )
     }
     
@@ -34,7 +29,7 @@ struct StatsView: View {
             circleView
             statsDetailView
             
-            Chart(stepsData) { entry in
+            Chart(statsViewModel.stepsData) { entry in
                 BarMark(
                     x: .value("Week Day", entry.day),
                     y: .value("Total Steps", entry.stepCount)
@@ -42,77 +37,18 @@ struct StatsView: View {
             }
             .padding()
         }
-        .onAppear {
-            if HealthKitManager.isAuthorized() {
-                HealthKitManager.readWeeklyStepCount { weeklyStepData in
-                    self.stepsData = weeklyStepData
-                    
-                    // calculate xp
-                    weeklyXP = .zero
-                    let xpDataArray = weeklyStepData.map {
-                        let xp = XPManager.convertStepCountToXP($0.stepCount)
-                        weeklyXP += xp
-                        return XPData(date: $0.date, xp: xp)
-                    }.filter {
-                        if let lastActiveDate = userStore.currentUser.lastActiveDate {
-                            return $0.date > lastActiveDate
-                        } 
-                        else {
-                            return false
-                        }
-                    }
-                    
-                    let lastActiveDayXP = xpDataArray.last!.xp
-                    let cumulatedXpUntilNow = xpDataArray.reduce(0) { $0 + $1.xp }
-                    var storedLastActiveDayXP: Int = UserDefaultsManager.shared.getLastActiveDayXP()
-                    let updatedXP = userStore.currentUser.xp - storedLastActiveDayXP + cumulatedXpUntilNow
-                    
-                    levelManager.updateUserXP(updatedXP)
-                    storedLastActiveDayXP = lastActiveDayXP
-                    UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
-                    
-                    // TODO: pass updatedXp to backend (done)
-                    let userData = User(
-                        level: levelManager.currentLevel,
-                        xp: levelManager.userXP,
-                        lastActiveDate: xpDataArray.last?.date,
-                        xpDataArray: xpDataArray
-                    )
-                    
-                    updateStatTask(data: userData)
-                    
-                    if let currentDay = weeklyStepData.last {
-                        self.stepsCount = currentDay.stepCount
-                    }
-                }
-            } else {
-                HealthKitManager.requestHealthKitAuthorization()
-            }
-        }
-        .animation(.default, value: stepsCount)
-    }
-    
-    private func updateStatTask(data: User) {
-        Task {
-            guard let accessToken = KeychainManager.shared.getAccessToken() else {
-                return
-            }
-            
-            let request = HttpRequest(
-                endpoint: .updateStats,
-                headers: [.authorization(accessToken), .contentTypeApplicationJson],
-                httpMethod: .POST,
-                body: data
-            )
-            let updateResult: UpdateResult = try await HttpRequestProcessor().process(request)
-        }
     }
     
     @ViewBuilder
     private var circleView: some View {
         ZStack {
             Circle()
-                .trim(from: 0.0, to: CGFloat(levelManager.levelProgression))
+                .trim(
+                    from: 0.0,
+                    to: CGFloat(
+                        statsViewModel.levelManager.levelProgression
+                    )
+                )
                 .stroke(Color.blue, lineWidth: 8)
                 .rotationEffect(Angle(degrees: 90))
                 .frame(width: 200, height: 200) // frame always comes before anything else
