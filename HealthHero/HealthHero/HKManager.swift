@@ -7,7 +7,6 @@
 
 import HealthKit
 
-@MainActor
 class HKManager: ObservableObject {
     @Published var error: Error?
     
