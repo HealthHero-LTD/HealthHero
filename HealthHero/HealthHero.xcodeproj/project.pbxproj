@@ -140,7 +140,6 @@
 				34468A732B3971000081D38E /* Info.plist */,
 				3492E09E2B4CEB6F00AE3719 /* GoogleSignIn.plist */,
 				347526D52B313A820022DB52 /* HealthHeroApp.swift */,
-				34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */,
 				82AA4B0A2B880225006DACC4 /* Util */,
 				82AA4B072B880082006DACC4 /* Login */,
 				3404ABE62B69765600C55381 /* LaunchScreen.swift */,
@@ -168,7 +167,7 @@
 			children = (
 				82AA4B092B880200006DACC4 /* Main */,
 				82AA4B062B880057006DACC4 /* Stats */,
-				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
+				82AA4B0C2B8802E8006DACC4 /* Profile */,
 				82AA4B052B880022006DACC4 /* Leaderboard */,
 			);
 			path = "Tab Views";
@@ -245,6 +244,15 @@
 				34D24FA12B795607004682E7 /* LevelManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		82AA4B0C2B8802E8006DACC4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */,
+				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */ = {
