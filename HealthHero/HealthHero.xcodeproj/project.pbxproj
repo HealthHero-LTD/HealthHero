@@ -156,7 +156,6 @@
 				34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */,
 				34D24FA12B795607004682E7 /* LevelManager.swift */,
 				34923AE82B7D3C74009D11EF /* Username.swift */,
-				34D9E9132B7F068500D70049 /* StatsViewModel.swift */,
 				34D9E9152B7F137E00D70049 /* UserStore.swift */,
 				34D9E9172B7F1B8A00D70049 /* UserInfo.swift */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
@@ -180,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				3486B5912B3F9B5D00AFC633 /* MainView.swift */,
-				3486B58F2B3F990500AFC633 /* StatsView.swift */,
+				82AA4B062B880057006DACC4 /* Stats */,
 				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
 				82AA4B052B880022006DACC4 /* Leaderboard */,
 			);
@@ -197,6 +196,15 @@
 				3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */,
 			);
 			path = Leaderboard;
+			sourceTree = "<group>";
+		};
+		82AA4B062B880057006DACC4 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				34D9E9132B7F068500D70049 /* StatsViewModel.swift */,
+				3486B58F2B3F990500AFC633 /* StatsView.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */ = {
