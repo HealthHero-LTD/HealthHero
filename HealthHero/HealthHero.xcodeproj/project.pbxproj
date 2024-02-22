@@ -144,7 +144,6 @@
 				34468A742B39790E0081D38E /* HKManager.swift */,
 				3416F4082B63493300E19FAE /* KeychainManager.swift */,
 				82AA4B072B880082006DACC4 /* Login */,
-				34989B942B68789000790C86 /* SetUsername.swift */,
 				3404ABE62B69765600C55381 /* LaunchScreen.swift */,
 				34C209AD2B7198A0008323E0 /* XPManager.swift */,
 				34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */,
@@ -203,8 +202,7 @@
 		82AA4B072B880082006DACC4 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				34D014F12B606EB700974C5F /* IdTokenStore.swift */,
-				3416F4012B60863400E19FAE /* AccessTokenStore.swift */,
+				34989B942B68789000790C86 /* SetUsername.swift */,
 				34989B922B68582500790C86 /* SignInScreen.swift */,
 				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
 			);
@@ -214,6 +212,8 @@
 		82AA4B082B8800FA006DACC4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				34D014F12B606EB700974C5F /* IdTokenStore.swift */,
+				3416F4012B60863400E19FAE /* AccessTokenStore.swift */,
 				34C209AB2B6F4840008323E0 /* User.swift */,
 				34C209AF2B726B2B008323E0 /* StepsEntry.swift */,
 				34C209B12B73E016008323E0 /* XPData.swift */,
@@ -482,7 +482,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HealthHero/Preview Content\"";
-				DEVELOPMENT_TEAM = 23244392NK;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -531,7 +531,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HealthHero/Preview Content\"";
-				DEVELOPMENT_TEAM = 23244392NK;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
