@@ -148,7 +148,6 @@
 				34C209AD2B7198A0008323E0 /* XPManager.swift */,
 				34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */,
 				34D24FA12B795607004682E7 /* LevelManager.swift */,
-				34D9E9152B7F137E00D70049 /* UserStore.swift */,
 				82AA4B082B8800FA006DACC4 /* Models */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */,
@@ -170,7 +169,7 @@
 		3486B5932B3F9CD200AFC633 /* Tab Views */ = {
 			isa = PBXGroup;
 			children = (
-				3486B5912B3F9B5D00AFC633 /* MainView.swift */,
+				82AA4B092B880200006DACC4 /* Main */,
 				82AA4B062B880057006DACC4 /* Stats */,
 				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
 				82AA4B052B880022006DACC4 /* Leaderboard */,
@@ -221,6 +220,15 @@
 				34D9E9172B7F1B8A00D70049 /* UserInfo.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		82AA4B092B880200006DACC4 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				34D9E9152B7F137E00D70049 /* UserStore.swift */,
+				3486B5912B3F9B5D00AFC633 /* MainView.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */ = {
