@@ -145,8 +145,7 @@
 				34D014F12B606EB700974C5F /* IdTokenStore.swift */,
 				3416F4012B60863400E19FAE /* AccessTokenStore.swift */,
 				3416F4082B63493300E19FAE /* KeychainManager.swift */,
-				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
-				34989B922B68582500790C86 /* SignInScreen.swift */,
+				82AA4B072B880082006DACC4 /* Login */,
 				34989B942B68789000790C86 /* SetUsername.swift */,
 				3404ABE62B69765600C55381 /* LaunchScreen.swift */,
 				34C209AB2B6F4840008323E0 /* User.swift */,
@@ -205,6 +204,15 @@
 				3486B58F2B3F990500AFC633 /* StatsView.swift */,
 			);
 			path = Stats;
+			sourceTree = "<group>";
+		};
+		82AA4B072B880082006DACC4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				34989B922B68582500790C86 /* SignInScreen.swift */,
+				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */ = {
