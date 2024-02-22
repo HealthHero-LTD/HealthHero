@@ -145,10 +145,6 @@
 				34D014F12B606EB700974C5F /* IdTokenStore.swift */,
 				3416F4012B60863400E19FAE /* AccessTokenStore.swift */,
 				3416F4082B63493300E19FAE /* KeychainManager.swift */,
-				34989B842B66A67D00790C86 /* LeaderboardHeader.swift */,
-				34989B862B66A6CD00790C86 /* LeaderboardRow.swift */,
-				34989B882B66A70A00790C86 /* LeaderboardEntry.swift */,
-				34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */,
 				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
 				34989B922B68582500790C86 /* SignInScreen.swift */,
 				34989B942B68789000790C86 /* SetUsername.swift */,
@@ -186,9 +182,21 @@
 				3486B5912B3F9B5D00AFC633 /* MainView.swift */,
 				3486B58F2B3F990500AFC633 /* StatsView.swift */,
 				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
-				3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */,
+				82AA4B052B880022006DACC4 /* Leaderboard */,
 			);
 			path = "Tab Views";
+			sourceTree = "<group>";
+		};
+		82AA4B052B880022006DACC4 /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				34989B842B66A67D00790C86 /* LeaderboardHeader.swift */,
+				34989B862B66A6CD00790C86 /* LeaderboardRow.swift */,
+				34989B882B66A70A00790C86 /* LeaderboardEntry.swift */,
+				34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */,
+				3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */,
+			);
+			path = Leaderboard;
 			sourceTree = "<group>";
 		};
 		82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */ = {
