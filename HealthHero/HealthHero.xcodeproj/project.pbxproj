@@ -140,29 +140,11 @@
 				34468A732B3971000081D38E /* Info.plist */,
 				3492E09E2B4CEB6F00AE3719 /* GoogleSignIn.plist */,
 				347526D52B313A820022DB52 /* HealthHeroApp.swift */,
-				34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */,
-				34468A742B39790E0081D38E /* HKManager.swift */,
-				34D014F12B606EB700974C5F /* IdTokenStore.swift */,
-				3416F4012B60863400E19FAE /* AccessTokenStore.swift */,
-				3416F4082B63493300E19FAE /* KeychainManager.swift */,
-				34989B842B66A67D00790C86 /* LeaderboardHeader.swift */,
-				34989B862B66A6CD00790C86 /* LeaderboardRow.swift */,
-				34989B882B66A70A00790C86 /* LeaderboardEntry.swift */,
-				34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */,
-				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
-				34989B922B68582500790C86 /* SignInScreen.swift */,
-				34989B942B68789000790C86 /* SetUsername.swift */,
 				3404ABE62B69765600C55381 /* LaunchScreen.swift */,
-				34C209AB2B6F4840008323E0 /* User.swift */,
-				34C209AD2B7198A0008323E0 /* XPManager.swift */,
-				34C209AF2B726B2B008323E0 /* StepsEntry.swift */,
-				34C209B12B73E016008323E0 /* XPData.swift */,
-				34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */,
-				34D24FA12B795607004682E7 /* LevelManager.swift */,
-				34923AE82B7D3C74009D11EF /* Username.swift */,
-				34D9E9132B7F068500D70049 /* StatsViewModel.swift */,
-				34D9E9152B7F137E00D70049 /* UserStore.swift */,
-				34D9E9172B7F1B8A00D70049 /* UserInfo.swift */,
+				82AA4B0A2B880225006DACC4 /* Util */,
+				82AA4B072B880082006DACC4 /* Login */,
+				82AA4B0B2B8802D0006DACC4 /* Managers */,
+				82AA4B082B8800FA006DACC4 /* Models */,
 				3486B5932B3F9CD200AFC633 /* Tab Views */,
 				82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */,
 				347526D92B313A830022DB52 /* Assets.xcassets */,
@@ -183,12 +165,94 @@
 		3486B5932B3F9CD200AFC633 /* Tab Views */ = {
 			isa = PBXGroup;
 			children = (
-				3486B5912B3F9B5D00AFC633 /* MainView.swift */,
-				3486B58F2B3F990500AFC633 /* StatsView.swift */,
-				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
-				3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */,
+				82AA4B092B880200006DACC4 /* Main */,
+				82AA4B062B880057006DACC4 /* Stats */,
+				82AA4B0C2B8802E8006DACC4 /* Profile */,
+				82AA4B052B880022006DACC4 /* Leaderboard */,
 			);
 			path = "Tab Views";
+			sourceTree = "<group>";
+		};
+		82AA4B052B880022006DACC4 /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				34989B842B66A67D00790C86 /* LeaderboardHeader.swift */,
+				34989B862B66A6CD00790C86 /* LeaderboardRow.swift */,
+				34989B882B66A70A00790C86 /* LeaderboardEntry.swift */,
+				34989B8A2B66A74D00790C86 /* LeaderboardViewModel.swift */,
+				3486B58B2B3F95B000AFC633 /* LeaderboardView.swift */,
+			);
+			path = Leaderboard;
+			sourceTree = "<group>";
+		};
+		82AA4B062B880057006DACC4 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				34D9E9132B7F068500D70049 /* StatsViewModel.swift */,
+				3486B58F2B3F990500AFC633 /* StatsView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		82AA4B072B880082006DACC4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				34989B942B68789000790C86 /* SetUsername.swift */,
+				34989B922B68582500790C86 /* SignInScreen.swift */,
+				34989B902B68514E00790C86 /* GoogleSignInManager.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		82AA4B082B8800FA006DACC4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				34D014F12B606EB700974C5F /* IdTokenStore.swift */,
+				3416F4012B60863400E19FAE /* AccessTokenStore.swift */,
+				34C209AB2B6F4840008323E0 /* User.swift */,
+				34C209AF2B726B2B008323E0 /* StepsEntry.swift */,
+				34C209B12B73E016008323E0 /* XPData.swift */,
+				34923AE82B7D3C74009D11EF /* Username.swift */,
+				34D9E9172B7F1B8A00D70049 /* UserInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		82AA4B092B880200006DACC4 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				34D9E9152B7F137E00D70049 /* UserStore.swift */,
+				3486B5912B3F9B5D00AFC633 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		82AA4B0A2B880225006DACC4 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				34D24F9F2B76FA35004682E7 /* UserDefaultsManager.swift */,
+				3416F4082B63493300E19FAE /* KeychainManager.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		82AA4B0B2B8802D0006DACC4 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				34468A742B39790E0081D38E /* HKManager.swift */,
+				34C209AD2B7198A0008323E0 /* XPManager.swift */,
+				34D24FA12B795607004682E7 /* LevelManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		82AA4B0C2B8802E8006DACC4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */,
+				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		82E2FBEC2B7BC3AF007AE967 /* NetworkLayer */ = {
@@ -450,7 +514,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HealthHero/Preview Content\"";
-				DEVELOPMENT_TEAM = 23244392NK;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -499,7 +563,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HealthHero/Preview Content\"";
-				DEVELOPMENT_TEAM = 23244392NK;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
