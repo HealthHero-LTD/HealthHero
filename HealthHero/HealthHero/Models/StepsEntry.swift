@@ -9,7 +9,6 @@ import Foundation
 
 struct StepsEntry: Identifiable {
     var id = UUID()
-    var day: String
     var stepCount: Double
     var date: Date
 }
