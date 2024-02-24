@@ -7,41 +7,64 @@
 
 import HealthKit
 
+enum HKError: Error {
+    case healthDataNotAvailable
+}
+
 class HKManager: ObservableObject {
     @Published var error: Error?
     
-    let healthStore = HKHealthStore()
+    var healthStore: HKHealthStore?
     let stepCountQuantityType = HKObjectType.quantityType(forIdentifier: .stepCount)
     
-    private func isHKAvailable() -> Bool {
-        return HKHealthStore.isHealthDataAvailable()
-    }
-    
-    func requestHealthKitAuthorization() {
-        guard isHKAvailable() else {
-            print("Setup HealthKit")
-            return
-        }
-        
-        let allTypes = Set([stepCountQuantityType!])
-        
-        healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { (success, error) in
-            if !success {
-                self.error = error
-                print("Authorization failed. Error: \(error?.localizedDescription ?? "Unknown error")")
-            } else {
-                print("Authorization successful!")
-            }
-        }
-    }
-    
-    func isAuthorized() -> Bool {
-        if let quantityType = stepCountQuantityType {
-            return healthStore.authorizationStatus(for: quantityType) == .sharingAuthorized
+    init() {
+        if HKHealthStore.isHealthDataAvailable() {
+            healthStore = HKHealthStore()
         } else {
-            return false
+            error = HKError.healthDataNotAvailable
         }
     }
+    
+//    private func isHKAvailable() -> Bool {
+//        return HKHealthStore.isHealthDataAvailable()
+//    }
+    
+    func requestHealthKitAuthorization() async {
+        guard let stepType = stepCountQuantityType else { return }
+        guard let healthStore = self.healthStore else { return }
+        
+        do {
+            try await healthStore.requestAuthorization(toShare: [], read: [stepType])
+        } catch {
+            self.error = error
+        }
+        
+    }
+    
+//        guard isHKAvailable() else {
+//            print("Setup HealthKit")
+//            return
+//        }
+//        
+//        guard let allTypes = Set([stepCountQuantityType!])
+//        
+//        healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { (success, error) in
+//            if !success {
+//                self.error = error
+//                print("Authorization failed. Error: \(error?.localizedDescription ?? "Unknown error")")
+//            } else {
+//                print("Authorization successful!")
+//            }
+//        }
+//    }
+//    
+//    func isAuthorized() -> Bool {
+//        if let quantityType = stepCountQuantityType {
+//            return healthStore.authorizationStatus(for: quantityType) == .sharingAuthorized
+//        } else {
+//            return false
+//        }
+//    }
         
     func readStepCount(for date: Date, completion: @escaping (Double) -> Void) {
         guard let stepQuantityType = stepCountQuantityType else { return }
