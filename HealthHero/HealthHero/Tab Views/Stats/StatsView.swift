@@ -31,7 +31,7 @@ struct StatsView: View {
             
             Chart(statsViewModel.stepsData) { entry in
                 BarMark(
-                    x: .value("Week Day", entry.day),
+                    x: .value("Week Day", entry.date, unit: .day),
                     y: .value("Total Steps", entry.stepCount)
                 )
             }

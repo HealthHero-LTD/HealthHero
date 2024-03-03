@@ -7,97 +7,56 @@
 
 import HealthKit
 
+enum HKError: Error {
+    case healthDataNotAvailable
+}
+
 class HKManager: ObservableObject {
     @Published var error: Error?
+    @Published var stepsEntries: [StepsEntry] = []
     
-    let healthStore = HKHealthStore()
+    var healthStore: HKHealthStore?
     let stepCountQuantityType = HKObjectType.quantityType(forIdentifier: .stepCount)
     
-    private func isHKAvailable() -> Bool {
-        return HKHealthStore.isHealthDataAvailable()
-    }
-    
-    func requestHealthKitAuthorization() {
-        guard isHKAvailable() else {
-            print("Setup HealthKit")
-            return
-        }
-        
-        let allTypes = Set([stepCountQuantityType!])
-        
-        healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { (success, error) in
-            if !success {
-                self.error = error
-                print("Authorization failed. Error: \(error?.localizedDescription ?? "Unknown error")")
-            } else {
-                print("Authorization successful!")
-            }
-        }
-    }
-    
-    func isAuthorized() -> Bool {
-        if let quantityType = stepCountQuantityType {
-            return healthStore.authorizationStatus(for: quantityType) == .sharingAuthorized
+    init() {
+        if HKHealthStore.isHealthDataAvailable() {
+            healthStore = HKHealthStore()
         } else {
-            return false
+            error = HKError.healthDataNotAvailable
         }
     }
-        
-    func readStepCount(for date: Date, completion: @escaping (Double) -> Void) {
-        guard let stepQuantityType = stepCountQuantityType else { return }
-
-        let startOfDay = Calendar.current.startOfDay(for: date)
-        let endOfDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date) ?? date
-
-        let predicate = HKQuery.predicateForSamples(
-            withStart: startOfDay,
-            end: endOfDay,
-            options: .strictStartDate
-        )
-
-        let query = HKStatisticsQuery(
-            quantityType: stepQuantityType,
-            quantitySamplePredicate: predicate,
-            options: .cumulativeSum
-        ) { _, result, error in
-            guard let result = result, let sum = result.sumQuantity() else {
-                completion(.zero)
-                return
-            }
-
-            completion(sum.doubleValue(for: HKUnit.count()))
-        }
-
-        healthStore.execute(query)
-    }
-
     
-    func readWeeklyStepCount(completion: @escaping ([StepsEntry]) -> Void) {
-        guard let stepQuantityType = stepCountQuantityType else { return }
+    func requestHealthKitAuthorization() async {
+        guard let stepType = stepCountQuantityType else { return }
+        guard let healthStore = self.healthStore else { return }
         
-        let calendar = Calendar.current
-        let now = Date()
-        var weeklyStepData: [StepsEntry] = []
-        
-        guard let lastWeekStartDate = calendar.date(byAdding: .day, value: -6, to: now),
-              let lastWeekEndDate = calendar.date(byAdding: .day, value: 0, to: now) else {
-            completion([])
-            return
+        do {
+            try await healthStore.requestAuthorization(toShare: [], read: [stepType])
+        } catch {
+            self.error = error
         }
-                
-        for i in 0..<7 {
-            if let date = calendar.date(byAdding: .day, value: i, to: lastWeekStartDate) {
-                let dayString = calendar.shortWeekdaySymbols[calendar.component(.weekday, from: date) - 1].capitalized
-                
-                readStepCount(for: date) { stepsCount in
-                    let stepsEntry = StepsEntry(day: dayString, stepCount: stepsCount, date: date)
-                    weeklyStepData.append(stepsEntry)
-                    
-                    if weeklyStepData.count == 7 {
-                        let sortedData = weeklyStepData.sorted(by: { $0.date < $1.date })
-                        completion(sortedData)
-                    }
-                }
+    }
+        
+    func calculateSteps(from startDate: Date) async throws {
+        
+        guard let healthStore = self.healthStore else { return }
+        let endDate: Date = .now
+        let stepType = HKQuantityType(.stepCount)
+        let everyDay = DateComponents(day:1)
+        let thisWeek = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
+        let stepsThisWeek = HKSamplePredicate.quantitySample(type: stepType, predicate:thisWeek)
+        
+        let sumOfStepsQuery = HKStatisticsCollectionQueryDescriptor(predicate: stepsThisWeek, options: .cumulativeSum, anchorDate: endDate, intervalComponents: everyDay)
+        
+        let stepsCount = try await sumOfStepsQuery.result(for: healthStore)
+        
+        stepsCount.enumerateStatistics(from: startDate, to: endDate) { statistics, stop in
+            let count = statistics.sumQuantity()?.doubleValue(for: .count())
+            let stepsEntry = StepsEntry(stepCount: count ?? 0, date: statistics.startDate)
+            
+            DispatchQueue.main.async {
+                self.stepsEntries.append(stepsEntry)
+                _ = self.stepsEntries.sorted(by: { $0.date < $1.date })
             }
         }
     }
