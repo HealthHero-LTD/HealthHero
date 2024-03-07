@@ -11,6 +11,7 @@ import GoogleSignIn
 
 struct ProfileView: View {
     @State var username = UserDefaultsManager.shared.getUsername()
+    @EnvironmentObject var vm: ProfileViewModel
     
     var body: some View {
         
@@ -76,6 +77,7 @@ struct ProfileView: View {
     private var profileLogButton: some View {
         Button(action: {
             KeychainManager.shared.deleteUserToken()
+            vm.isLoggedIn = false
             print("user Logged out!")
         }) {
             Text("Log Out")

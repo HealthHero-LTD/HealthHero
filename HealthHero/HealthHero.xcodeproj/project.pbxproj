@@ -12,6 +12,7 @@
 		3416F4092B63493300E19FAE /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3416F4082B63493300E19FAE /* KeychainManager.swift */; };
 		34266AB62B4A5CBE00AA173E /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */; };
 		34468A752B39790E0081D38E /* HKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34468A742B39790E0081D38E /* HKManager.swift */; };
+		3455B3142B9825150064DABF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3455B3132B9825150064DABF /* ProfileViewModel.swift */; };
 		347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347526D52B313A820022DB52 /* HealthHeroApp.swift */; };
 		347526DA2B313A830022DB52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 347526D92B313A830022DB52 /* Assets.xcassets */; };
 		347526DE2B313A830022DB52 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 347526DD2B313A830022DB52 /* Preview Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		34468A732B3971000081D38E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		34468A742B39790E0081D38E /* HKManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKManager.swift; sourceTree = "<group>"; };
+		3455B3132B9825150064DABF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		347526D22B313A820022DB52 /* HealthHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		347526D52B313A820022DB52 /* HealthHeroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthHeroApp.swift; sourceTree = "<group>"; };
 		347526D92B313A830022DB52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			children = (
 				34266AB52B4A5CBE00AA173E /* ProfilePicture.swift */,
 				3486B58D2B3F97E400AFC633 /* ProfileView.swift */,
+				3455B3132B9825150064DABF /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				34989B952B68789000790C86 /* SetUsername.swift in Sources */,
 				3486B5922B3F9B5D00AFC633 /* MainView.swift in Sources */,
 				82E2FBE32B7BC131007AE967 /* HttpHeader.swift in Sources */,
+				3455B3142B9825150064DABF /* ProfileViewModel.swift in Sources */,
 				34D9E9162B7F137E00D70049 /* UserStore.swift in Sources */,
 				34C209B02B726B2B008323E0 /* StepsEntry.swift in Sources */,
 				347526D62B313A820022DB52 /* HealthHeroApp.swift in Sources */,

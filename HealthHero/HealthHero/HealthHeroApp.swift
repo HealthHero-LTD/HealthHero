@@ -12,10 +12,12 @@ import GoogleSignIn
 @main
 struct HealthHeroApp: App {
     @Environment(\.scenePhase) var scenePhase
+    @StateObject var loginState = ProfileViewModel()
     
     var body: some Scene {
         WindowGroup {
             LaunchScreen()
+                .environmentObject(loginState)
                 .onOpenURL { url in
                     GIDSignIn.sharedInstance.handle(url)
                 }
