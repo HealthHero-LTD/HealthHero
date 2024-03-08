@@ -12,19 +12,21 @@ import JWTDecode
 struct LaunchScreen: View {
     @State private var isAccessTokenValid = false
     @State private var isSignInRequire = false
+    @EnvironmentObject var vm: ProfileViewModel
     
     var body: some View {
         Group {
-            if isAccessTokenValid {
+            if isAccessTokenValid && vm.isLoggedIn {
                 MainView()
             } else {
-                VStack {
-                    Text("Health Hero ツ")
-                        .font(.title)
-                        .fontWeight(.bold)
-                    Spacer()
-                        .frame(height: 400)
-                }
+                SignInScreen()
+//                VStack {
+//                    Text("Health Hero ツ")
+//                        .font(.title)
+//                        .fontWeight(.bold)
+//                    Spacer()
+//                        .frame(height: 400)
+//                }
             }
         }
         .onAppear {
@@ -49,6 +51,7 @@ struct LaunchScreen: View {
                 isSignInRequire = true
             } else {
                 isAccessTokenValid = true
+                vm.isLoggedIn = true
             }
         } catch {
             print("error\(error.localizedDescription)")

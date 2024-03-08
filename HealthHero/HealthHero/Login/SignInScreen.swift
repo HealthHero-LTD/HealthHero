@@ -10,11 +10,16 @@ import GoogleSignInSwift
 
 struct SignInScreen: View {
     @State private var isLoggedIn = false
+    @State var username = UserDefaultsManager.shared.getUsername()
     
     var body: some View {
         Group {
             if isLoggedIn {
-                SetUsername()
+                if username.isEmpty {
+                    SetUsername()
+                } else {
+                    MainView()
+                }
             } else {
                 Spacer()
                     .frame(height: 500)
