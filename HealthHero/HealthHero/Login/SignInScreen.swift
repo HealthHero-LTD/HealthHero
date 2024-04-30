@@ -15,7 +15,7 @@ struct SignInScreen: View {
     var body: some View {
         Group {
             if isLoggedIn {
-                if username.isEmpty {
+                if username == nil {
                     SetUsername()
                 } else {
                     MainView()

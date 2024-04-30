@@ -55,7 +55,7 @@ struct ProfileView: View {
             Text("Soroush Kami")
                 .font(.title)
             
-            Text(username)
+//            Text(username)
         }
         .padding()
         .frame(
