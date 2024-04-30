@@ -22,8 +22,11 @@ class StatsViewModel: ObservableObject {
         )
         Task {
             await healthKitManager.requestHealthKitAuthorization()
+            let calendar = Calendar.current
+            let today = Date()
+            let oneWeekAgo = calendar.date(byAdding: .day, value: -7, to: today)!
             try await healthKitManager.calculateSteps(
-                from: userStore.currentUser.lastActiveDate ?? .now
+                from: oneWeekAgo
             )
             
             stepsData = healthKitManager.stepsEntries
@@ -73,7 +76,7 @@ class StatsViewModel: ObservableObject {
             return XPData(date: $0.date, xp: xp)
         }.filter {
             if let lastActiveDate {
-                return $0.date > lastActiveDate
+                return $0.date >= lastActiveDate
             } else {
                 return false
             }
