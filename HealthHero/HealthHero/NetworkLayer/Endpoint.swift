@@ -10,7 +10,7 @@ import Foundation
 struct Endpoint {
     #if DEBUG
     static let host = "healthhero.fly.dev"
-//    static let host = "192.168.2.11"
+//    static let host = "192.168.2.11:6969"
     #else
     static let host = "api.healthhero.app"
     #endif

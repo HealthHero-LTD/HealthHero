@@ -40,7 +40,7 @@ class HKManager: ObservableObject {
     func calculateSteps(from startDate: Date) async throws {
         
         guard let healthStore = self.healthStore else { return }
-        let endDate: Date = .now
+        let endDate: Date = Date().localDate()
         let stepType = HKQuantityType(.stepCount)
         let everyDay = DateComponents(day:1)
         let thisWeek = HKQuery.predicateForSamples(withStart: startDate, end: endDate)
