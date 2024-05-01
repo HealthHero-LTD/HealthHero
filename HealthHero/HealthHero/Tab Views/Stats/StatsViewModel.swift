@@ -10,6 +10,7 @@ import SwiftUI
 @MainActor
 class StatsViewModel: ObservableObject {
     private var healthKitManager = HKManager()
+    private var userStore: UserStore
     @Published var levelManager: LevelManager
     @Published var stepsCount: Double = .zero
     @Published var stepsData: [StepsEntry] = []
@@ -20,11 +21,12 @@ class StatsViewModel: ObservableObject {
             currentLevel: userStore.currentUser.level,
             userXP: userStore.currentUser.xp
         )
+        self.userStore = userStore
         Task {
             await healthKitManager.requestHealthKitAuthorization()
             let calendar = Calendar.current
-            let today = Date()
-            let oneWeekAgo = calendar.date(byAdding: .day, value: -7, to: today)!
+            let today = Date().localDate()
+            let oneWeekAgo = calendar.date(byAdding: .day, value: -6, to: today)!
             try await healthKitManager.calculateSteps(
                 from: oneWeekAgo
             )
@@ -66,6 +68,7 @@ class StatsViewModel: ObservableObject {
                 body: userData
             )
             let updateResult: UpdateResult = try await HttpRequestProcessor().process(request)
+            await self.userStore.fetchCurrentUser()
         }
     }
     
@@ -78,7 +81,7 @@ class StatsViewModel: ObservableObject {
             if let lastActiveDate {
                 return $0.date >= lastActiveDate
             } else {
-                return false
+                return true
             }
         }
     }
@@ -92,5 +95,15 @@ class StatsViewModel: ObservableObject {
         self.levelManager.updateUserXP(updatedXP)
         storedLastActiveDayXP = lastActiveDayXP
         UserDefaultsManager.shared.setLastActiveDayXP(storedLastActiveDayXP)
+    }
+}
+
+extension Date {
+    func localDate() -> Date {
+        let nowUTC = Date()
+        let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: nowUTC))
+        guard let localDate = Calendar.current.date(byAdding: .second, value: Int(timeZoneOffset), to: nowUTC) else {return Date()}
+
+        return localDate
     }
 }
