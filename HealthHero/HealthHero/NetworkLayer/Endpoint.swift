@@ -9,15 +9,15 @@ import Foundation
 
 struct Endpoint {
     #if DEBUG
-//    static let host = "healthhero.fly.dev"
-    static let host = "192.168.86.224"
+    static let host = "healthhero.fly.dev"
+//    static let host = "192.168.2.11:6969"
     #else
     static let host = "api.healthhero.app"
     #endif
     
     #if DEBUG
-//    static let scheme = "https"
-    static let scheme = "http"
+    static let scheme = "https"
+//    static let scheme = "http"
     #else
     static let scheme = "https"
     #endif
@@ -31,7 +31,7 @@ extension Endpoint {
         var components = URLComponents()
         components.scheme = Endpoint.scheme
         components.host = Endpoint.host
-        components.port = 6969 // comment out for flyio conenction
+//        components.port = 6969 // comment out for flyio conenction
         components.path = "/" + path
         components.queryItems = queryItems
         
