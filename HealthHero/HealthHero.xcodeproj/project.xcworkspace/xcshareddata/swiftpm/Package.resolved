@@ -1,4 +1,5 @@
 {
+  "originHash" : "4e2cf570ca9d973479f4444e8f29151a72837b2eb5ad613f789ae934bb3d8320",
   "pins" : [
     {
       "identity" : "appauth-ios",
@@ -46,5 +47,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
