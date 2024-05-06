@@ -14,14 +14,12 @@ class LevelManager: ObservableObject {
     ) {
         self.userXP = userXP
         self.currentLevel = currentLevel
-        self.requiredXPForNextLevel = 1
     }
     
     var userXP: Int
     var currentLevel: Int
-    var requiredXPForNextLevel: Int
     var levelProgression: Float {
-        Float(userXP) / Float(requiredXPForNextLevel)
+        Float(userXP) / Float(requiredXPForNextLevel(currentLevel))
     }
     
     func updateUserXP(_ xp: Int) {
@@ -30,15 +28,26 @@ class LevelManager: ObservableObject {
     }
     
     private func checkLevelUp() {
-        while userXP >= requiredXPForNextLevel {
+        while userXP >= requiredXPForNextLevel(self.currentLevel) {
             levelUp()
         }
     }
     
     private func levelUp() {
+        userXP -= requiredXPForNextLevel(self.currentLevel)
         currentLevel += 1
-        userXP -= requiredXPForNextLevel
-        requiredXPForNextLevel *= 2
-        checkLevelUp()
+    }
+
+    private func requiredXPForNextLevel(_ currentLevel: Int) -> Int {
+        switch currentLevel {
+        case 1...5:
+            return 100
+        case 6...10:
+            return 200
+        case 11...20:
+            return 500
+        default:
+            return 1000
+        }
     }
 }
